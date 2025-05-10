@@ -1,1 +1,14 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@theme {
+    --color-peach: #fef8ed;
+    --color-babyblue: #ebf1ed;
+    --color-babypink: #fee8d1;
+    --font-montserrat: "Montserrat", sans-serif;
+}   
+
+body {
+    background-color: var(--color-peach);
+    font-family: var(--font-montserrat);
+}
