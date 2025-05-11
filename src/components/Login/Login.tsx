@@ -1,56 +1,34 @@
 import { useContext, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Input from "../Input/Input";
-import type { IUser } from "../../types/types";
 import { UsersContext } from "../../context/UsersContext";
 
-const Register = () => {
+const Login = () => {
   const context = useContext(UsersContext);
+
   if (!context) {
     throw new Error("Register deve estar dentro de <UsersProvider>");
   }
-  const { users, setUsers } = context;
 
-  const [name, setName] = useState<string>("");
+  const { users } = context;
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (users.find((user) => email === user.email)) {
-      setError("Email já cadastrado");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError("As senhas precisam ser iguais");
-      return;
-    }
-
-    createUser();
-    resetForm();
-  };
-
-  const createUser = () => {
-    const newUser: IUser = {
-      id: uuidv4(),
-      name,
-      email,
-      password,
-    };
-
-    setUsers([...users, newUser]);
-  };
-
-  const resetForm = () => {
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
     setError("");
+
+    const existingUser = users.find((user) => user.email === email);
+
+    if (!existingUser) {
+      return setError("Email não cadastrado");
+    }
+
+    if (existingUser.password !== password) {
+      return setError("Senha incorreta");
+    }
+
   };
 
   return (
@@ -62,13 +40,6 @@ const Register = () => {
       )}
 
       <form className="flex flex-col mt-2" onSubmit={handleSubmit}>
-        <Input
-          label="Nome:"
-          type="text"
-          placeholder="Digite seu nome..."
-          value={name}
-          setValue={setName}
-        />
         <Input
           label="Email:"
           type="email"
@@ -83,16 +54,9 @@ const Register = () => {
           value={password}
           setValue={setPassword}
         />
-        <Input
-          label="Confirme sua senha:"
-          type="password"
-          placeholder="Confirme sua senha..."
-          value={confirmPassword}
-          setValue={setConfirmPassword}
-        />
         <input
           type="submit"
-          value="Cadastrar"
+          value="Entrar"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-3xl transition duration-200 cursor-pointer"
         />
       </form>
@@ -100,4 +64,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
