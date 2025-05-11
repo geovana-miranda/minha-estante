@@ -4,6 +4,9 @@ import Input from "../Input/Input";
 import type { IUser } from "../../types/types";
 import { UsersContext } from "../../context/UsersContext";
 
+import semfoto from "../../assets/semfoto.png";
+const imgsemfoto = semfoto;
+
 const Register = () => {
   const context = useContext(UsersContext);
   if (!context) {
@@ -40,6 +43,10 @@ const Register = () => {
       name,
       email,
       password,
+      profilePhoto: imgsemfoto,
+      profileTitle: "Minha estante",
+      profileQuote:
+        "A leitura abre a mente, impulsiona sonhos e alimenta a alma. Érico Teixeira.",
     };
 
     setUsers([...users, newUser]);

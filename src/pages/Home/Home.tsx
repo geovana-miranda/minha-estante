@@ -1,9 +1,7 @@
-import React from 'react'
+import UserProfileHeader from "../../components/UserProfileHeader/UserProfileHeader";
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  return <UserProfileHeader />;
+};
 
-export default Home
+export default Home;
