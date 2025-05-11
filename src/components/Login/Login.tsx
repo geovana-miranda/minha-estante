@@ -1,15 +1,21 @@
 import { useContext, useState } from "react";
 import Input from "../Input/Input";
 import { UsersContext } from "../../context/UsersContext";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const context = useContext(UsersContext);
+  const userContext = useContext(UsersContext);
+  const authContext = useContext(AuthContext);
 
-  if (!context) {
+  if (!userContext || !authContext) {
     throw new Error("Register deve estar dentro de <UsersProvider>");
   }
 
-  const { users } = context;
+  const { users } = userContext;
+  const { setCurrentUser } = authContext;
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -29,6 +35,8 @@ const Login = () => {
       return setError("Senha incorreta");
     }
 
+    setCurrentUser(existingUser);
+    navigate("/home");
   };
 
   return (
