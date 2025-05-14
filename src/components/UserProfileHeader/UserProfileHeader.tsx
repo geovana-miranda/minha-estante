@@ -16,7 +16,7 @@ const UserProfileHeader = () => {
 
   return (
     <>
-      <div className="w-4xl h-auto mx-auto bg-amber-50 py-10 mt-10 rounded-2xl shadow-xl border border-gray-200">
+      <div className="w-4xl h-auto mx-auto bg-amber-50 py-10 rounded-2xl shadow-xl border border-gray-200">
         <div className="w-2xl mx-auto flex flex-col">
           <div className="w-2xl flex items-center justify-center gap-10">
             <img
@@ -27,7 +27,7 @@ const UserProfileHeader = () => {
             <h2 className="text-3xl font-bold text-blue-950">{title}</h2>
           </div>
           <div className="mt-5 flex justify-center">
-            <p className="text-lg font-crimson italic text-gray-700">{quote}</p>
+            <p className="text-lg text-center font-crimson italic text-gray-700">{quote}</p>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { UsersProvider } from "./context/UsersContext";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Home from "./pages/Home/Home";
+import EditProfile from "./pages/EditProfile/EditProfile";
 
 function App() {
   
@@ -20,6 +21,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Home />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/editprofile"
+                element={
+                  <PrivateRoute>
+                    <EditProfile />
                   </PrivateRoute>
                 }
               />

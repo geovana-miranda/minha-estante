@@ -1,16 +1,17 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@1,600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@1,600&display=swap");
 
 @theme {
-    --color-peach: #fefae0 ;
-    --color-babyblue: #ebf1ed;
-    --color-babypink: #fee8d1;
-    --font-montserrat: "Montserrat", sans-serif;
-    --font-crimson: "Crimson Text", serif;
-}   
+  --color-peach: #fefae0;
+  --color-babyblue: #ebf1ed;
+  --color-babypink: #fee8d1;
+  --color-navy: #1a237e;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-crimson: "Crimson Text", serif;
+}
 
 body {
-    background-color: var(--color-peach);
-    font-family: var(--font-montserrat);
+  background-color: var(--color-peach);
+  font-family: var(--font-montserrat);
 }

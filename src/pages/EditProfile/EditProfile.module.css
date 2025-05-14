@@ -1,0 +1,31 @@
+.containerImagem {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5em;
+  padding: 0.2em;
+  background: #303030cc;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 0.8em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
