@@ -113,7 +113,7 @@ const EditProfile = () => {
   return (
     <>
       <Header />
-      <div className="w-md mx-auto bg-white p-6 rounded-2xl shadow-xl border border-gray-200">
+      <section className="w-md mx-auto bg-white p-6 rounded-2xl shadow-xl border border-gray-200">
         <div className="w-sm mx-auto flex flex-col items-center justify-center px-10">
           <h2 className="text-2xl font-bold text-center text-navy mb-6 ">
             Editar perfil
@@ -225,7 +225,7 @@ const EditProfile = () => {
             />
           </form>
         </div>
-      </div>
+      </section>
     </>
   );
 };

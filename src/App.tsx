@@ -6,9 +6,9 @@ import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Home from "./pages/Home/Home";
 import EditProfile from "./pages/EditProfile/EditProfile";
+import Search from "./pages/Search/Search";
 
 function App() {
-  
   return (
     <>
       <UsersProvider>
@@ -29,6 +29,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <EditProfile />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/search"
+                element={
+                  <PrivateRoute>
+                    <Search />
                   </PrivateRoute>
                 }
               />

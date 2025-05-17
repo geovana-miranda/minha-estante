@@ -26,8 +26,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full h-[500px] flex items-center justify-center max-w-3xl mx-auto ">
+    <main className="min-h-screen flex items-center justify-center">
+      <section className="w-full h-[500px] flex items-center justify-center max-w-3xl mx-auto ">
         <div className="w-full max-w-md h-full flex flex-col items-center justify-center bg-babyblue rounded-l-2xl shadow-xl border border-gray-200">
           <div>
             <h2 className="text-3xl font-bold text-center text-gray-800">
@@ -58,8 +58,8 @@ const Index = () => {
             className="w-80"
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

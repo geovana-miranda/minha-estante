@@ -7,3 +7,19 @@ export interface IUser {
   profileTitle: string;
   profileQuote: string;
 }
+
+export interface IFoundBooks {
+  
+    id: string;
+  
+  volumeInfo: {
+    title: string;
+    subtitle?: string;
+    authors?: string[];
+    description?: string;
+    imageLinks?: {
+      thumbnail?: string;
+      smallThumbnail?: string;
+    };
+  };
+}
