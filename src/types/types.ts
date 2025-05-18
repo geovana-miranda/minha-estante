@@ -9,9 +9,7 @@ export interface IUser {
 }
 
 export interface IFoundBooks {
-  
-    id: string;
-  
+  id: string;
   volumeInfo: {
     title: string;
     subtitle?: string;
