@@ -7,6 +7,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Home from "./pages/Home/Home";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Search from "./pages/Search/Search";
+import BookDetails from "./pages/BookDetails/BookDetails";
 
 function App() {
   return (
@@ -37,6 +38,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Search />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/book/:id"
+                element={
+                  <PrivateRoute>
+                    <BookDetails />
                   </PrivateRoute>
                 }
               />

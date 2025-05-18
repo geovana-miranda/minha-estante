@@ -15,9 +15,11 @@ export interface IFoundBooks {
     subtitle?: string;
     authors?: string[];
     description?: string;
+    publisher?: string;
+    pageCount?: number;
+    publishedDate?: string;
     imageLinks?: {
       thumbnail?: string;
-      smallThumbnail?: string;
     };
   };
 }

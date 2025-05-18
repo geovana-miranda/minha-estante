@@ -53,6 +53,9 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
               <div>
                 <label className="mr-2">Status:</label>
                 <select
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
                   className="border border-gray-300 rounded-md p-2 text-sm"
                   onChange={(e) => {
                     if (e.target.value === "lido") {
@@ -99,12 +102,20 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
 
           <div className="flex items-center gap-5">
             <button
-              onClick={handleToggleModal}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleToggleModal();
+              }}
               className="w-full py-2 border border-navy text-navy rounded-2xl font-bold cursor-pointer"
             >
               Cancelar
             </button>
-            <button className="w-full py-2 bg-navy text-white border border-navy rounded-2xl font-bold cursor-pointer hover:bg-[#3f51b5]">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              className="w-full py-2 bg-navy text-white border border-navy rounded-2xl font-bold cursor-pointer hover:bg-[#3f51b5]"
+            >
               Salvar
             </button>
           </div>
