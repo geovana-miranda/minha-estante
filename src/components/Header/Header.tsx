@@ -25,6 +25,9 @@ const Header = () => {
           placeholder="Digite o título do livro"
           className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={query}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === "Enter") handleSearch();
+          }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setQuery(e.target.value.trimStart())
           }
