@@ -25,7 +25,7 @@ export interface IGoogleBook {
   };
 }
 
-interface IBook extends IGoogleBook {
+export interface IBook extends IGoogleBook {
   status: string;
   rating: number | null;
   review: string | null;
