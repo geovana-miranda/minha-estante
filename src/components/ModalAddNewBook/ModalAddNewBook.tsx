@@ -1,18 +1,36 @@
-import { useState } from "react";
-import type { IFoundBooks } from "../../types/types";
+import { useContext, useState } from "react";
+import type { IGoogleBook, IUser } from "../../types/types";
 import { FaStar } from "react-icons/fa";
 import styles from "./ModalAddNewBook.module.css";
+import { AuthContext } from "../../context/AuthContext";
+import { UsersContext } from "../../context/UsersContext";
 
 interface IModalAddNewBook {
   handleToggleModal: () => void;
-  book: IFoundBooks;
+  book: IGoogleBook;
 }
 
+type typeStatus = "queroler" | "lido";
+
 const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
+  const usersContext = useContext(UsersContext);
+  const authContext = useContext(AuthContext);
+
+  if (!usersContext || !authContext) {
+    throw new Error("Register deve estar dentro de <UsersProvider>");
+  }
+
+  const { currentUser, setCurrentUser } = authContext;
+  const { users, setUsers } = usersContext;
+
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
   const [selectedStar, setSelectedStar] = useState<number | null>(null);
 
   const [markedAsRead, setMarkedAsRead] = useState<boolean>(false);
+
+  const [status, setStatus] = useState<typeStatus>("queroler");
+  const [rating, setRating] = useState<number | null>(null);
+  const [review, setReview] = useState<string | null>(null);
 
   const getStarColor = (starNumber: number) => {
     if (hoveredStar != null) {
@@ -25,6 +43,43 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
 
     return "text-gray-300";
   };
+
+  const addNewBook = () => {
+    const newBook = {
+      id: book.id,
+      volumeInfo: {
+        title: book.volumeInfo.title,
+        subtitle: book.volumeInfo.subtitle,
+        authors: book.volumeInfo.authors,
+        description: book.volumeInfo.description,
+        publisher: book.volumeInfo.publisher,
+        pageCount: book.volumeInfo.pageCount,
+        publishedDate: book.volumeInfo.publishedDate,
+        imageLinks: {
+          thumbnail: book.volumeInfo.imageLinks?.thumbnail,
+        },
+      },
+      status,
+      rating,
+      review,
+    };
+
+    if (!currentUser) return;
+
+    const updatedUser: IUser = {
+      ...currentUser,
+      books: [...(currentUser.books || []), newBook],
+    };
+
+    setCurrentUser(updatedUser);
+
+    setUsers([
+      ...users.map((user) => (user.id === currentUser.id ? updatedUser : user)),
+    ]);
+
+    handleToggleModal();
+  };
+
   return (
     <>
       <section className={styles.background}>
@@ -60,8 +115,10 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
                   onChange={(e) => {
                     if (e.target.value === "lido") {
                       setMarkedAsRead(true);
+                      setStatus("lido");
                     } else {
                       setMarkedAsRead(false);
+                      setStatus("queroler");
                     }
                   }}
                 >
@@ -82,7 +139,11 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
                           )}`}
                           onMouseEnter={() => setHoveredStar(star)}
                           onMouseLeave={() => setHoveredStar(null)}
-                          onClick={() => setSelectedStar(star)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedStar(star);
+                            setRating(star);
+                          }}
                         />
                       ))}
                     </div>
@@ -93,6 +154,8 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
                       className="w-full h-20 border border-gray-300 rounded-md p-2 text-sm resize-none"
                       rows={3}
                       placeholder="Escreva sua resenha aqui..."
+                      onChange={(e) => setReview(e.target.value)}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
                 </>
@@ -113,6 +176,7 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
+                addNewBook();
               }}
               className="w-full py-2 bg-navy text-white border border-navy rounded-2xl font-bold cursor-pointer hover:bg-[#3f51b5]"
             >

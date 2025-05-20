@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
 import { fetchBookByID } from "../../services/BookAPI";
-import type { IFoundBooks } from "../../types/types";
+import type { IGoogleBook  } from "../../types/types";
 import { FaBook, FaRegBuilding } from "react-icons/fa";
 import { BsCalendarDate } from "react-icons/bs";
 import { LuPlus } from "react-icons/lu";
@@ -11,7 +11,7 @@ import ModalAddNewBook from "../../components/ModalAddNewBook/ModalAddNewBook";
 const BookDetails = () => {
   const { id } = useParams<string>();
   const idBook: string | undefined = id;
-  const [book, setBook] = useState<IFoundBooks | null>(null);
+  const [book, setBook] = useState<IGoogleBook  | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [openModal, setOpenModal] = useState<boolean>(false);
 

@@ -1,10 +1,10 @@
-import type { IFoundBooks } from "../../types/types";
+import type { IGoogleBook  } from "../../types/types";
 import { LuPlus } from "react-icons/lu";
 import { useState } from "react";
 import ModalAddNewBook from "../ModalAddNewBook/ModalAddNewBook";
 import { useNavigate } from "react-router-dom";
 
-const SearchResultItem = ({ book }: { book: IFoundBooks }) => {
+const SearchResultItem = ({ book }: { book: IGoogleBook  }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const navigate = useNavigate();
 

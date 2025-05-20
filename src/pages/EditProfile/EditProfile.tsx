@@ -70,6 +70,7 @@ const EditProfile = () => {
     setError("");
     setSuccess("")
 
+    if (!currentUser) return;
     if (!name && !email && !profileTitle && !profileQuote) return;
     if (
       name === currentUser!.name &&
@@ -89,14 +90,14 @@ const EditProfile = () => {
       return setError("Email já cadastrado");
     }
 
-    const editedUser = {
+    const editedUser: IUser = {
       ...currentUser,
       name,
       email,
       profilePhoto,
       profileTitle,
       profileQuote,
-    } as IUser;
+    };
 
 
     setCurrentUser(editedUser);

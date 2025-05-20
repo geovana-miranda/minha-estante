@@ -6,9 +6,10 @@ export interface IUser {
   profilePhoto: string;
   profileTitle: string;
   profileQuote: string;
+  books: IBook[];
 }
 
-export interface IFoundBooks {
+export interface IGoogleBook {
   id: string;
   volumeInfo: {
     title: string;
@@ -22,4 +23,10 @@ export interface IFoundBooks {
       thumbnail?: string;
     };
   };
+}
+
+interface IBook extends IGoogleBook {
+  status: string;
+  rating: number | null;
+  review: string | null;
 }
