@@ -4,7 +4,7 @@ import { useState } from "react";
 import ModalAddNewBook from "../ModalAddNewBook/ModalAddNewBook";
 import { useNavigate } from "react-router-dom";
 
-const SearchResultItem = ({ book }: { book: IGoogleBook  }) => {
+const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook  }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ const SearchResultItem = ({ book }: { book: IGoogleBook  }) => {
   };
 
   const displayBookDetails = () => {
-    navigate(`/book/${book.id}`);
+    navigate(`/book/${apiBook.id}`);
   };
 
   return (
@@ -24,21 +24,21 @@ const SearchResultItem = ({ book }: { book: IGoogleBook  }) => {
       <div className="w-32 h-48 shrink-0">
         <img
           className="w-full object-cover"
-          src={book.volumeInfo.imageLinks?.thumbnail}
-          alt={`Capa do livro ${book.volumeInfo.title}`}
+          src={apiBook.volumeInfo.imageLinks?.thumbnail}
+          alt={`Capa do livro ${apiBook.volumeInfo.title}`}
         />
       </div>
       <div className="flex flex-col justify-between items-start">
         <div>
-          <h3 className="text-lg font-bold">{book.volumeInfo.title}</h3>
+          <h3 className="text-lg font-bold">{apiBook.volumeInfo.title}</h3>
           <p className="text-sm italic text-gray-700">
-            {book.volumeInfo.subtitle}
+            {apiBook.volumeInfo.subtitle}
           </p>
           <p className="text-sm font-medium text-navy">
-            {book.volumeInfo.authors}
+            {apiBook.volumeInfo.authors}
           </p>
           <p className="text-sm text-gray-600 text-justify">
-            {book.volumeInfo.description?.slice(0, 200) + "..."}
+            {apiBook.volumeInfo.description?.slice(0, 200) + "..."}
           </p>
         </div>
         <button
@@ -53,7 +53,7 @@ const SearchResultItem = ({ book }: { book: IGoogleBook  }) => {
         </button>
       </div>
       {openModal && (
-        <ModalAddNewBook handleToggleModal={handleToggleModal} book={book} />
+        <ModalAddNewBook handleToggleModal={handleToggleModal} apiBook={apiBook} />
       )}
     </div>
   );

@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import type { IGoogleBook, IUser } from "../../types/types";
+import { useContext, useEffect, useState } from "react";
+import type { IGoogleBook, IUser, IBook } from "../../types/types";
 import { FaStar } from "react-icons/fa";
 import styles from "./ModalAddNewBook.module.css";
 import { AuthContext } from "../../context/AuthContext";
@@ -7,12 +7,17 @@ import { UsersContext } from "../../context/UsersContext";
 
 interface IModalAddNewBook {
   handleToggleModal: () => void;
-  book: IGoogleBook;
+  apiBook?: IGoogleBook;
+  userBook?: IBook;
 }
 
 type typeStatus = "queroler" | "lido";
 
-const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
+const ModalAddNewBook = ({
+  handleToggleModal,
+  apiBook,
+  userBook,
+}: IModalAddNewBook) => {
   const usersContext = useContext(UsersContext);
   const authContext = useContext(AuthContext);
 
@@ -23,14 +28,22 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
   const { currentUser, setCurrentUser } = authContext;
   const { users, setUsers } = usersContext;
 
+  const book: IBook = userBook
+    ? userBook
+    : { ...apiBook!, status: "queroler", rating: null, review: "" };
+
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
-  const [selectedStar, setSelectedStar] = useState<number | null>(null);
+  const [selectedStar, setSelectedStar] = useState<number | null>(
+    book.rating || null
+  );
 
   const [markedAsRead, setMarkedAsRead] = useState<boolean>(false);
 
-  const [status, setStatus] = useState<typeStatus>("queroler");
-  const [rating, setRating] = useState<number | null>(null);
-  const [review, setReview] = useState<string | null>(null);
+  const [status, setStatus] = useState<typeStatus>(
+    (book.status as typeStatus) || "queroler"
+  );
+  const [rating, setRating] = useState<number | null>(book.rating || null);
+  const [review, setReview] = useState<string>(book.review || "");
 
   const getStarColor = (starNumber: number) => {
     if (hoveredStar != null) {
@@ -44,8 +57,8 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
     return "text-gray-300";
   };
 
-  const addNewBook = () => {
-    const newBook = {
+  const saveBook = () => {
+    let bookDetails = {
       id: book.id,
       volumeInfo: {
         title: book.volumeInfo.title,
@@ -66,19 +79,53 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
 
     if (!currentUser) return;
 
-    const updatedUser: IUser = {
-      ...currentUser,
-      books: [...(currentUser.books || []), newBook],
-    };
+    if (apiBook) {
+      const updatedUser: IUser = {
+        ...currentUser,
+        books: [...(currentUser.books || []), bookDetails],
+      };
 
-    setCurrentUser(updatedUser);
+      setCurrentUser(updatedUser);
 
-    setUsers([
-      ...users.map((user) => (user.id === currentUser.id ? updatedUser : user)),
-    ]);
+      setUsers([
+        ...users.map((user) =>
+          user.id === currentUser.id ? updatedUser : user
+        ),
+      ]);
+    }
+
+    if (userBook) {
+      if (bookDetails.status === "queroler") {
+        bookDetails = { ...bookDetails, rating: null, review: "" };
+      }
+
+      const updatedUser: IUser = {
+        ...currentUser,
+        books: [
+          ...currentUser.books.map((b) => (b.id === book.id ? bookDetails : b)),
+        ],
+      };
+
+      setCurrentUser(updatedUser);
+      setUsers([
+        ...users.map((user) =>
+          user.id === currentUser.id ? updatedUser : user
+        ),
+      ]);
+    }
 
     handleToggleModal();
   };
+
+  useEffect(() => {
+    if (status === "lido") {
+      return setMarkedAsRead(true);
+    }
+
+    if (status === "queroler") {
+      return setMarkedAsRead(false);
+    }
+  }, [status]);
 
   return (
     <>
@@ -108,16 +155,15 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
               <div>
                 <label className="mr-2">Status:</label>
                 <select
+                  defaultValue={status}
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
                   className="border border-gray-300 rounded-md p-2 text-sm"
                   onChange={(e) => {
                     if (e.target.value === "lido") {
-                      setMarkedAsRead(true);
                       setStatus("lido");
                     } else {
-                      setMarkedAsRead(false);
                       setStatus("queroler");
                     }
                   }}
@@ -152,7 +198,8 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
                     <p>Resenha:</p>
                     <textarea
                       className="w-full h-20 border border-gray-300 rounded-md p-2 text-sm resize-none"
-                      rows={3}
+                      maxLength={240}
+                      value={review}
                       placeholder="Escreva sua resenha aqui..."
                       onChange={(e) => setReview(e.target.value)}
                       onClick={(e) => e.stopPropagation()}
@@ -176,7 +223,7 @@ const ModalAddNewBook = ({ handleToggleModal, book }: IModalAddNewBook) => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                addNewBook();
+                saveBook();
               }}
               className="w-full py-2 bg-navy text-white border border-navy rounded-2xl font-bold cursor-pointer hover:bg-[#3f51b5]"
             >

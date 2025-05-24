@@ -45,7 +45,7 @@ const Search = () => {
                 <ul>
                   {foundBooks.map((book) => (
                     <li key={book.id}>
-                      <SearchResultItem book={book} />
+                      <SearchResultItem apiBook={book} />
                     </li>
                   ))}
                 </ul>

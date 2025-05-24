@@ -14,6 +14,11 @@ const BooksSection = () => {
   type typeStatus = "queroler" | "lido";
 
   const [displayBooks, setDisplayBooks] = useState<typeStatus>("lido");
+  const filteredBooks = currentUser?.books.filter((b) =>
+    b.status === displayBooks ? b : ""
+  );
+
+  console.log(filteredBooks);
 
   return (
     <section className="w-4xl h-auto mx-auto bg-amber-50 py-10 rounded-2xl shadow-xl border border-gray-200 my-10 ">
@@ -35,14 +40,24 @@ const BooksSection = () => {
           </select>
         </div>
         <div>
-          <ul className="flex items-center justify-start gap-2 flex-wrap ">
-            {currentUser?.books
-              .filter((b) => (b.status === displayBooks ? b : ""))
-              .map((b) => (
+          <ul className="flex items-center justify-start gap-2 flex-wrap">
+            {filteredBooks && filteredBooks.length > 0 ? (
+              filteredBooks.map((b) => (
                 <li key={b.id}>
                   <CardBook book={b} />
                 </li>
-              ))}
+              ))
+            ) : (
+              <div className="mx-auto text-gray-800">
+                {(displayBooks === "queroler" ? (
+                <p>
+                  Você ainda não adicionou nenhum livro a lista de "quero ler".
+                </p>
+                ) : (
+                <p>Você ainda não adicionou nenhum livro lista de "lidos".</p>
+                ))}
+              </div>
+            )}
           </ul>
         </div>
       </div>
