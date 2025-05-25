@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import type { IGoogleBook, IUser, IBook } from "../../types/types";
+import { useEffect, useState } from "react";
+import type { IGoogleBook, IBook, typeStatus } from "../../types/types";
 import { FaStar } from "react-icons/fa";
 import styles from "./ModalAddNewBook.module.css";
-import { AuthContext } from "../../context/AuthContext";
-import { UsersContext } from "../../context/UsersContext";
+import { useSaveBook } from "../../hooks/useSaveBook";
 
 interface IModalAddNewBook {
   handleToggleModal: () => void;
@@ -11,34 +10,26 @@ interface IModalAddNewBook {
   userBook?: IBook;
 }
 
-type typeStatus = "queroler" | "lido";
-
 const ModalAddNewBook = ({
   handleToggleModal,
   apiBook,
   userBook,
 }: IModalAddNewBook) => {
-  const usersContext = useContext(UsersContext);
-  const authContext = useContext(AuthContext);
-
-  if (!usersContext || !authContext) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-
-  const { currentUser, setCurrentUser } = authContext;
-  const { users, setUsers } = usersContext;
-
   const book: IBook = userBook
     ? userBook
-    : { ...apiBook!, status: "queroler", rating: null, review: "", favorite: false };
+    : {
+        ...apiBook!,
+        status: "queroler",
+        rating: null,
+        review: "",
+        favorite: false,
+      };
 
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
   const [selectedStar, setSelectedStar] = useState<number | null>(
     book.rating || null
   );
-
   const [markedAsRead, setMarkedAsRead] = useState<boolean>(false);
-
   const [status, setStatus] = useState<typeStatus>(
     (book.status as typeStatus) || "queroler"
   );
@@ -57,73 +48,16 @@ const ModalAddNewBook = ({
     return "text-gray-300";
   };
 
-  const saveBook = () => {
-    let bookDetails = {
-      id: book.id,
-      volumeInfo: {
-        title: book.volumeInfo.title,
-        subtitle: book.volumeInfo.subtitle,
-        authors: book.volumeInfo.authors,
-        description: book.volumeInfo.description,
-        publisher: book.volumeInfo.publisher,
-        pageCount: book.volumeInfo.pageCount,
-        publishedDate: book.volumeInfo.publishedDate,
-        imageLinks: {
-          thumbnail: book.volumeInfo.imageLinks?.thumbnail,
-        },
-      },
-      status,
-      rating,
-      review,
-      favorite: false,
-    };
-
-    if (!currentUser) return;
-
-    if (apiBook) {
-      const updatedUser: IUser = {
-        ...currentUser,
-        books: [...(currentUser.books || []), bookDetails],
-      };
-
-      setCurrentUser(updatedUser);
-
-      setUsers([
-        ...users.map((user) =>
-          user.id === currentUser.id ? updatedUser : user
-        ),
-      ]);
-    }
-
-    if (userBook) {
-      if (bookDetails.status === "queroler") {
-        bookDetails = { ...bookDetails, rating: null, review: "" };
-      }
-
-      const updatedUser: IUser = {
-        ...currentUser,
-        books: [
-          ...currentUser.books.map((b) => (b.id === book.id ? bookDetails : b)),
-        ],
-      };
-
-      setCurrentUser(updatedUser);
-      setUsers([
-        ...users.map((user) =>
-          user.id === currentUser.id ? updatedUser : user
-        ),
-      ]);
-    }
-
+  const { saveBook } = useSaveBook();
+  const handleSaveBook = () => {
+    saveBook({ apiBook, userBook, status, rating, review});
     handleToggleModal();
   };
 
   useEffect(() => {
     if (status === "lido") {
       return setMarkedAsRead(true);
-    }
-
-    if (status === "queroler") {
+    } else {
       return setMarkedAsRead(false);
     }
   }, [status]);
@@ -224,7 +158,7 @@ const ModalAddNewBook = ({
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                saveBook();
+                handleSaveBook();
               }}
               className="w-full py-2 bg-navy text-white border border-navy rounded-2xl font-bold cursor-pointer hover:bg-[#3f51b5]"
             >

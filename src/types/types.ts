@@ -31,3 +31,5 @@ export interface IBook extends IGoogleBook {
   review: string;
   favorite: boolean;
 }
+
+export type typeStatus = "queroler" | "lido";
