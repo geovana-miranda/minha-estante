@@ -1,4 +1,4 @@
-import { useContext, useState, type MouseEvent } from "react";
+import { useContext, useEffect, useState } from "react";
 import type { IBook, IUser } from "../../types/types";
 import { FaStar, FaHeart } from "react-icons/fa";
 import ModalAddNewBook from "../ModalAddNewBook/ModalAddNewBook";
@@ -17,10 +17,9 @@ const CardBook = ({ book }: { book: IBook }) => {
   const { users, setUsers } = usersContext;
 
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const favoritedBook  = 
+  const [favoritedBook, setFavoritedBook] = useState<boolean>(
     book.favorite || false
-  ;
-
+  );
   const handleToggleModal = () => {
     setOpenModal(!openModal);
   };
@@ -31,11 +30,17 @@ const CardBook = ({ book }: { book: IBook }) => {
     }
   };
 
-  const favoriteBook = (e: React.MouseEvent<SVGElement, globalThis.MouseEvent>) => {
+  const favoriteBook = (
+    e: React.MouseEvent<SVGElement, globalThis.MouseEvent>
+  ) => {
     e.stopPropagation();
+    setFavoritedBook(!favoritedBook);
+  };
+
+  const updateUser = () => {
     if (!currentUser) return;
 
-    const updatedBook = { ...book, favorite: !favoritedBook };
+    const updatedBook = { ...book, favorite: favoritedBook };
 
     const updatedUser: IUser = {
       ...currentUser,
@@ -50,19 +55,27 @@ const CardBook = ({ book }: { book: IBook }) => {
       ...users.map((user) => (user.id === currentUser.id ? updatedUser : user)),
     ]);
   };
+
+  useEffect(() => {
+    updateUser();
+  }, [favoritedBook]);
+
   return (
     <div
       className="relative w-44 h-64 mb-2 flex flex-col items-center justify-center rounded-xl shadow-xl border border-gray-200 cursor-pointer"
       onClick={handleToggleModal}
     >
-      <div className="absolute top-1 right-3 text-gray-300 cursor-pointer">
-        <FaHeart
-          className={`text-3xl ${
-            favoritedBook ? "text-red-600" : "text-gray-300"
-          }`}
-          onClick={(e) => favoriteBook(e)}
-        />
-      </div>
+      {book.status === "lido" && (
+        <div className="absolute top-1 right-3 text-gray-300 cursor-pointer">
+          <FaHeart
+            className={`text-3xl ${
+              favoritedBook ? "text-red-600" : "text-gray-300"
+            }`}
+            onClick={(e) => favoriteBook(e)}
+          />
+        </div>
+      )}
+
       <div className="w-32 h-48 shrink-0">
         <img
           className="w-full object-cover"
