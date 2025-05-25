@@ -30,7 +30,7 @@ const ModalAddNewBook = ({
 
   const book: IBook = userBook
     ? userBook
-    : { ...apiBook!, status: "queroler", rating: null, review: "" };
+    : { ...apiBook!, status: "queroler", rating: null, review: "", favorite: false };
 
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
   const [selectedStar, setSelectedStar] = useState<number | null>(
@@ -75,6 +75,7 @@ const ModalAddNewBook = ({
       status,
       rating,
       review,
+      favorite: false,
     };
 
     if (!currentUser) return;

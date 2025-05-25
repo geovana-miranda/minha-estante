@@ -107,7 +107,7 @@ const BookDetails = () => {
                   {openModal && (
                     <ModalAddNewBook
                       handleToggleModal={handleToggleModal}
-                      book={book}
+                      apiBook={book}
                     />
                   )}
                 </div>

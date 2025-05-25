@@ -29,4 +29,5 @@ export interface IBook extends IGoogleBook {
   status: string;
   rating: number | null;
   review: string;
+  favorite: boolean;
 }

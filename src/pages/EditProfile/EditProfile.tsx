@@ -116,18 +116,18 @@ const EditProfile = () => {
       <Header />
       <section className="w-md mx-auto bg-white p-6 rounded-2xl shadow-xl border border-gray-200">
         <div className="w-sm mx-auto flex flex-col items-center justify-center px-10">
-          <h2 className="text-2xl font-bold text-center text-navy mb-6 ">
+          <h2 className="text-2xl font-bold text-center text-navy mb-3">
             Editar perfil
           </h2>
 
           {success && (
-            <div className=" border-none py-2 px-5 bg-[#bbffbe] rounded-3xl">
+            <div className="border-none py-2 px-5 mb-3 bg-[#bbffbe] rounded-3xl">
               <p className="text-sm text-center text-[#00bb00]">{success}</p>
             </div>
           )}
 
           {error && (
-            <div className=" border-none py-2 px-5 bg-[#ffbbbb] rounded-3xl">
+            <div className=" border-none py-2 px-5 mb-3 bg-[#ffbbbb] rounded-3xl">
               <p className="text-sm text-center text-[#ff0000]">{error}</p>
             </div>
           )}
