@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { UsersContext } from "../context/UsersContext";
 import type { IBook, IGoogleBook, IUser, typeStatus } from "../types/types";
 
-interface SaveBookParams {
+interface ISaveBookParams {
   apiBook?: IGoogleBook;
   userBook?: IBook;
   status: typeStatus;
@@ -22,7 +22,7 @@ export const useSaveBook = () => {
   const { currentUser, setCurrentUser } = authContext;
   const { users, setUsers } = usersContext;
 
-  const saveBook = ({ apiBook, userBook, status, rating, review }: SaveBookParams) => {
+  const saveBook = ({ apiBook, userBook, status, rating, review }: ISaveBookParams) => {
 
     const book: IBook = userBook
     ? userBook
