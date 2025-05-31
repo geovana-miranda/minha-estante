@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { UsersContext } from "../context/UsersContext";
 import type { IBook, IGoogleBook, IUser, typeStatus } from "../types/types";
+import { useUpdateUser } from "./useUpdateUser";
 
 interface ISaveBookParams {
   apiBook?: IGoogleBook;
@@ -12,15 +12,15 @@ interface ISaveBookParams {
 };
 
 export const useSaveBook = () => {
-  const usersContext = useContext(UsersContext);
   const authContext = useContext(AuthContext);
 
-  if (!usersContext || !authContext) {
+  if (!authContext) {
     throw new Error("Register deve estar dentro de <UsersProvider>");
   }
 
-  const { currentUser, setCurrentUser } = authContext;
-  const { users, setUsers } = usersContext;
+  const { currentUser } = authContext;
+
+  const {updateUser} = useUpdateUser();
 
   const saveBook = ({ apiBook, userBook, status, rating, review }: ISaveBookParams) => {
 
@@ -59,7 +59,7 @@ export const useSaveBook = () => {
 
     if (apiBook) {
       const updatedUser: IUser = {
-        ...currentUser,
+        ...currentUser,  
         books: [...(currentUser.books || []), bookDetails],
       };
 
@@ -87,15 +87,7 @@ export const useSaveBook = () => {
     }
   };
   
-  const updateUser = (updatedUser: IUser) => {
-    setCurrentUser(updatedUser);
-
-    setUsers([
-      ...users.map((user) =>
-        user.id === currentUser?.id ? updatedUser : user
-      ),
-    ]);
-  };
+  
 
   return { saveBook };
 };

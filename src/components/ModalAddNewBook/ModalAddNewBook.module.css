@@ -6,6 +6,7 @@
     right: 0;
     background-color: #03091333;
     backdrop-filter: blur(3px);
+    z-index: 20;
 }
 
 .modal {
@@ -22,4 +23,6 @@
     flex-direction: column;
     gap: 20px;
     box-sizing: border-box;
+    cursor: auto;
+    z-index: 50;
 }

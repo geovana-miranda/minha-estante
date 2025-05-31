@@ -2,24 +2,24 @@ import { useContext, useEffect, useState } from "react";
 import type { IBook, IUser } from "../../types/types";
 import { FaStar, FaHeart } from "react-icons/fa";
 import ModalAddNewBook from "../ModalAddNewBook/ModalAddNewBook";
-import { UsersContext } from "../../context/UsersContext";
 import { AuthContext } from "../../context/AuthContext";
+import { useUpdateUser } from "../../hooks/useUpdateUser";
 
 const CardBook = ({ book }: { book: IBook }) => {
-  const usersContext = useContext(UsersContext);
   const authContext = useContext(AuthContext);
 
-  if (!usersContext || !authContext) {
+  if (!authContext) {
     throw new Error("Register deve estar dentro de <UsersProvider>");
   }
 
-  const { currentUser, setCurrentUser } = authContext;
-  const { users, setUsers } = usersContext;
+  const { currentUser } = authContext;
+  const { updateUser } = useUpdateUser();
 
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [favoritedBook, setFavoritedBook] = useState<boolean>(
     book.favorite || false
   );
+
   const handleToggleModal = () => {
     setOpenModal(!openModal);
   };
@@ -28,6 +28,8 @@ const CardBook = ({ book }: { book: IBook }) => {
     if (book.rating) {
       return star <= book.rating ? "text-amber-300" : "text-gray-300";
     }
+
+    return "text-gray-300";
   };
 
   const favoriteBook = (
@@ -37,7 +39,7 @@ const CardBook = ({ book }: { book: IBook }) => {
     setFavoritedBook(!favoritedBook);
   };
 
-  const updateUser = () => {
+  const updateBook = () => {
     if (!currentUser) return;
 
     const updatedBook = { ...book, favorite: favoritedBook };
@@ -49,15 +51,11 @@ const CardBook = ({ book }: { book: IBook }) => {
       ],
     };
 
-    setCurrentUser(updatedUser);
-
-    setUsers([
-      ...users.map((user) => (user.id === currentUser.id ? updatedUser : user)),
-    ]);
+    updateUser(updatedUser);
   };
 
   useEffect(() => {
-    updateUser();
+    updateBook();
   }, [favoritedBook]);
 
   return (
@@ -83,13 +81,15 @@ const CardBook = ({ book }: { book: IBook }) => {
           alt={`Capa do livro ${book.volumeInfo.title}`}
         />
       </div>
-      {book.rating && (
+
+      {book.status === "lido" && (
         <div className="w-32 flex mt-2">
           {[1, 2, 3, 4, 5].map((star) => (
             <FaStar key={star} className={`text-3xl ${getStarColor(star)}`} />
           ))}
         </div>
       )}
+
       {openModal && (
         <ModalAddNewBook
           handleToggleModal={handleToggleModal}

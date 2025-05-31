@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import type { IGoogleBook, IBook, typeStatus } from "../../types/types";
+import { useContext, useEffect, useState } from "react";
+import type { IGoogleBook, IBook, typeStatus, IUser } from "../../types/types";
 import styles from "./ModalAddNewBook.module.css";
 import { useSaveBook } from "../../hooks/useSaveBook";
 import FormAddNewBook from "../FormAddNewBook/FormAddNewBook";
+import { AuthContext } from "../../context/AuthContext";
+import { useUpdateUser } from "../../hooks/useUpdateUser";
 
 interface IModalAddNewBook {
   handleToggleModal: () => void;
@@ -15,6 +17,15 @@ const ModalAddNewBook = ({
   apiBook,
   userBook,
 }: IModalAddNewBook) => {
+  const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    throw new Error("Register deve estar dentro de <UsersProvider>");
+  }
+
+  const { currentUser } = authContext;
+  const { updateUser } = useUpdateUser();
+
   const book: IBook = userBook
     ? userBook
     : {
@@ -31,8 +42,8 @@ const ModalAddNewBook = ({
   );
   const [rating, setRating] = useState<number | null>(book.rating || null);
   const [review, setReview] = useState<string>(book.review || "");
-
   const { saveBook } = useSaveBook();
+
   const handleSaveBook = () => {
     saveBook({ apiBook, userBook, status, rating, review });
     handleToggleModal();
@@ -46,12 +57,23 @@ const ModalAddNewBook = ({
     }
   }, [status]);
 
+  const handleDeleteBook = () => {
+    if (!currentUser) return;
+
+    const updatedUser: IUser = {
+      ...currentUser,
+      books: currentUser.books.filter((b) => b.id !== book.id),
+    };
+
+    updateUser(updatedUser);
+    handleToggleModal();
+  };
   return (
     <>
       <section className={styles.background}>
         <div className={styles.modal}>
           <h2 className="text-2xl font-bold text-center text-navy">
-            Adicionar novo livro
+            {apiBook ? "Adicionar novo livro" : "Editar livro"}
           </h2>
 
           <div className="flex justify-center gap-8">
@@ -98,6 +120,17 @@ const ModalAddNewBook = ({
                   review={review}
                   setReview={setReview}
                 />
+              )}
+              {userBook && (
+                <button
+                  className="text-start text-sm text-red-600 underline cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteBook();
+                  }}
+                >
+                  Remover da sua estante
+                </button>
               )}
             </div>
           </div>

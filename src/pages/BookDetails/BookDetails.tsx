@@ -1,19 +1,51 @@
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchBookByID } from "../../services/BookAPI";
-import type { IGoogleBook  } from "../../types/types";
+import type { IBook, IGoogleBook, typeStatus } from "../../types/types";
 import { FaBook, FaRegBuilding } from "react-icons/fa";
 import { BsCalendarDate } from "react-icons/bs";
 import { LuPlus } from "react-icons/lu";
 import ModalAddNewBook from "../../components/ModalAddNewBook/ModalAddNewBook";
+import { AuthContext } from "../../context/AuthContext";
+import { HiCheck } from "react-icons/hi";
+import BooksSection from "../../components/BooksSection/BooksSection";
 
 const BookDetails = () => {
+  const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    throw new Error("Register deve estar dentro de <UsersProvider>");
+  }
+
+  const { currentUser } = authContext;
   const { id } = useParams<string>();
   const idBook: string | undefined = id;
-  const [book, setBook] = useState<IGoogleBook  | null>(null);
+  const [book, setBook] = useState<IGoogleBook | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [bookStatus, setBookStatus] = useState<typeStatus | null>(null);
+  const userBook = currentUser?.books.find((b) => b.id === book?.id) as IBook;
+
+  const getStatusColor = (bookStatus: typeStatus) => {
+    if (bookStatus === "lido") {
+      return `bg-green-700`;
+    } else {
+      return `bg-yellow-400`;
+    }
+  };
+
+  useEffect(() => {
+    const updatedStatus = currentUser?.books.find(
+      (b) => b.id === book?.id
+    ) as IBook;
+
+    if (updatedStatus) {
+      setBookStatus(updatedStatus.status as typeStatus);
+    } else {
+      setBookStatus(null)
+    }
+  }, [currentUser, book]);
 
   const handleToggleModal = () => {
     setOpenModal(!openModal);
@@ -47,22 +79,38 @@ const BookDetails = () => {
             <>
               {book && (
                 <div className="w-full flex gap-5 mb-5 bg-white rounded-xl shadow-md p-8 mx-auto">
-                  <div className="w-36 shrink-0 flex flex-col items-center">
+                  <div className="w-36 shrink-0 flex flex-col items-center gap-3">
                     <img
                       className=" w-32 h-48 object-cover"
                       src={book.volumeInfo.imageLinks?.thumbnail}
                       alt={`Capa do livro ${book.volumeInfo.title}`}
                     />
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleToggleModal();
-                      }}
-                      className="mt-5 flex items-center justify-center gap-1 py-2 w-full bg-navy text-white border-none rounded-2xl cursor-pointer hover:bg-[#3f51b5]"
-                    >
-                      <LuPlus />
-                      Adicionar livro
-                    </button>
+
+                    {bookStatus ? (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleToggleModal();
+                        }}
+                        className={`flex items-center gap-1 border-none cursor-pointer px-4 py-1 rounded-full text-sm text-white shadow hover:shadow-lg hover:-translate-y-0.5 transition" ${getStatusColor(
+                          bookStatus
+                        )}`}
+                      >
+                        <HiCheck />
+                        {bookStatus === "lido" ? "Lido" : "Quero ler"}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleToggleModal();
+                        }}
+                        className="flex items-center gap-1 px-6 py-1 bg-navy text-white border-none cursor-pointer  rounded-full text-sm shadow hover:shadow-lg hover:-translate-y-0.5 transition"
+                      >
+                        <LuPlus />
+                        Adicionar livro
+                      </button>
+                    )}
                   </div>
                   <div className="flex flex-col justify-between items-start gap-5">
                     <div>
@@ -100,16 +148,22 @@ const BookDetails = () => {
                     <p
                       className="text-sm text-gray-800 leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
                       dangerouslySetInnerHTML={{
-                        __html: book.volumeInfo.description || ""
+                        __html: book.volumeInfo.description || "",
                       }}
                     />
                   </div>
-                  {openModal && (
-                    <ModalAddNewBook
-                      handleToggleModal={handleToggleModal}
-                      apiBook={book}
-                    />
-                  )}
+                  {openModal &&
+                    (userBook ? (
+                      <ModalAddNewBook
+                        handleToggleModal={handleToggleModal}
+                        userBook={userBook}
+                      />
+                    ) : (
+                      <ModalAddNewBook
+                        handleToggleModal={handleToggleModal}
+                        apiBook={book}
+                      />
+                    ))}
                 </div>
               )}
             </>

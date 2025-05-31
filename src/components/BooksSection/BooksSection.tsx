@@ -34,7 +34,7 @@ const BooksSection = () => {
       );
 
     }
-  }, [displayBooks]);
+  }, [displayBooks, currentUser]);
 
   return (
     <section className="w-4xl h-auto mx-auto bg-amber-50 py-10 rounded-2xl shadow-xl border border-gray-200 my-10 ">
