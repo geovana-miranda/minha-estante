@@ -114,9 +114,9 @@ const EditProfile = () => {
   return (
     <>
       <Header />
-      <section className="w-md mx-auto bg-white p-6 rounded-2xl shadow-xl border border-gray-200">
+      <section className="w-md mx-auto bg-peach p-6 rounded-2xl shadow-xl border border-lightbrown">
         <div className="w-sm mx-auto flex flex-col items-center justify-center px-10">
-          <h2 className="text-2xl font-bold text-center text-navy mb-3">
+          <h2 className="text-2xl font-bold text-center text-brown mb-3">
             Editar perfil
           </h2>
 
@@ -135,8 +135,8 @@ const EditProfile = () => {
           <div className={styles.containerImagem}>
             <img
               src={profilePhoto}
-              alt="imagem do usuário"
-              className="w-40 h-40 rounded-full"
+              alt="foto do usuário"
+              className="w-40 h-40 rounded-full border border-lightbrown"
             />
 
             <div className={styles.overlay}>
@@ -157,9 +157,9 @@ const EditProfile = () => {
           <form onSubmit={handleSubmit}>
             <div className="mt-5 mb-5">
               <label>
-                <span className="font-bold text-gray-800">Nome </span>
+                <span className="font-bold text-brown">Nome </span>
                 <input
-                  className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
                   value={name}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -172,9 +172,9 @@ const EditProfile = () => {
 
             <div className="mb-5">
               <label>
-                <span className="font-bold text-gray-800">Email </span>
+                <span className="font-bold text-brown">Email </span>
                 <input
-                  className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
                   value={email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -187,12 +187,12 @@ const EditProfile = () => {
 
             <div className="mb-5">
               <label>
-                <span className="font-bold text-gray-800">
+                <span className="font-bold text-brown">
                   {" "}
                   Título da estante{" "}
                 </span>
                 <input
-                  className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
                   maxLength={40}
                   value={profileTitle}
@@ -206,9 +206,9 @@ const EditProfile = () => {
 
             <div className="mb-5">
               <label>
-                <span className="font-bold text-gray-800"> Frase </span>
+                <span className="font-bold text-brown"> Frase </span>
                 <textarea
-                  className="w-full italic h-30 mt-1 px-2 py-1 rounded-2xl bg-white border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full italic h-30 mt-1 px-2 py-1 rounded-2xl bg-white border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   maxLength={140}
                   value={profileQuote}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -221,7 +221,7 @@ const EditProfile = () => {
 
             <input
               type="submit"
-              className="w-full p-3 bg-navy text-white border-none rounded-4xl font-bold cursor-pointer hover:bg-[#3f51b5]"
+              className="w-full p-3 bg-brown text-white border-none rounded-4xl font-bold cursor-pointer hover:bg-lightbrown"
               value="Salvar"
             />
           </form>

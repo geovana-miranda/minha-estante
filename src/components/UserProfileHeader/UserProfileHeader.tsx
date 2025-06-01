@@ -15,18 +15,18 @@ const UserProfileHeader = () => {
   const photo = currentUser!.profilePhoto;
 
   return (
-      <section className="w-4xl h-auto mx-auto bg-amber-50 py-10 rounded-2xl shadow-xl border border-gray-200">
+      <section className="w-4xl h-auto mx-auto bg-peach py-10 rounded-3xl shadow-xl border border-lightbrown">
         <div className="w-2xl mx-auto flex flex-col">
-          <div className="w-2xl flex items-center justify-center gap-10">
+          <div className="w-2xl flex flex-col items-center justify-center gap-2">
             <img
               src={photo}
-              alt="imagem do usuário"
-              className="w-40 h-40 rounded-full"
+              alt="foto do usuário"
+              className="w-40 h-40 rounded-full border border-lightbrown"
             />
-            <h2 className="text-3xl font-bold text-blue-950">{title}</h2>
+            <h2 className="text-4xl font-bold text-brown">{title}</h2>
           </div>
           <div className="mt-5 flex justify-center">
-            <p className="text-lg text-center font-crimson italic text-gray-700">
+            <p className="text-xl text-center font-crimson italic text-lightbrown">
               {quote}
             </p>
           </div>

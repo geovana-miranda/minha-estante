@@ -21,20 +21,20 @@ const FormAddNewBook = ({
 
   const getStarColor = (starNumber: number) => {
     if (hoveredStar != null) {
-      return starNumber <= hoveredStar ? "text-amber-300" : "text-gray-300";
+      return starNumber <= hoveredStar ? "text-amber-400" : "text-gray-400";
     }
 
     if (selectedStar != null) {
-      return starNumber <= selectedStar ? "text-amber-300" : "text-gray-300";
+      return starNumber <= selectedStar ? "text-amber-400" : "text-gray-400";
     }
 
-    return "text-gray-300";
+    return "text-gray-400";
   };
 
   return (
     <>
       <div className="flex items-center gap-2">
-        <label className="">Avaliar:</label>{" "}
+        <label className="text-brown font-bold">Avaliar:</label>{" "}
         <div className="flex">
           {[1, 2, 3, 4, 5].map((star) => (
             <FaStar
@@ -54,9 +54,9 @@ const FormAddNewBook = ({
         </div>
       </div>
       <div>
-        <p>Resenha:</p>
+        <p className="text-brown font-bold">Resenha:</p>
         <textarea
-          className="w-full h-20 border border-gray-300 rounded-md p-2 text-sm resize-none"
+          className="w-full h-20 border border-gray-400 rounded-md p-2 text-sm resize-none"
           maxLength={240}
           value={review}
           placeholder="Escreva sua resenha aqui..."

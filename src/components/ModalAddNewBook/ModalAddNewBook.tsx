@@ -79,7 +79,7 @@ const ModalAddNewBook = ({
     <>
       <section className={styles.background}>
         <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-          <h2 className="text-2xl font-bold text-center text-navy">
+          <h2 className="text-3xl italic font-crimson font-bold text-center text-brown">
             {apiBook ? "Adicionar novo livro" : "Editar livro"}
           </h2>
 
@@ -94,21 +94,21 @@ const ModalAddNewBook = ({
             </div>
             <div className="w-full  flex flex-col gap-2">
               <div>
-                <p className="text-lg font-semibold">
+                <p className="text-lg font-bold text-brown">
                   {book.volumeInfo.title}{" "}
                 </p>
-                <p className="text-sm text-gray-700 italic">
+                <p className="text-sm text-lightbrown italic">
                   {book.volumeInfo.authors}
                 </p>
               </div>
               <div>
-                <label className="mr-2">Status:</label>
+                <label className="mr-2 text-brown font-bold">Status:</label>
                 <select
                   defaultValue={status}
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                  className="border border-gray-300 rounded-md p-2 text-sm"
+                  className="w-30 mt-1 py-2 px-6 rounded-full bg-peach border border-lightbrown"
                   onChange={(e) => {
                     if (e.target.value === "lido") {
                       setStatus("lido");
@@ -131,7 +131,7 @@ const ModalAddNewBook = ({
               )}
               {userBook && (
                 <button
-                  className="text-start text-sm text-red-600 underline cursor-pointer"
+                  className="text-start text-sm text-[#9e0101] underline cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleDeleteBook();
@@ -149,7 +149,7 @@ const ModalAddNewBook = ({
                 e.stopPropagation();
                 handleToggleModal();
               }}
-              className="w-full py-2 border border-navy text-navy rounded-2xl font-bold cursor-pointer"
+              className="w-full py-2 border border-brown bg-peach text-brown rounded-2xl font-bold cursor-pointer hover:border-lightbrown hover:text-lightbrown"
             >
               Cancelar
             </button>
@@ -158,7 +158,7 @@ const ModalAddNewBook = ({
                 e.stopPropagation();
                 handleSaveBook();
               }}
-              className="w-full py-2 bg-navy text-white border border-navy rounded-2xl font-bold cursor-pointer hover:bg-[#3f51b5]"
+              className="w-full py-2 bg-brown text-white border border-brown rounded-2xl font-bold cursor-pointer hover:bg-lightbrown hover:border-lightbrown"
             >
               Salvar
             </button>

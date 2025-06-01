@@ -26,10 +26,10 @@ const CardBook = ({ book }: { book: IBook }) => {
 
   const getStarColor = (star: number) => {
     if (book.rating) {
-      return star <= book.rating ? "text-amber-300" : "text-gray-300";
+      return star <= book.rating ? "text-amber-400" : "text-gray-400";
     }
 
-    return "text-gray-300";
+    return "text-gray-400";
   };
 
   const favoriteBook = (
@@ -60,21 +60,21 @@ const CardBook = ({ book }: { book: IBook }) => {
 
   return (
     <div
-      className="relative w-44 h-64 mb-2 flex flex-col items-center justify-center rounded-xl shadow-xl border border-gray-200 cursor-pointer"
+      className="relative w-40 h-60 mb-2 flex flex-col items-center justify-center bg-peach rounded-xl shadow-lg border border-[#b4955e] cursor-pointer"
       onClick={handleToggleModal}
     >
       {book.status === "lido" && (
         <div className="absolute top-1 right-3 text-gray-300 cursor-pointer">
           <FaHeart
             className={`text-3xl ${
-              favoritedBook ? "text-red-600" : "text-gray-300"
+              favoritedBook ? "text-red-600" : "text-gray-400"
             }`}
             onClick={(e) => favoriteBook(e)}
           />
         </div>
       )}
 
-      <div className="w-32 h-48 shrink-0">
+      <div className="w-32 h-44 my-2 shrink-0">
         <img
           className="w-full object-cover"
           src={book.volumeInfo.imageLinks?.thumbnail}

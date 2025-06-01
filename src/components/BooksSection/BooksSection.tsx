@@ -37,12 +37,12 @@ const BooksSection = () => {
   }, [displayBooks, currentUser]);
 
   return (
-    <section className="w-4xl h-auto mx-auto bg-amber-50 py-10 rounded-2xl shadow-xl border border-gray-200 my-10 ">
-      <div className="w-3xl mx-auto">
-        <div className="flex items-center gap-5 mb-5">
-          <span>Exibir: </span>
+    <section className="w-4xl h-auto mx-auto mt-5 mb-10">
+      <div className="px-3">
+        <div className="flex items-center gap-5 my-6 mx-auto">
+          <span className="text-2xl font-bold font-cormorant text-brown">Exibir: </span>
           <select
-            className="w-30 mt-1 p-2 rounded-2xl bg-white border border-blue-200"
+            className="w-30 mt-1 py-2 px-6 rounded-full bg-peach border border-brown"
             onChange={(e) => {
               setDisplayBooks(e.target.value as typeDisplayBooks);
             }}
@@ -53,7 +53,7 @@ const BooksSection = () => {
           </select>
         </div>
         <div>
-          <ul className="flex items-center justify-start gap-2 flex-wrap">
+          <ul className="flex items-center justify-start gap-4 flex-wrap">
             {filteredBooks && filteredBooks.length > 0 ? (
               filteredBooks.map((b) => (
                 <li key={b.id}>
