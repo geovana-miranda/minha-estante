@@ -9,7 +9,6 @@ import { LuPlus } from "react-icons/lu";
 import ModalAddNewBook from "../../components/ModalAddNewBook/ModalAddNewBook";
 import { AuthContext } from "../../context/AuthContext";
 import { HiCheck } from "react-icons/hi";
-import BooksSection from "../../components/BooksSection/BooksSection";
 
 const BookDetails = () => {
   const authContext = useContext(AuthContext);

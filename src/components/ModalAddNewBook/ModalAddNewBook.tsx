@@ -5,6 +5,7 @@ import { useSaveBook } from "../../hooks/useSaveBook";
 import FormAddNewBook from "../FormAddNewBook/FormAddNewBook";
 import { AuthContext } from "../../context/AuthContext";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
+import { useNavigate } from "react-router-dom";
 
 interface IModalAddNewBook {
   handleToggleModal: () => void;
@@ -43,6 +44,7 @@ const ModalAddNewBook = ({
   const [rating, setRating] = useState<number | null>(book.rating || null);
   const [review, setReview] = useState<string>(book.review || "");
   const { saveBook } = useSaveBook();
+  const navigate = useNavigate();
 
   const handleSaveBook = () => {
     saveBook({ apiBook, userBook, status, rating, review });
@@ -68,10 +70,15 @@ const ModalAddNewBook = ({
     updateUser(updatedUser);
     handleToggleModal();
   };
+
+    const displayBookDetails = () => {
+    navigate(`/book/${book.id}`);
+  };
+
   return (
     <>
       <section className={styles.background}>
-        <div className={styles.modal}>
+        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
           <h2 className="text-2xl font-bold text-center text-navy">
             {apiBook ? "Adicionar novo livro" : "Editar livro"}
           </h2>
@@ -79,9 +86,10 @@ const ModalAddNewBook = ({
           <div className="flex justify-center gap-8">
             <div className="shrink-0">
               <img
-                className="w-36 h-auto shadow-md"
+                className="w-36 h-auto shadow-md cursor-pointer"
                 src={book.volumeInfo.imageLinks?.thumbnail}
                 alt="capa do livro"
+                onClick={displayBookDetails}
               />
             </div>
             <div className="w-full  flex flex-col gap-2">
