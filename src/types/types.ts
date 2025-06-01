@@ -33,3 +33,11 @@ export interface IBook extends IGoogleBook {
 }
 
 export type typeStatus = "queroler" | "lido";
+
+export interface IAuthor {
+  title: string;
+  thumbnail?: {
+    source: string;
+  };
+  extract_html: string;
+}

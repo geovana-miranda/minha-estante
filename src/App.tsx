@@ -8,6 +8,7 @@ import Home from "./pages/Home/Home";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Search from "./pages/Search/Search";
 import BookDetails from "./pages/BookDetails/BookDetails";
+import AuthorDetails from "./pages/AuthorDetails/AuthorDetails";
 
 function App() {
   return (
@@ -46,6 +47,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <BookDetails />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/author/:name"
+                element={
+                  <PrivateRoute>
+                    <AuthorDetails />
                   </PrivateRoute>
                 }
               />

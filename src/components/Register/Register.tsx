@@ -47,6 +47,7 @@ const Register = () => {
       profileTitle: "Minha estante",
       profileQuote:
         "A leitura abre a mente, impulsiona sonhos e alimenta a alma. Érico Teixeira.",
+      books: []
     };
 
     setUsers([...users, newUser]);
