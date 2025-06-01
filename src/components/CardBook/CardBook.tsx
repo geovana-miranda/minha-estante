@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import type { IBook, IUser } from "../../types/types";
 import { FaStar, FaHeart } from "react-icons/fa";
-import ModalAddNewBook from "../ModalAddNewBook/ModalAddNewBook";
 import { AuthContext } from "../../context/AuthContext";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
+import ModalAddNewBook from "../ModalAddNewBook/ModalAddNewBook";
+import type { IBook, IUser } from "../../types/types";
 
 const CardBook = ({ book }: { book: IBook }) => {
   const authContext = useContext(AuthContext);

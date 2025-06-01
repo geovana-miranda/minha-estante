@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
-import type { IAuthor } from "../../types/types";
-import { fetchAuthor } from "../../services/AuthorAPI";
+import type { IAuthor, IBooksByAuthor } from "../../types/types";
+import { fetchAuthor } from "../../services/WikipediaAPI";
 import NotFound from "../../components/NotFound/NotFound";
 import semfoto from "../../assets/semfoto.png";
+import { fetchBooksByAuthor } from "../../services/GoogleAPI";
 const imgsemfoto = semfoto;
 
 type typeAuthor = IAuthor | { status: number; type: string };
@@ -12,7 +13,11 @@ type typeAuthor = IAuthor | { status: number; type: string };
 const AuthorDetails = () => {
   const { name } = useParams<string>();
   const [author, setAuthor] = useState<IAuthor | null>(null);
+  const [booksByAuthor, setBooksByAuthor] = useState<IBooksByAuthor[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
+
+  console.log(booksByAuthor);
 
   useEffect(() => {
     if (!name) return;
@@ -25,12 +30,29 @@ const AuthorDetails = () => {
         setLoading(false);
       } else {
         setAuthor(data as IAuthor);
-        setLoading(false);
       }
     }
 
     getAuthor(name);
   }, [name]);
+
+  useEffect(() => {
+    if (!author) return;
+
+    const normalizedName = name?.replace(/_/g, "%20");
+
+    async function getBooksByAuthor(normalizedName: string) {
+      const data = await fetchBooksByAuthor(normalizedName);
+      setBooksByAuthor(data);
+      setLoading(false);
+    }
+
+    if (normalizedName) getBooksByAuthor(normalizedName);
+  }, [author]);
+
+  const displayBookDetails = (id: string) => {
+    navigate(`/book/${id}`);
+  };
 
   return (
     <>
@@ -66,6 +88,30 @@ const AuthorDetails = () => {
                     __html: author.extract_html || "",
                   }}
                 />
+
+                {booksByAuthor && (
+                  <>
+                    <h2>Livros: </h2>
+                    <ul className="flex items-center justify-start gap-4 flex-wrap">
+                      {booksByAuthor.map((book) => (
+                        <li key={book.id}>
+                          <div
+                            className="relative w-24 h-32 flex flex-col items-center justify-center bg-peach rounded-xl shadow-lg border border-[#b4955e] cursor-pointer"
+                            onClick={() => displayBookDetails(book.id)}
+                          >
+                            <div className="w-20 h-28 shrink-0">
+                              <img
+                                className="w-full object-cover"
+                                src={book.volumeInfo.imageLinks?.thumbnail}
+                                alt={`Capa do livro ${book.volumeInfo.title}`}
+                              />
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </div>
             </div>
           ) : (

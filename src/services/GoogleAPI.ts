@@ -11,3 +11,9 @@ export async function fetchBookByID(id: string) {
   const data = await res.json();
   return data;
 }
+
+export async function fetchBooksByAuthor(author: string) {
+  const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=inauthor:"${author}"&maxResults=40`);
+  const data = await res.json();
+  return data.items;
+}

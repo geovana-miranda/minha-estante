@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
-import { fetchBooks } from "../../services/BookAPI";
+import { fetchBooks } from "../../services/GoogleAPI";
 import type { IGoogleBook  } from "../../types/types";
 import SearchResultItem from "../../components/SearchResultItem/SearchResultItem";
 
@@ -9,7 +9,7 @@ const Search = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
 
-  const [foundBooks, setFoundBooks] = useState<IGoogleBook []>([]);
+  const [foundBooks, setFoundBooks] = useState<IGoogleBook[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {

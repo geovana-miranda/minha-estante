@@ -9,6 +9,7 @@ import { LuPlus } from "react-icons/lu";
 import ModalAddNewBook from "../../components/ModalAddNewBook/ModalAddNewBook";
 import { AuthContext } from "../../context/AuthContext";
 import { HiCheck } from "react-icons/hi";
+import { fetchAuthor } from "../../services/WikipediaAPI";
 
 const BookDetails = () => {
   const authContext = useContext(AuthContext);
@@ -43,7 +44,7 @@ const BookDetails = () => {
     if (updatedStatus) {
       setBookStatus(updatedStatus.status as typeStatus);
     } else {
-      setBookStatus(null);
+      setBookStatus(null)
     }
   }, [currentUser, book]);
 
@@ -56,7 +57,6 @@ const BookDetails = () => {
 
     async function getBookByID(id: string) {
       const data = await fetchBookByID(id);
-      
       setBook(data);
       setLoading(false);
     }
@@ -66,12 +66,8 @@ const BookDetails = () => {
 
   const displayAuthor = () => {
     const name = book?.volumeInfo.authors;
-
-    if (name) {
-      const normalizedName = name[0].replace(/ /g, "_");
-      navigate(`/author/${normalizedName}`);
-    }
-  };
+    navigate(`/author/${name[0]}`);
+  }
 
   return (
     <>
@@ -130,9 +126,7 @@ const BookDetails = () => {
                       <p className="italic text-indigo-600">
                         {book.volumeInfo.subtitle}
                       </p>
-                      <p className="text-gray-600 cursor-pointer" onClick={displayAuthor}>
-                        {book.volumeInfo.authors}
-                      </p>
+                      <p className="text-gray-600" onClick={displayAuthor}>{book.volumeInfo.authors}</p>
                     </div>
 
                     <div className="w-full flex justify-around gap-4 text-sm text-gray-700">
