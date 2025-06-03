@@ -114,9 +114,9 @@ const EditProfile = () => {
   return (
     <>
       <Header />
-      <section className="w-md mx-auto bg-peach p-6 rounded-2xl shadow-xl border border-lightbrown">
+      <section className="w-md mx-auto p-6 rounded-2xl shadow-xl border border-lightbrown">
         <div className="w-sm mx-auto flex flex-col items-center justify-center px-10">
-          <h2 className="text-2xl font-bold text-center text-brown mb-3">
+          <h2 className="text-3xl font-cormorant font-bold text-center text-brown mb-3">
             Editar perfil
           </h2>
 
@@ -155,11 +155,11 @@ const EditProfile = () => {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <div className="mt-5 mb-5">
+            <div className="mt-5 mb-3">
               <label>
-                <span className="font-bold text-brown">Nome </span>
+                <span className="font-cormorant italic text-lg font-bold text-brown">Nome </span>
                 <input
-                  className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
                   value={name}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -170,11 +170,11 @@ const EditProfile = () => {
               </label>
             </div>
 
-            <div className="mb-5">
+            <div className="mb-3">
               <label>
-                <span className="font-bold text-brown">Email </span>
+                <span className="font-cormorant italic text-lg font-bold text-brown">Email </span>
                 <input
-                  className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
                   value={email}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -185,14 +185,14 @@ const EditProfile = () => {
               </label>
             </div>
 
-            <div className="mb-5">
+            <div className="mb-3">
               <label>
-                <span className="font-bold text-brown">
+                <span className="font-cormorant italic text-lg font-bold text-brown">
                   {" "}
                   Título da estante{" "}
                 </span>
                 <input
-                  className="w-full italic mt-1 px-2 py-1 rounded-2xl bg-white border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
                   maxLength={40}
                   value={profileTitle}
@@ -204,11 +204,11 @@ const EditProfile = () => {
               </label>
             </div>
 
-            <div className="mb-5">
+            <div className="mb-3">
               <label>
-                <span className="font-bold text-brown"> Frase </span>
+                <span className="font-cormorant italic text-lg font-bold text-brown"> Frase </span>
                 <textarea
-                  className="w-full italic h-30 mt-1 px-2 py-1 rounded-2xl bg-white border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full h-30 mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   maxLength={140}
                   value={profileQuote}
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>

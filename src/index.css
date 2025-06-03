@@ -4,12 +4,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap");
 
 @theme {
-  --color-peach: #f1d9af;
+  --color-peach: #f2d39e;
   --color-babyblue: #ebf1ed;
   --color-babypink: #fee8d1;
   --color-navy: blue;
-  --color-brown: #513c23;
-  --color-lightbrown: #a47e3b;
+  --color-brown: #442609;
+  --color-lightbrown: #8c6444;
   --font-montserrat: "Montserrat", sans-serif;
   --font-crimson: "Crimson Text", serif;
   --font-cormorant: "Cormorant Garamond", serif;

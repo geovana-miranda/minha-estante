@@ -10,6 +10,8 @@ const BooksSection = () => {
     throw new Error("Register deve estar dentro de <UsersProvider>");
   }
 
+  console.log("contando renderizacoes");
+
   const { currentUser } = authContext;
 
   type typeDisplayBooks = "queroler" | "lido" | "favoritos";
@@ -18,6 +20,7 @@ const BooksSection = () => {
   const [filteredBooks, setFilteredBooks] = useState<IBook[] | null>(null);
 
   useEffect(() => {
+    console.log("aqui");
     if (displayBooks === "lido" || displayBooks === "queroler") {
       setFilteredBooks(
         currentUser?.books
@@ -32,7 +35,6 @@ const BooksSection = () => {
       setFilteredBooks(
         currentUser?.books ? currentUser.books.filter((b) => b.favorite) : null
       );
-
     }
   }, [displayBooks, currentUser]);
 
@@ -40,9 +42,11 @@ const BooksSection = () => {
     <section className="w-4xl h-auto mx-auto mt-5 mb-10">
       <div className="px-3">
         <div className="flex items-center gap-5 my-6 mx-auto">
-          <span className="text-2xl font-bold font-cormorant text-brown">Exibir: </span>
+          <span className="text-2xl font-bold font-cormorant text-brown">
+            Exibir:{" "}
+          </span>
           <select
-            className="w-30 mt-1 py-2 px-6 rounded-full bg-peach border border-brown"
+            className="w-32 mt-1 py-2 px-4 rounded-full bg-peach border border-brown"
             onChange={(e) => {
               setDisplayBooks(e.target.value as typeDisplayBooks);
             }}
@@ -61,14 +65,18 @@ const BooksSection = () => {
                 </li>
               ))
             ) : (
-              <div className="mx-auto text-gray-800">
+              <div className="mx-auto text-brown text-lg font-semibold">
                 {displayBooks === "queroler" ? (
                   <p>
-                    Você ainda não adicionou nenhum livro a lista de "quero
+                    Você ainda não adicionou nenhum livro à sua lista de "quero
                     ler".
                   </p>
+                ) : displayBooks === "lido" ? (
+                  <p>Você ainda não adicionou nenhum livro à sua lista de "lidos".</p>
                 ) : (
-                  <p>Você ainda não adicionou nenhum livro lista de "lidos".</p>
+                  <p>
+                    Você ainda não adicionou nenhum livro à sua lista de "favoritos".
+                  </p>
                 )}
               </div>
             )}

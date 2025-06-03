@@ -6,7 +6,7 @@ import type { IBook, IGoogleBook, typeStatus } from "../../types/types";
 import { FaBook, FaRegBuilding } from "react-icons/fa";
 import { BsCalendarDate } from "react-icons/bs";
 import { LuPlus } from "react-icons/lu";
-import ModalAddNewBook from "../../components/ModalAddNewBook/ModalAddNewBook";
+import ModalAddNewBook from "../../components/BookFormModal/BookFormModal";
 import { AuthContext } from "../../context/AuthContext";
 import { HiCheck } from "react-icons/hi";
 import { fetchAuthor } from "../../services/WikipediaAPI";

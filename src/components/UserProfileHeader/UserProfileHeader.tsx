@@ -15,7 +15,7 @@ const UserProfileHeader = () => {
   const photo = currentUser!.profilePhoto;
 
   return (
-      <section className="w-4xl h-auto mx-auto bg-peach py-10 rounded-3xl shadow-xl border border-lightbrown">
+      <section className="w-4xl h-auto mx-auto  py-10 rounded-3xl shadow-xl border border-lightbrown">
         <div className="w-2xl mx-auto flex flex-col">
           <div className="w-2xl flex flex-col items-center justify-center gap-2">
             <img

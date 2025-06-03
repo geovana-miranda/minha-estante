@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { FaStar, FaHeart } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
-import ModalAddNewBook from "../ModalAddNewBook/ModalAddNewBook";
+import BookFormModal from "../BookFormModal/BookFormModal";
 import type { IBook, IUser } from "../../types/types";
 
 const CardBook = ({ book }: { book: IBook }) => {
@@ -74,9 +74,9 @@ const CardBook = ({ book }: { book: IBook }) => {
         </div>
       )}
 
-      <div className="w-32 h-44 my-2 shrink-0">
+      <div className="w-32 h-44 mt-2 shrink-0">
         <img
-          className="w-full object-cover"
+          className="w-full h-44 object-cover"
           src={book.volumeInfo.imageLinks?.thumbnail}
           alt={`Capa do livro ${book.volumeInfo.title}`}
         />
@@ -91,7 +91,7 @@ const CardBook = ({ book }: { book: IBook }) => {
       )}
 
       {openModal && (
-        <ModalAddNewBook
+        <BookFormModal
           handleToggleModal={handleToggleModal}
           userBook={book}
         />

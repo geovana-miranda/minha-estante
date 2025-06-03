@@ -65,7 +65,7 @@ const Login = () => {
         <input
           type="submit"
           value="Entrar"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-3xl transition duration-200 cursor-pointer"
+          className="mt-3 w-full bg-brown hover:bg-lightbrown text-white font-medium py-2 rounded-3xl transition duration-200 cursor-pointer"
         />
       </form>
     </>

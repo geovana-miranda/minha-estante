@@ -6,6 +6,7 @@ import { fetchAuthor } from "../../services/WikipediaAPI";
 import NotFound from "../../components/NotFound/NotFound";
 import semfoto from "../../assets/semfoto.png";
 import { fetchBooksByAuthor } from "../../services/GoogleAPI";
+import Loading from "../../components/Loading/Loading";
 const imgsemfoto = semfoto;
 
 type typeAuthor = IAuthor | { status: number; type: string };
@@ -57,17 +58,12 @@ const AuthorDetails = () => {
   return (
     <>
       <Header />
-      <section className="w-4xl h-auto mx-auto bg-amber-50 py-10 rounded-2xl shadow-xl border border-gray-200">
-        <div className="w-2xl mx-auto flex flex-col items-center justify-between">
+      <section className="w-4xl h-auto mx-auto py-10 rounded-2xl shadow-xl border border-lightbrown">
+        <div className="w-3xl mx-auto flex flex-col items-center justify-between">
           {loading ? (
-            <div className="mx-auto flex flex-col items-center gap-2">
-              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-              <span className="text-xl italic text-navy mb-6 text-center">
-                Carregando...
-              </span>
-            </div>
+            <Loading />
           ) : author ? (
-            <div className="w-full flex gap-5 mb-5 bg-white rounded-xl shadow-md p-8 mx-auto">
+            <div className="w-full flex gap-5 mb-5 bg-peach border border-lightbrown rounded-xl shadow-md p-8 mx-auto">
               <div className="w-36 shrink-0 flex flex-col items-center gap-3">
                 <img
                   className=" w-32 h-40 object-cover"
@@ -77,13 +73,13 @@ const AuthorDetails = () => {
               </div>
               <div className="flex flex-col justify-between items-start gap-5">
                 <div>
-                  <h2 className="text-3xl font-bold text-indigo-900">
+                  <h2 className="text-4xl font-cormorant font-bold text-brown">
                     {author.title}
                   </h2>
                 </div>
 
                 <p
-                  className="text-sm text-gray-800 leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
+                  className="text-brown leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
                   dangerouslySetInnerHTML={{
                     __html: author.extract_html || "",
                   }}
@@ -91,8 +87,8 @@ const AuthorDetails = () => {
 
                 {booksByAuthor && (
                   <>
-                    <h2>Livros: </h2>
-                    <ul className="flex items-center justify-start gap-4 flex-wrap">
+                    <h2 className="text-brown text-xl font-cormorant italic font-bold">Livros publicados por {author.title}:</h2>
+                    <ul className="flex items-center justify-start gap-3 flex-wrap">
                       {booksByAuthor.map((book) => (
                         <li key={book.id}>
                           <div

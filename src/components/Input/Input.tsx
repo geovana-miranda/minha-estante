@@ -10,10 +10,10 @@ interface IInputProps {
 
 const Input = ({ label, type, placeholder, value, setValue }: IInputProps) => {
   return (
-    <label className="w-[250px] flex flex-col mb-4">
-      <span className="text-md font-medium text-gray-700">{label}</span>
+    <label className="w-[250px] flex flex-col mb-3">
+      <span className="text-lg text-brown font-cormorant italic font-bold">{label}</span>
       <input
-        className="w-full mt-1 px-2 py-1 rounded-2xl bg-white border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
         type={type}
         placeholder={placeholder}
         value={value}

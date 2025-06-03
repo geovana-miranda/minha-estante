@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchBooks } from "../../services/GoogleAPI";
 import type { IGoogleBook  } from "../../types/types";
 import SearchResultItem from "../../components/SearchResultItem/SearchResultItem";
+import Loading from "../../components/Loading/Loading";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
@@ -27,18 +28,13 @@ const Search = () => {
   return (
     <>
       <Header />
-      <section className="w-4xl h-auto mx-auto bg-amber-50 py-10 rounded-2xl shadow-xl border border-gray-200">
+      <section className="w-4xl h-auto mx-auto py-10 rounded-2xl shadow-xl border border-lightbrown">
         <div className="w-2xl mx-auto flex flex-col items-center justify-between">
           {loading ? (
-            <div className="mx-auto flex flex-col items-center gap-2">
-              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-              <span className="text-xl italic text-navy mb-6 text-center">
-                Carregando...
-              </span>
-            </div>
+            <Loading />
           ) : (
             <>
-              <h2 className="text-xl font-bold text-navy mb-4 text-center">
+              <h2 className="text-3xl font-bold font-cormorant text-brown mb-4 text-center">
                 Exibindo resultados da pesquisa por: {query}{" "}
               </h2>
               <div className="w-full">

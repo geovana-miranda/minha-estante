@@ -1,23 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import type { IGoogleBook, IBook, typeStatus, IUser } from "../../types/types";
-import styles from "./ModalAddNewBook.module.css";
+import styles from "./BookFormModal.module.css";
 import { useSaveBook } from "../../hooks/useSaveBook";
 import FormAddNewBook from "../FormAddNewBook/FormAddNewBook";
 import { AuthContext } from "../../context/AuthContext";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
 import { useNavigate } from "react-router-dom";
 
-interface IModalAddNewBook {
+interface IBookFormModal {
   handleToggleModal: () => void;
   apiBook?: IGoogleBook;
   userBook?: IBook;
 }
 
-const ModalAddNewBook = ({
+const BookFormModal = ({
   handleToggleModal,
   apiBook,
   userBook,
-}: IModalAddNewBook) => {
+}: IBookFormModal) => {
   const authContext = useContext(AuthContext);
 
   if (!authContext) {
@@ -108,7 +108,7 @@ const ModalAddNewBook = ({
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                  className="w-30 mt-1 py-2 px-6 rounded-full bg-peach border border-lightbrown"
+                  className="w-32 mt-1 py-2 px-4 rounded-full bg-peach border border-lightbrown"
                   onChange={(e) => {
                     if (e.target.value === "lido") {
                       setStatus("lido");
@@ -169,4 +169,4 @@ const ModalAddNewBook = ({
   );
 };
 
-export default ModalAddNewBook;
+export default BookFormModal;
