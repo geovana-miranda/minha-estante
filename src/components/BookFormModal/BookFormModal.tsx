@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { IGoogleBook, IBook, typeStatus, IUser } from "../../types/types";
 import styles from "./BookFormModal.module.css";
 import { useSaveBook } from "../../hooks/useSaveBook";
 import FormAddNewBook from "../FormAddNewBook/FormAddNewBook";
-import { AuthContext } from "../../context/AuthContext";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 interface IBookFormModal {
   handleToggleModal: () => void;
@@ -18,13 +18,7 @@ const BookFormModal = ({
   apiBook,
   userBook,
 }: IBookFormModal) => {
-  const authContext = useContext(AuthContext);
-
-  if (!authContext) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-
-  const { currentUser } = authContext;
+  const { currentUser } = useAuth();
   const { updateUser } = useUpdateUser();
 
   const book: IBook = userBook

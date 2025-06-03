@@ -1,14 +1,8 @@
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 
 const UserProfileHeader = () => {
-  const authContext = useContext(AuthContext);
-
-  if (!authContext) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-
-  const { currentUser } = authContext;
+    const { currentUser } = useAuth();
+  
 
   const quote = currentUser!.profileQuote;
   const title = currentUser!.profileTitle;

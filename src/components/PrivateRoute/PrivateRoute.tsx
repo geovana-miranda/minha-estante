@@ -1,15 +1,9 @@
-import { useContext, type ReactNode } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { type ReactNode } from "react";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
-  const authContext = useContext(AuthContext);
-
-  if (!authContext) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-
-  const { currentUser } = authContext;
+  const { currentUser } = useAuth();
 
   if (!currentUser) {
     return <Navigate to="/" replace />;

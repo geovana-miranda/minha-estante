@@ -1,23 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchBookByID } from "../../services/GoogleAPI";
 import type { IBook, IGoogleBook, typeStatus } from "../../types/types";
 import { FaBook, FaRegBuilding } from "react-icons/fa";
 import { BsCalendarDate } from "react-icons/bs";
 import BookFormModal from "../../components/BookFormModal/BookFormModal";
 import Loading from "../../components/Loading/Loading";
-import { AuthContext } from "../../context/AuthContext";
 import BookActionButton from "../../components/BookActionButton/BookActionButton";
+import { useAuth } from "../../hooks/useAuth";
 
 const BookDetails = () => {
-  const authContext = useContext(AuthContext);
+  const { currentUser } = useAuth();
 
-  if (!authContext) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-
-  const { currentUser } = authContext;
   const { id } = useParams<string>();
   const idBook: string | undefined = id;
   const [book, setBook] = useState<IGoogleBook | null>(null);

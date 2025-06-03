@@ -1,18 +1,12 @@
 import type { IBook, IGoogleBook, typeStatus } from "../../types/types";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BookFormModal from "../BookFormModal/BookFormModal";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
 import BookActionButton from "../BookActionButton/BookActionButton";
+import { useAuth } from "../../hooks/useAuth";
 
 const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
-  const authContext = useContext(AuthContext);
-
-  if (!authContext) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-
-  const { currentUser } = authContext;
+  const { currentUser } = useAuth();
 
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [bookStatus, setBookStatus] = useState<typeStatus | null>(null);

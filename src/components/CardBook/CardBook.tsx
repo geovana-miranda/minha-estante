@@ -1,18 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar, FaHeart } from "react-icons/fa";
-import { AuthContext } from "../../context/AuthContext";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
 import BookFormModal from "../BookFormModal/BookFormModal";
 import type { IBook, IUser } from "../../types/types";
+import { useAuth } from "../../hooks/useAuth";
 
 const CardBook = ({ book }: { book: IBook }) => {
-  const authContext = useContext(AuthContext);
+  const { currentUser } = useAuth();
 
-  if (!authContext) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-
-  const { currentUser } = authContext;
   const { updateUser } = useUpdateUser();
 
   const [openModal, setOpenModal] = useState<boolean>(false);

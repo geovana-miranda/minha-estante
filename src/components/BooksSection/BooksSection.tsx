@@ -1,18 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useEffect, useState } from "react";
 import CardBook from "../CardBook/CardBook";
 import type { IBook } from "../../types/types";
+import { useAuth } from "../../hooks/useAuth";
 
 const BooksSection = () => {
-  const authContext = useContext(AuthContext);
+  const { currentUser } = useAuth();
 
-  if (!authContext) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-
-  console.log("contando renderizacoes");
-
-  const { currentUser } = authContext;
 
   type typeDisplayBooks = "queroler" | "lido" | "favoritos";
 

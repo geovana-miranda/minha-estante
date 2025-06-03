@@ -1,20 +1,20 @@
 import { useContext, useRef, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import Header from "../../components/Header/Header";
 import { MdOutlineEdit } from "react-icons/md";
 import styles from "./EditProfile.module.css";
 import type { IUser } from "../../types/types";
 import { UsersContext } from "../../context/UsersContext";
+import { useAuth } from "../../hooks/useAuth";
 
 const EditProfile = () => {
   const usersContext = useContext(UsersContext);
-  const authContext = useContext(AuthContext);
 
-  if (!usersContext || !authContext) {
+  if (!usersContext) {
     throw new Error("Register deve estar dentro de <UsersProvider>");
   }
 
-  const { currentUser, setCurrentUser } = authContext;
+  const { currentUser, setCurrentUser } = useAuth();
+  ;
   const { users, setUsers } = usersContext;
 
   const [name, setName] = useState<string>(currentUser!.name);

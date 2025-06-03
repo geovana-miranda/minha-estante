@@ -1,19 +1,15 @@
 import Register from "../../components/Register/Register";
 import books from "../../assets/books.png";
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import Login from "../../components/Login/Login";
-import { AuthContext } from "../../context/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 
 const imgbooks = books;
 
 const Index = () => {
-  const authContext = useContext(AuthContext);
 
-  if (!authContext) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-
-  const { setCurrentUser } = authContext;
+  const { setCurrentUser } = useAuth();
+  
 
   const [isLogin, setIsLogin] = useState<boolean>(false);
 

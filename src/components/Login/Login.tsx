@@ -1,19 +1,18 @@
 import { useContext, useState } from "react";
 import Input from "../Input/Input";
 import { UsersContext } from "../../context/UsersContext";
-import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 const Login = () => {
   const userContext = useContext(UsersContext);
-  const authContext = useContext(AuthContext);
 
-  if (!userContext || !authContext) {
+  if (!userContext) {
     throw new Error("Register deve estar dentro de <UsersProvider>");
   }
 
   const { users } = userContext;
-  const { setCurrentUser } = authContext;
+  const { setCurrentUser } = useAuth();
 
   const navigate = useNavigate();
 

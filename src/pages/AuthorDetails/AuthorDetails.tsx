@@ -18,8 +18,6 @@ const AuthorDetails = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
-  console.log(booksByAuthor);
-
   useEffect(() => {
     if (!name) return;
 
