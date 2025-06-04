@@ -59,14 +59,7 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              <Route
-                path="/*"
-                element={
-                  <PrivateRoute>
-                    <PageNotFound />
-                  </PrivateRoute>
-                }
-              />
+              <Route path="/*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>
         </AuthProvider>
