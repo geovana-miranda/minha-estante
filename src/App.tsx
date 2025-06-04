@@ -9,6 +9,7 @@ import EditProfile from "./pages/EditProfile/EditProfile";
 import Search from "./pages/Search/Search";
 import BookDetails from "./pages/BookDetails/BookDetails";
 import AuthorDetails from "./pages/AuthorDetails/AuthorDetails";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
   return (
@@ -55,6 +56,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <AuthorDetails />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/*"
+                element={
+                  <PrivateRoute>
+                    <PageNotFound />
                   </PrivateRoute>
                 }
               />
