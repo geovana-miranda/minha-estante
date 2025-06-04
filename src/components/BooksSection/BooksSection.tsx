@@ -6,14 +6,12 @@ import { useAuth } from "../../hooks/useAuth";
 const BooksSection = () => {
   const { currentUser } = useAuth();
 
-
   type typeDisplayBooks = "queroler" | "lido" | "favoritos";
 
   const [displayBooks, setDisplayBooks] = useState<typeDisplayBooks>("lido");
   const [filteredBooks, setFilteredBooks] = useState<IBook[] | null>(null);
 
   useEffect(() => {
-    console.log("aqui");
     if (displayBooks === "lido" || displayBooks === "queroler") {
       setFilteredBooks(
         currentUser?.books

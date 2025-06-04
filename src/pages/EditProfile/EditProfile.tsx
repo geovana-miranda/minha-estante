@@ -14,7 +14,7 @@ const EditProfile = () => {
   }
 
   const { currentUser, setCurrentUser } = useAuth();
-  ;
+
   const { users, setUsers } = usersContext;
 
   const [name, setName] = useState<string>(currentUser!.name);
@@ -68,7 +68,7 @@ const EditProfile = () => {
     e.preventDefault();
 
     setError("");
-    setSuccess("")
+    setSuccess("");
 
     if (!currentUser) return;
     if (!name && !email && !profileTitle && !profileQuote) return;
@@ -82,10 +82,7 @@ const EditProfile = () => {
       return;
 
     if (
-      users.find(
-        (user) =>
-          user.email === email && currentUser!.id !== user.id
-      )
+      users.find((user) => user.email === email && currentUser!.id !== user.id)
     ) {
       return setError("Email já cadastrado");
     }
@@ -99,7 +96,6 @@ const EditProfile = () => {
       profileQuote,
     };
 
-
     setCurrentUser(editedUser);
 
     setUsers([
@@ -107,7 +103,7 @@ const EditProfile = () => {
     ]);
 
     setSuccess("Perfil atualizado com sucesso");
-    
+
     window.scroll({ top: 0, behavior: "smooth" });
   };
 
@@ -157,7 +153,9 @@ const EditProfile = () => {
           <form onSubmit={handleSubmit}>
             <div className="mt-5 mb-3">
               <label>
-                <span className="font-cormorant italic text-lg font-bold text-brown">Nome </span>
+                <span className="font-cormorant italic text-lg font-bold text-brown">
+                  Nome{" "}
+                </span>
                 <input
                   className="w-full mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
@@ -172,7 +170,9 @@ const EditProfile = () => {
 
             <div className="mb-3">
               <label>
-                <span className="font-cormorant italic text-lg font-bold text-brown">Email </span>
+                <span className="font-cormorant italic text-lg font-bold text-brown">
+                  Email{" "}
+                </span>
                 <input
                   className="w-full mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
@@ -206,7 +206,10 @@ const EditProfile = () => {
 
             <div className="mb-3">
               <label>
-                <span className="font-cormorant italic text-lg font-bold text-brown"> Frase </span>
+                <span className="font-cormorant italic text-lg font-bold text-brown">
+                  {" "}
+                  Frase{" "}
+                </span>
                 <textarea
                   className="w-full h-30 mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   maxLength={140}
