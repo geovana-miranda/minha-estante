@@ -9,6 +9,7 @@ import BookFormModal from "../../components/BookFormModal/BookFormModal";
 import Loading from "../../components/Loading/Loading";
 import BookActionButton from "../../components/BookActionButton/BookActionButton";
 import { useAuth } from "../../hooks/useAuth";
+import NotFound from "../../components/NotFound/NotFound";
 
 const BookDetails = () => {
   const { currentUser } = useAuth();
@@ -42,10 +43,14 @@ const BookDetails = () => {
     if (!idBook) return;
 
     async function getBookByID(id: string) {
-      const data = await fetchBookByID(id);
-
-      setBook(data);
-      setLoading(false);
+      try {
+        const data = await fetchBookByID(id);
+        setBook(data);
+      } catch (error) {
+        console.error("Erro ao buscar livro:", error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     getBookByID(idBook);
@@ -69,7 +74,7 @@ const BookDetails = () => {
             <Loading />
           ) : (
             <>
-              {book && (
+              {book ? (
                 <div className="w-full flex gap-5 mb-5 bg-peach rounded-xl shadow-md p-8 mx-auto border border-lightbrown">
                   <div className="w-36 shrink-0 flex flex-col items-center gap-3">
                     <img
@@ -141,6 +146,8 @@ const BookDetails = () => {
                       />
                     ))}
                 </div>
+              ): (
+                <NotFound />
               )}
             </>
           )}

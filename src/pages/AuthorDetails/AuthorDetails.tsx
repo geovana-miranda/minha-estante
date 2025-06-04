@@ -22,13 +22,19 @@ const AuthorDetails = () => {
     if (!name) return;
 
     async function getAuthor(name: string) {
-      const data: typeAuthor = await fetchAuthor(name);
+      try {
+        const data: typeAuthor = await fetchAuthor(name);
 
-      if ("status" in data && data.status === 404) {
+        if ("status" in data && data.status === 404) {
+          setAuthor(null);
+        } else {
+          setAuthor(data as IAuthor);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar autor:", error);
         setAuthor(null);
+      } finally {
         setLoading(false);
-      } else {
-        setAuthor(data as IAuthor);
       }
     }
 
@@ -41,9 +47,14 @@ const AuthorDetails = () => {
     const normalizedName = name?.replace(/_/g, "%20");
 
     async function getBooksByAuthor(normalizedName: string) {
-      const data = await fetchBooksByAuthor(normalizedName);
-      setBooksByAuthor(data);
-      setLoading(false);
+      try {
+        const data = await fetchBooksByAuthor(normalizedName);
+        setBooksByAuthor(data);
+      } catch (error) {
+        console.error("Erro ao buscar livros:", error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     if (normalizedName) getBooksByAuthor(normalizedName);
@@ -85,7 +96,9 @@ const AuthorDetails = () => {
 
                 {booksByAuthor && (
                   <>
-                    <h2 className="text-brown text-xl font-cormorant italic font-bold">Livros publicados por {author.title}:</h2>
+                    <h2 className="text-brown text-xl font-cormorant italic font-bold">
+                      Livros publicados por {author.title}:
+                    </h2>
                     <ul className="flex items-center justify-start gap-3 flex-wrap">
                       {booksByAuthor.map((book) => (
                         <li key={book.id}>

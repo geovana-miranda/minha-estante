@@ -11,12 +11,14 @@ import type { IUser } from "../types/types";
 interface IAuthContext {
   currentUser: IUser | null;
   setCurrentUser: Dispatch<SetStateAction<IUser | null>>;
+  loading: boolean;
 }
 
 export const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const savedCurrentUser = localStorage.getItem("usuario");
@@ -26,6 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     } else {
       setCurrentUser(null);
     }
+     setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -37,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, setCurrentUser }}>
+    <AuthContext.Provider value={{ currentUser, setCurrentUser, loading }}>
       {children}
     </AuthContext.Provider>
   );

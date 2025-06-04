@@ -1,15 +1,13 @@
 import Register from "../../components/Register/Register";
 import books from "../../assets/books.png";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "../../components/Login/Login";
 import { useAuth } from "../../hooks/useAuth";
 
 const imgbooks = books;
 
 const Index = () => {
-
   const { setCurrentUser } = useAuth();
-  
 
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
@@ -26,7 +24,7 @@ const Index = () => {
       <section className="w-full h-[500px] flex items-center justify-center max-w-3xl mx-auto ">
         <div className="w-full max-w-md h-full flex flex-col items-center justify-center rounded-l-2xl shadow-xl border border-lightbrown">
           <div>
-            <h2 className="text-4xl font-cormorant font-bold text-center text-brown"> 
+            <h2 className="text-4xl font-cormorant font-bold text-center text-brown">
               {isLogin ? "Login" : "Cadastre-se"}
             </h2>
             <p className="text-sm text-center text-gray-600 mb-3">
