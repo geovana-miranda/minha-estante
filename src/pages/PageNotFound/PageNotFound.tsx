@@ -15,7 +15,29 @@ const PageNotFound = () => {
 
   return (
     <>
-      <Header />
+      {currentUser ? (
+        <Header />
+      ) : (
+        <header className="w-4xl mx-auto py-3 mb-3 px-4 flex items-center justify-between text-brown border-b-2 border-lightbrown">
+          <Link to="/" className="font-bold font-cormorant text-3xl">
+            MinhaEstante
+          </Link>
+          <div className="flex items-center gap-5 italic font-bold font-cormorant text-xl">
+            <Link
+              to="/"
+              className="flex items-center gap-1 hover:text-lightbrown"
+            >
+              <span>Cadastre-se</span>
+            </Link>
+            <Link
+              to="/login"
+              className="flex items-center gap-1 border py-1 px-4 bg-peach rounded-4xl hover:text-lightbrown"
+            >
+              <span>Login</span>
+            </Link>
+          </div>
+        </header>
+      )}
       <div className="w-4xl flex gap-5 mb-5 border border-lightbrown rounded-xl shadow-md p-8 mx-auto">
         <div className="w-3xl my-10 flex flex-col justify-center items-center mx-auto ">
           <div className="flex items-center justify-around mb-10">

@@ -18,7 +18,8 @@ function App() {
         <AuthProvider>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Index />} />
+              <Route path="/" element={<Index login={false} />} />
+              <Route path="/login" element={<Index login={true} />} />
               <Route
                 path="/home"
                 element={
