@@ -55,41 +55,43 @@ const CardBook = ({ book }: { book: IBook }) => {
 
   return (
     <div
-      className="relative w-40 h-60 mb-2 flex flex-col items-center justify-center bg-peach rounded-xl shadow-lg border border-[#b4955e] cursor-pointer"
+      className="relative w-40 mb-2 flex flex-col items-center justify-center bg-peach rounded-xl shadow-lg border border-[#b4955e] cursor-pointer"
       onClick={handleToggleModal}
     >
-      {book.status === "lido" && (
-        <div className="absolute top-1 right-3 text-gray-300 cursor-pointer">
-          <FaHeart
-            className={`text-3xl ${
-              favoritedBook ? "text-red-600" : "text-gray-400"
-            }`}
-            onClick={(e) => favoriteBook(e)}
+      {book.status === "lido" ? (
+        <>
+          <div className="absolute top-1 right-3 text-gray-300 cursor-pointer">
+            <FaHeart
+              className={`text-3xl ${
+                favoritedBook ? "text-red-600" : "text-gray-400"
+              }`}
+              onClick={(e) => favoriteBook(e)}
+            />
+          </div>
+          <div className="w-32 h-44 mt-4 shrink-0">
+            <img
+              className="w-full h-44 object-cover"
+              src={book.volumeInfo.imageLinks?.thumbnail}
+              alt={`Capa do livro ${book.volumeInfo.title}`}
+            />
+          </div>
+          <div className="w-32 flex mt-2 mb-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <FaStar key={star} className={`text-3xl ${getStarColor(star)}`} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="w-32 h-52 shrink-0 flex flex-col justify-center">
+          <img
+            className="w-full h-44 object-cover"
+            src={book.volumeInfo.imageLinks?.thumbnail}
+            alt={`Capa do livro ${book.volumeInfo.title}`}
           />
         </div>
       )}
-
-      <div className="w-32 h-44 mt-2 shrink-0">
-        <img
-          className="w-full h-44 object-cover"
-          src={book.volumeInfo.imageLinks?.thumbnail}
-          alt={`Capa do livro ${book.volumeInfo.title}`}
-        />
-      </div>
-
-      {book.status === "lido" && (
-        <div className="w-32 flex mt-2">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <FaStar key={star} className={`text-3xl ${getStarColor(star)}`} />
-          ))}
-        </div>
-      )}
-
       {openModal && (
-        <BookFormModal
-          handleToggleModal={handleToggleModal}
-          userBook={book}
-        />
+        <BookFormModal handleToggleModal={handleToggleModal} userBook={book} />
       )}
     </div>
   );
