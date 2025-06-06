@@ -56,11 +56,9 @@ const BookDetails = () => {
     getBookByID(idBook);
   }, [id]);
 
-  const displayAuthor = () => {
-    const name = book?.volumeInfo.authors;
-
-    if (name) {
-      const normalizedName = name[0].replace(/ /g, "_");
+  const displayAuthor = (author: string) => {
+    if (author) {
+      const normalizedName = author.replace(/ /g, "_");
       navigate(`/author/${normalizedName}`);
     }
   };
@@ -96,12 +94,14 @@ const BookDetails = () => {
                       <p className="text-xl font-cormorant italic text-lightbrown mb-2">
                         {book.volumeInfo.subtitle}
                       </p>
-                      <p
-                        className="text-gray-600 cursor-pointer"
-                        onClick={displayAuthor}
-                      >
-                        {book.volumeInfo.authors}
-                      </p>
+                      {book.volumeInfo.authors?.map((author) => (
+                        <p
+                          className="text-gray-600 cursor-pointer"
+                          onClick={() => displayAuthor(author)}
+                        >
+                          {author}
+                        </p>
+                      ))}
                     </div>
 
                     <div className="w-full flex justify-around gap-4 text-sm text-gray-700">
@@ -146,7 +146,7 @@ const BookDetails = () => {
                       />
                     ))}
                 </div>
-              ): (
+              ) : (
                 <NotFound />
               )}
             </>
