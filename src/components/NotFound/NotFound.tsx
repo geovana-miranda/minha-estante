@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import books404 from "../../assets/books2.png";
 const imgBooks = books404;
 import { IoArrowBackOutline } from "react-icons/io5";
