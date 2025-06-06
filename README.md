@@ -1,54 +1,59 @@
-# React + TypeScript + Vite
+# Minha Estante
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MinhaEstante é um aplicativo web voltado para leitores, onde os usuários podem pesquisar por livros, adicioná-los à sua estante pessoal, marcando-os como "lido" ou "quero ler", também é possível favoritá-los e escrever resenhas. 
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Autenticação de Usuário:** Registro e login com salvamento de dados no localStorage.
+- **Header de perfil:** Cada usuário pode personalizar sua estante adicionando uma foto de perfil, um título e uma bio curta.
+- **Busca de livros**: O usuário pode pesquisar pelo título do livro desejado.
+- **Página do livro:** Exibe detalhes sobre o livro, como título, descrição e imagem.
+- **Página do autor:** Exibe detalhes sobre o autor e outras obras públicadas por ele.
+- **Adicionar Livro à Estante:** O usuário pode adicionar um livro à sua estante pessoal. No formulário, ele escolhe o status do livro: "quero ler" ou "lido". Se marcar como lido, poderá também avaliar o livro com uma nota e escrever uma resenha.
 
-## Expanding the ESLint configuration
+## Tecnologias Usadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React**: Biblioteca para construir a interface de usuário.
+- **React Router**: Para navegação entre páginas.
+- **Tailwind:** Estilização da interface com classes utilitárias.
+- **UUID**: Para geração de IDs únicos para os usuários.
+- **Context API**: Para controle de autenticação e gerenciamento de usuário.
+- **Google Books API:** Utilizada para buscar livros.
+- **Wikipedia REST API:** Para obter informações biográficas dos autores.
+- **React Icons**: Para ícones personalizáveis e de fácil uso na interface.
+- **Local Storage**: Para armazenamento dos dados localmente no navegador.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Como Rodar o Projeto
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Pré-requisitos
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **Node.js** e **npm** instalados. Caso não tenha, instale o [Node.js](https://nodejs.org/).
+
+### Passos
+
+1. Clone este repositório para sua máquina:
+
+    ```bash
+    git clone https://github.com/geovana-miranda/flashlearn.git
+    ```
+
+2. Acesse a pasta do projeto:
+
+    ```bash
+    cd flashlearn
+    ```
+
+3. Instale as dependências:
+
+    ```bash
+    npm install
+    ```
+
+4. Inicie o projeto:
+
+    ```bash
+    npm start
+    ```
+
+    O aplicativo estará disponível em [http://localhost:3000](http://localhost:3000).
