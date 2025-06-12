@@ -33,9 +33,7 @@ const AuthorDetails = () => {
       } catch (error) {
         console.error("Erro ao buscar autor:", error);
         setAuthor(null);
-      } finally {
-        setLoading(false);
-      }
+      } 
     }
 
     getAuthor(name);
@@ -108,7 +106,7 @@ const AuthorDetails = () => {
                           >
                             <div className="w-20 h-28 shrink-0">
                               <img
-                                className="w-full object-cover"
+                                className="w-20 h-28 object-cover"
                                 src={book.volumeInfo.imageLinks?.thumbnail}
                                 alt={`Capa do livro ${book.volumeInfo.title}`}
                               />

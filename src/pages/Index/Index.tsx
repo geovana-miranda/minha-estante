@@ -18,6 +18,7 @@ const Index = ({ login }: { login: boolean }) => {
   const toggleForm = () => {
     setIsLogin(!isLogin);
   };
+  
 
   return (
     <main className="min-h-screen flex items-center justify-center">
