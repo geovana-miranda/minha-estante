@@ -7,6 +7,8 @@ import SearchResultItem from "../../components/SearchResultItem/SearchResultItem
 import Loading from "../../components/Loading/Loading";
 
 const Search = () => {
+  console.log("renderizando")
+
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
 

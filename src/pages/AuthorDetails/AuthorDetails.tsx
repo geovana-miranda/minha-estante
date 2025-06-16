@@ -33,7 +33,9 @@ const AuthorDetails = () => {
       } catch (error) {
         console.error("Erro ao buscar autor:", error);
         setAuthor(null);
-      } 
+      } finally {
+        setLoading(false);
+      }
     }
 
     getAuthor(name);
@@ -50,9 +52,7 @@ const AuthorDetails = () => {
         setBooksByAuthor(data);
       } catch (error) {
         console.error("Erro ao buscar livros:", error);
-      } finally {
-        setLoading(false);
-      }
+      } 
     }
 
     if (normalizedName) getBooksByAuthor(normalizedName);

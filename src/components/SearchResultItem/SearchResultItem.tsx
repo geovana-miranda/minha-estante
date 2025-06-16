@@ -61,7 +61,7 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
             {apiBook.volumeInfo.subtitle}
           </p>
           {apiBook.volumeInfo.authors?.map((author) => (
-            <span className="text-sm font-medium text-gray-600 mb-2">{author}{" "}</span>
+            <span key={apiBook.volumeInfo.authors?.indexOf(author)} className="text-sm font-medium text-gray-600 mb-2">{author}{" "}</span>
           ))}
           <p className="text-brown text-justify">
             {apiBook.volumeInfo.description?.slice(0, 200) + "..."}
