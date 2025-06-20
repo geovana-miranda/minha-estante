@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
-import type { IAuthor, IBooksByAuthor } from "../../types/types";
+import type { IAuthor, IGoogleBook } from "../../types/types";
 import { fetchAuthor } from "../../services/WikipediaAPI";
 import NotFound from "../../components/NotFound/NotFound";
 import semfoto from "../../assets/semfoto.png";
@@ -14,7 +14,7 @@ type typeAuthor = IAuthor | { status: number; type: string };
 const AuthorDetails = () => {
   const { name } = useParams<string>();
   const [author, setAuthor] = useState<IAuthor | null>(null);
-  const [booksByAuthor, setBooksByAuthor] = useState<IBooksByAuthor[]>([]);
+  const [booksByAuthor, setBooksByAuthor] = useState<IGoogleBook[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 

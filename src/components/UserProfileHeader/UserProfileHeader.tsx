@@ -1,7 +1,7 @@
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const UserProfileHeader = () => {
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuthContext();
 
   const quote = currentUser!.profileQuote;
   const title = currentUser!.profileTitle;

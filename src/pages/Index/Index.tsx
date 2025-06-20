@@ -2,12 +2,12 @@ import Register from "../../components/Register/Register";
 import books from "../../assets/books.png";
 import { useEffect, useState } from "react";
 import Login from "../../components/Login/Login";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const imgbooks = books;
 
 const Index = ({ login }: { login: boolean }) => {
-  const { setCurrentUser } = useAuth();
+  const { setCurrentUser } = useAuthContext();
 
   const [isLogin, setIsLogin] = useState<boolean>(login);
 

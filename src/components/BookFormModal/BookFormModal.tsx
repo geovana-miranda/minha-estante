@@ -5,7 +5,7 @@ import { useSaveBook } from "../../hooks/useSaveBook";
 import FormAddNewBook from "../FormAddNewBook/FormAddNewBook";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 interface IBookFormModal {
   handleToggleModal: () => void;
@@ -18,7 +18,7 @@ const BookFormModal = ({
   apiBook,
   userBook,
 }: IBookFormModal) => {
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuthContext();
   const { updateUser } = useUpdateUser();
 
   const book: IBook = userBook

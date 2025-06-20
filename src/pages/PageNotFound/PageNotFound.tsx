@@ -1,17 +1,11 @@
 import { Link } from "react-router-dom";
 import books404 from "../../assets/books2.png";
-import { useAuth } from "../../hooks/useAuth";
-import { useEffect } from "react";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import Header from "../../components/Header/Header";
 const imgBooks = books404;
 
 const PageNotFound = () => {
-  const { currentUser } = useAuth();
-  console.log(currentUser);
-
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+  const { currentUser } = useAuthContext();
 
   return (
     <>

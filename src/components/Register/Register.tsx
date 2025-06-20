@@ -1,22 +1,20 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Input from "../Input/Input";
 import type { IUser } from "../../types/types";
-import { UsersContext } from "../../context/UsersContext";
 
 import semfoto from "../../assets/semfoto.png";
+import { useUsersContext } from "../../hooks/useUsersContext";
 const imgsemfoto = semfoto;
 
 const Register = () => {
-  const context = useContext(UsersContext);
-  if (!context) {
-    throw new Error("Register deve estar dentro de <UsersProvider>");
-  }
-  const { users, setUsers } = context;
+  const { users, setUsers } = useUsersContext();
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState("");
 

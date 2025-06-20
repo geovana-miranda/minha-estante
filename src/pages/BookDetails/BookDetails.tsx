@@ -8,11 +8,11 @@ import { BsCalendarDate } from "react-icons/bs";
 import BookFormModal from "../../components/BookFormModal/BookFormModal";
 import Loading from "../../components/Loading/Loading";
 import BookActionButton from "../../components/BookActionButton/BookActionButton";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import NotFound from "../../components/NotFound/NotFound";
 
 const BookDetails = () => {
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuthContext();
 
   const { id } = useParams<string>();
   const idBook: string | undefined = id;

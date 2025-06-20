@@ -41,14 +41,3 @@ export interface IAuthor {
   };
   extract_html: string;
 }
-
-
-export interface IBooksByAuthor {
-  id: string;
-  volumeInfo: {
-    title: string;
-    imageLinks?: {
-      thumbnail?: string;
-    };
-  };
-}

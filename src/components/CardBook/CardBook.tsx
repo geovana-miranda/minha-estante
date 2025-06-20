@@ -3,11 +3,10 @@ import { FaStar, FaHeart } from "react-icons/fa";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
 import BookFormModal from "../BookFormModal/BookFormModal";
 import type { IBook, IUser } from "../../types/types";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const CardBook = ({ book }: { book: IBook }) => {
-  const { currentUser } = useAuth();
-
+  const { currentUser } = useAuthContext();
   const { updateUser } = useUpdateUser();
 
   const [openModal, setOpenModal] = useState<boolean>(false);

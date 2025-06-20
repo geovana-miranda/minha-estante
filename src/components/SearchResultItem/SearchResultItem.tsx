@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import BookFormModal from "../BookFormModal/BookFormModal";
 import { useNavigate } from "react-router-dom";
 import BookActionButton from "../BookActionButton/BookActionButton";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuthContext();
 
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [bookStatus, setBookStatus] = useState<typeStatus | null>(null);

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import CardBook from "../CardBook/CardBook";
 import type { IBook } from "../../types/types";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const BooksSection = () => {
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuthContext();
 
   type typeDisplayBooks = "queroler" | "lido" | "favoritos";
 
