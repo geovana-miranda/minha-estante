@@ -1,60 +1,41 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../../components/Header/Header";
 import { MdOutlineEdit } from "react-icons/md";
 import styles from "./EditProfile.module.css";
 import type { IUser } from "../../types/types";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useUsersContext } from "../../hooks/useUsersContext";
+import useUploadPhoto from "../../hooks/useUploadPhoto";
 
 const EditProfile = () => {
   const { currentUser, setCurrentUser } = useAuthContext();
   const { users, setUsers } = useUsersContext();
 
-  const [name, setName] = useState<string>(currentUser!.name);
-  const [email, setEmail] = useState<string>(currentUser!.email);
-  // const [password, setPassword] = useState<string>(currentUser!.password);
-  const [profilePhoto, setProfilePhoto] = useState<string>(
-    currentUser!.profilePhoto
-  );
-  const [profileTitle, setProfileTitle] = useState<string>(
-    currentUser!.profileTitle
-  );
-  const [profileQuote, setProfileQuote] = useState<string>(
-    currentUser!.profileQuote
-  );
+  const [form, setForm] = useState({
+    name: currentUser!.name,
+    email: currentUser!.email,
+    profilePhoto: currentUser!.profilePhoto,
+    profileTitle: currentUser!.profileTitle,
+    profileQuote: currentUser!.profileQuote,
+  });
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   const inputImagemRef = useRef<HTMLInputElement>(null);
+  const { photo, uploadPhotoProfile } = useUploadPhoto();
 
-  const uploadPhotoProfile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPhoto = e.target.files?.[0];
-
-    if (newPhoto) {
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        const img = new Image();
-        img.src = reader.result as string;
-
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          const MAX_WIDTH = 400;
-          const scaleSize = MAX_WIDTH / img.width;
-          canvas.width = MAX_WIDTH;
-          canvas.height = img.height * scaleSize;
-
-          const ctx = canvas.getContext("2d");
-          if (!ctx) return;
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-          const dataUrl = canvas.toDataURL("image/jpeg", 0.5);
-          setProfilePhoto(dataUrl);
-        };
-      };
-      reader.readAsDataURL(newPhoto);
+  useEffect(() => {
+    if (photo) {
+      setForm((prev) => ({ ...prev, profilePhoto: photo }));
     }
+  }, [photo]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,29 +45,26 @@ const EditProfile = () => {
     setSuccess("");
 
     if (!currentUser) return;
-    if (!name && !email && !profileTitle && !profileQuote) return;
     if (
-      name === currentUser!.name &&
-      email === currentUser!.email &&
-      profilePhoto === currentUser!.profilePhoto &&
-      profileTitle === currentUser!.profileTitle &&
-      profileQuote === currentUser!.profileQuote
+      form.name === currentUser!.name &&
+      form.email === currentUser!.email &&
+      form.profilePhoto === currentUser!.profilePhoto &&
+      form.profileTitle === currentUser!.profileTitle &&
+      form.profileQuote === currentUser!.profileQuote
     )
       return;
 
     if (
-      users.find((user) => user.email === email && currentUser!.id !== user.id)
+      users.find(
+        (user) => user.email === form.email && currentUser!.id !== user.id
+      )
     ) {
       return setError("Email já cadastrado");
     }
 
     const editedUser: IUser = {
       ...currentUser,
-      name,
-      email,
-      profilePhoto,
-      profileTitle,
-      profileQuote,
+      ...form,
     };
 
     setCurrentUser(editedUser);
@@ -123,7 +101,7 @@ const EditProfile = () => {
 
           <div className={styles.containerImagem}>
             <img
-              src={profilePhoto}
+              src={form.profilePhoto}
               alt="foto do usuário"
               className="w-40 h-40 rounded-full border border-lightbrown"
             />
@@ -152,10 +130,9 @@ const EditProfile = () => {
                 <input
                   className="w-full mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
-                  value={name}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setName(e.target.value)
-                  }
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
                   required
                 />
               </label>
@@ -169,10 +146,9 @@ const EditProfile = () => {
                 <input
                   className="w-full mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
-                  value={email}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setEmail(e.target.value)
-                  }
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
                   required
                 />
               </label>
@@ -188,10 +164,9 @@ const EditProfile = () => {
                   className="w-full mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   type="text"
                   maxLength={40}
-                  value={profileTitle}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setProfileTitle(e.target.value)
-                  }
+                  name="profileTitle"
+                  value={form.profileTitle}
+                  onChange={handleChange}
                   required
                 />
               </label>
@@ -206,10 +181,9 @@ const EditProfile = () => {
                 <textarea
                   className="w-full h-30 mt-1 px-2 py-1 rounded-2xl bg-peach border border-lightbrown focus:outline-none focus:ring-2 focus:ring-blue-400"
                   maxLength={140}
-                  value={profileQuote}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                    setProfileQuote(e.target.value)
-                  }
+                  name="profileQuote"
+                  value={form.profileQuote}
+                  onChange={handleChange}
                   required
                 />
               </label>
