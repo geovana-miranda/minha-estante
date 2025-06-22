@@ -16,15 +16,10 @@ interface IUsersContext {
 export const UsersContext = createContext<IUsersContext | undefined>(undefined);
 
 export const UsersProvider = ({ children }: { children: ReactNode }) => {
-  const [users, setUsers] = useState<IUser[]>([]);
-
-  useEffect(() => {
+  const [users, setUsers] = useState<IUser[]>(() => {
     const savedUsers = localStorage.getItem("users");
-
-    if (savedUsers) {
-      setUsers(JSON.parse(savedUsers));
-    }
-  }, []);
+    return savedUsers ? JSON.parse(savedUsers) : [];
+  });
 
   useEffect(() => {
     localStorage.setItem("users", JSON.stringify(users));

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Input from "../Input/Input";
 import type { IUser } from "../../types/types";
-
 import semfoto from "../../assets/semfoto.png";
 import { useUsersContext } from "../../hooks/useUsersContext";
 const imgsemfoto = semfoto;
@@ -13,8 +12,6 @@ const Register = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
-
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState("");
 
