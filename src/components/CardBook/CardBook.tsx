@@ -54,12 +54,12 @@ const CardBook = ({ book }: { book: IBook }) => {
 
   return (
     <div
-      className="relative w-40 mb-2 flex flex-col items-center justify-center bg-peach rounded-xl shadow-lg border border-[#b4955e] cursor-pointer"
+      className="relative w-36 mb-2 flex flex-col items-center justify-center rounded-xl shadow-sm border border-gray-100 cursor-pointer"
       onClick={handleToggleModal}
     >
       {book.status === "lido" ? (
         <>
-          <div className="absolute top-1 right-3 text-gray-300 cursor-pointer">
+          <div className="absolute top-0 right-2 text-gray-300 cursor-pointer">
             <FaHeart
               className={`text-3xl ${
                 favoritedBook ? "text-red-600" : "text-gray-400"
@@ -67,23 +67,23 @@ const CardBook = ({ book }: { book: IBook }) => {
               onClick={(e) => favoriteBook(e)}
             />
           </div>
-          <div className="w-32 h-44 mt-4 shrink-0">
+          <div className="w-28 h-42 mt-3 shrink-0">
             <img
-              className="w-full h-44 object-cover"
+              className="w-full h-full object-cover"
               src={book.volumeInfo.imageLinks?.thumbnail}
               alt={`Capa do livro ${book.volumeInfo.title}`}
             />
           </div>
-          <div className="w-32 flex mt-2 mb-2">
+          <div className="w-28 flex mt-1 mb-1">
             {[1, 2, 3, 4, 5].map((star) => (
               <FaStar key={star} className={`text-3xl ${getStarColor(star)}`} />
             ))}
           </div>
         </>
       ) : (
-        <div className="w-32 h-52 shrink-0 flex flex-col justify-center">
+        <div className="w-28 h-42 my-2 shrink-0 flex flex-col justify-center">
           <img
-            className="w-full h-44 object-cover"
+            className="w-full h-fullobject-cover"
             src={book.volumeInfo.imageLinks?.thumbnail}
             alt={`Capa do livro ${book.volumeInfo.title}`}
           />

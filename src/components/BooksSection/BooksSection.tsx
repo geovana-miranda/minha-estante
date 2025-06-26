@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CardBook from "../CardBook/CardBook";
 import type { IBook } from "../../types/types";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Section from "../Section/Section";
 
 const BooksSection = () => {
   const { currentUser } = useAuthContext();
@@ -30,14 +31,14 @@ const BooksSection = () => {
   }, [displayBooks, currentUser]);
 
   return (
-    <section className="w-4xl h-auto mx-auto mt-5 mb-10">
+    <Section>
       <div className="px-3">
         <div className="flex items-center gap-5 my-6 mx-auto">
-          <span className="text-2xl font-bold font-cormorant text-brown">
+          <span className="text-lg font-bold">
             Exibir:{" "}
           </span>
           <select
-            className="w-32 mt-1 py-2 px-4 rounded-full bg-peach border border-brown"
+            className="w-32 py-1 px-3 rounded-full  border border-gray-300"
             onChange={(e) => {
               setDisplayBooks(e.target.value as typeDisplayBooks);
             }}
@@ -56,7 +57,7 @@ const BooksSection = () => {
                 </li>
               ))
             ) : (
-              <div className="mx-auto text-brown text-lg font-semibold">
+              <div className="mx-auto   font-semibold">
                 {displayBooks === "queroler" ? (
                   <p>
                     Você ainda não adicionou nenhum livro à sua lista de "quero
@@ -74,7 +75,8 @@ const BooksSection = () => {
           </ul>
         </div>
       </div>
-    </section>
+    </Section>
+
   );
 };
 

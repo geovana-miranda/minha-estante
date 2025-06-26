@@ -3,6 +3,7 @@ import Input from "../Input/Input";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useUsersContext } from "../../hooks/useUsersContext";
+import SubmitButton from "../SubmitButton/SubmitButton";
 
 const Login = () => {
   const { users } = useUsersContext();
@@ -40,7 +41,7 @@ const Login = () => {
         </div>
       )}
 
-      <form className="flex flex-col mt-2" onSubmit={handleSubmit}>
+      <form className="flex flex-col mt-2 w-full" onSubmit={handleSubmit}>
         <Input
           label="Email:"
           type="email"
@@ -55,11 +56,7 @@ const Login = () => {
           value={password}
           setValue={setPassword}
         />
-        <input
-          type="submit"
-          value="Entrar"
-          className="mt-3 w-full bg-brown hover:bg-lightbrown text-white font-medium py-2 rounded-3xl transition duration-200 cursor-pointer"
-        />
+        <SubmitButton value="Entrar" />
       </form>
     </>
   );

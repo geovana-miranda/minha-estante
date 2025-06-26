@@ -2,9 +2,10 @@ import { useSearchParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
 import { fetchBooks } from "../../services/GoogleAPI";
-import type { IGoogleBook  } from "../../types/types";
+import type { IGoogleBook } from "../../types/types";
 import SearchResultItem from "../../components/SearchResultItem/SearchResultItem";
 import Loading from "../../components/Loading/Loading";
+import Section from "../../components/Section/Section";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
@@ -28,13 +29,13 @@ const Search = () => {
   return (
     <>
       <Header />
-      <section className="w-4xl h-auto mx-auto py-10 rounded-2xl shadow-xl border border-lightbrown">
+      <Section>
         <div className="w-2xl mx-auto flex flex-col items-center justify-between">
           {loading ? (
             <Loading />
           ) : (
             <>
-              <h2 className="text-3xl font-bold font-cormorant text-brown mb-4 text-center">
+              <h2 className="font-bold mb-4 text-center">
                 Exibindo resultados da pesquisa por: {query}{" "}
               </h2>
               <div className="w-full">
@@ -49,7 +50,7 @@ const Search = () => {
             </>
           )}
         </div>
-      </section>
+      </Section>
     </>
   );
 };

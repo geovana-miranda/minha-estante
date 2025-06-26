@@ -4,6 +4,7 @@ import Input from "../Input/Input";
 import type { IUser } from "../../types/types";
 import semfoto from "../../assets/semfoto.png";
 import { useUsersContext } from "../../hooks/useUsersContext";
+import SubmitButton from "../SubmitButton/SubmitButton";
 const imgsemfoto = semfoto;
 
 const Register = () => {
@@ -42,7 +43,7 @@ const Register = () => {
       profileTitle: "Minha estante",
       profileQuote:
         "A leitura abre a mente, impulsiona sonhos e alimenta a alma. Érico Teixeira.",
-      books: []
+      books: [],
     };
 
     setUsers([...users, newUser]);
@@ -64,7 +65,7 @@ const Register = () => {
         </div>
       )}
 
-      <form className="flex flex-col mt-2" onSubmit={handleSubmit}>
+      <form className="flex flex-col mt-2 w-full" onSubmit={handleSubmit}>
         <Input
           label="Nome:"
           type="text"
@@ -93,11 +94,7 @@ const Register = () => {
           value={confirmPassword}
           setValue={setConfirmPassword}
         />
-        <input
-          type="submit"
-          value="Cadastrar"
-          className="mt-3 w-full bg-brown hover:bg-lightbrown text-white font-medium py-2 rounded-3xl transition duration-200 cursor-pointer"
-        />
+        <SubmitButton value="Cadastrar" />
       </form>
     </>
   );

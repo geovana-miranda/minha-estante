@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import books404 from "../../assets/books2.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import Header from "../../components/Header/Header";
-const imgBooks = books404;
+import NotFound from "../../components/NotFound/NotFound";
+import Section from "../../components/Section/Section";
 
 const PageNotFound = () => {
   const { currentUser } = useAuthContext();
@@ -12,45 +12,34 @@ const PageNotFound = () => {
       {currentUser ? (
         <Header />
       ) : (
-        <header className="w-4xl mx-auto py-3 mb-3 px-4 flex items-center justify-between text-brown border-b-2 border-lightbrown">
-          <Link to="/" className="font-bold font-cormorant text-3xl">
-            MinhaEstante
+        <header className="w-4xl mx-auto py-2 my-3 px-8 flex items-center justify-between shadow bg-white rounded-4xl">
+          <Link to="/home">
+            <img src="/logo.png" alt="logo da minha estante" className="w-28" />
           </Link>
-          <div className="flex items-center gap-5 italic font-bold font-cormorant text-xl">
-            <Link
-              to="/"
-              className="flex items-center gap-1 hover:text-lightbrown"
-            >
-              <span>Cadastre-se</span>
+
+
+
+
+
+          <div className="flex items-center gap-5">
+            <Link to="/" className="flex items-center gap-1 hover:text-blue-800 transition duration-200">
+              <span className="font-semibold">Cadastre-se</span>
             </Link>
             <Link
               to="/login"
-              className="flex items-center gap-1 border py-1 px-4 bg-peach rounded-4xl hover:text-lightbrown"
+              className="flex items-center gap-1 hover:text-blue-800 transition duration-200"
             >
-              <span>Login</span>
+              <span className="font-semibold">Login</span>
             </Link>
           </div>
+
+
+          
         </header>
       )}
-      <div className="w-4xl flex gap-5 mb-5 border border-lightbrown rounded-xl shadow-md p-8 mx-auto">
-        <div className="w-3xl my-10 flex flex-col justify-center items-center mx-auto ">
-          <div className="flex items-center justify-around mb-10">
-            <img src={imgBooks} alt="" className="w-64" />
-            <div className="flex flex-col justify-center items-center font-cormorant italic font-bold text-brown">
-              <h2 className="text-7xl">404</h2>
-              <p className="text-5xl">Página não encontrada</p>
-            </div>
-          </div>
-          {currentUser && (
-            <Link
-              to="/home"
-              className="text-lg px-16 py-3 border border-brown bg-peach text-brown rounded-2xl font-bold cursor-pointer hover:border-lightbrown hover:text-lightbrown"
-            >
-              Voltar para estante
-            </Link>
-          )}
-        </div>
-      </div>
+      <Section>
+        <NotFound />
+      </Section>
     </>
   );
 };

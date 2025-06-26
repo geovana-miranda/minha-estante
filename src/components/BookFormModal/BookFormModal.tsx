@@ -65,7 +65,7 @@ const BookFormModal = ({
     handleToggleModal();
   };
 
-    const displayBookDetails = () => {
+  const displayBookDetails = () => {
     navigate(`/book/${book.id}`);
   };
 
@@ -73,7 +73,7 @@ const BookFormModal = ({
     <>
       <section className={styles.background}>
         <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-          <h2 className="text-3xl italic font-crimson font-bold text-center text-brown">
+          <h2 className="text-3xl  font-bold text-center">
             {apiBook ? "Adicionar novo livro" : "Editar livro"}
           </h2>
 
@@ -88,21 +88,19 @@ const BookFormModal = ({
             </div>
             <div className="w-full  flex flex-col gap-2">
               <div>
-                <p className="text-lg font-bold text-brown">
-                  {book.volumeInfo.title}{" "}
-                </p>
-                <p className="text-sm text-lightbrown italic">
+                <p className="text-lg font-bold">{book.volumeInfo.title} </p>
+                <p className="text-sm text-gray-600 italic">
                   {book.volumeInfo.authors}
                 </p>
               </div>
               <div>
-                <label className="mr-2 text-brown font-bold">Status:</label>
+                <label className="mr-2 font-bold">Status:</label>
                 <select
                   defaultValue={status}
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                  className="w-32 mt-1 py-2 px-4 rounded-full bg-peach border border-lightbrown"
+                  className="w-32 mt-1 py-2 px-4 rounded-full bg-peach border border-gray-600"
                   onChange={(e) => {
                     if (e.target.value === "lido") {
                       setStatus("lido");
@@ -143,7 +141,7 @@ const BookFormModal = ({
                 e.stopPropagation();
                 handleToggleModal();
               }}
-              className="w-full py-2 border border-brown bg-peach text-brown rounded-2xl font-bold cursor-pointer hover:border-lightbrown hover:text-lightbrown"
+              className="w-full py-2 border border-gray-600 text-gray-700  rounded-3xl font-bold cursor-pointer hover:bg-gray-200 hover:text-gray-700 transition-colors"
             >
               Cancelar
             </button>
@@ -152,7 +150,7 @@ const BookFormModal = ({
                 e.stopPropagation();
                 handleSaveBook();
               }}
-              className="w-full py-2 bg-brown text-white border border-brown rounded-2xl font-bold cursor-pointer hover:bg-lightbrown hover:border-lightbrown"
+              className="w-full py-2 border rounded-3xl font-bold cursor-pointer bg-blue-800 hover:bg-blue-600 text-white"
             >
               Salvar
             </button>

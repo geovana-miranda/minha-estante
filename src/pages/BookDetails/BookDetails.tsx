@@ -3,13 +3,13 @@ import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
 import { fetchBookByID } from "../../services/GoogleAPI";
 import type { IBook, IGoogleBook, typeStatus } from "../../types/types";
-import { FaBook, FaRegBuilding } from "react-icons/fa";
-import { BsCalendarDate } from "react-icons/bs";
 import BookFormModal from "../../components/BookFormModal/BookFormModal";
 import Loading from "../../components/Loading/Loading";
 import BookActionButton from "../../components/BookActionButton/BookActionButton";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import NotFound from "../../components/NotFound/NotFound";
+import Section from "../../components/Section/Section";
+import BookInfo from "../../components/BookInfo/BookInfo";
 
 const BookDetails = () => {
   const { currentUser } = useAuthContext();
@@ -66,17 +66,17 @@ const BookDetails = () => {
   return (
     <>
       <Header />
-      <section className="w-4xl h-auto mx-auto py-10 rounded-2xl shadow-xl border border-lightbrown">
-        <div className="w-3xl mx-auto flex flex-col items-center justify-between">
+      <Section>
+        <div className="w-3xl py-6 mx-auto flex flex-col items-center justify-between">
           {loading && !book ? (
             <Loading />
           ) : (
             <>
               {book ? (
-                <div className="w-full flex gap-5 mb-5 bg-peach rounded-xl shadow-md p-8 mx-auto border border-lightbrown">
+                <div className="w-full flex gap-7 mx-auto">
                   <div className="w-36 shrink-0 flex flex-col items-center gap-3">
                     <img
-                      className=" w-36 h-52 object-cover"
+                      className=" w-full h-auto object-cover"
                       src={book.volumeInfo.imageLinks?.thumbnail}
                       alt={`Capa do livro ${book.volumeInfo.title}`}
                     />
@@ -86,53 +86,39 @@ const BookDetails = () => {
                       handleToggleModal={handleToggleModal}
                     />
                   </div>
-                  <div className="flex flex-col justify-between items-start gap-5">
+
+                  <div className="flex flex-col justify-between items-start gap-8">
                     <div>
-                      <h2 className="text-4xl font-bold text-brown font-cormorant">
+                      <h2 className="text-2xl  font-bold ">
                         {book.volumeInfo.title}
                       </h2>
-                      <p className="text-xl font-cormorant italic text-lightbrown mb-2">
+                      <p className="italic text-gray-600 mb-2">
                         {book.volumeInfo.subtitle}
                       </p>
                       {book.volumeInfo.authors?.map((author) => (
-                        <p
-                          className="text-gray-600 cursor-pointer"
+                        <span
+                          className="text-blue-600 cursor-pointer hover:underline"
                           onClick={() => displayAuthor(author)}
                         >
                           {author}
-                        </p>
+                        </span>
                       ))}
                     </div>
 
-                    <div className="w-full flex justify-around gap-4 text-sm text-gray-700">
-                      <div className="flex flex-col justify-center items-center gap-2">
-                        <FaBook className="text-xl text-brown" />
-                        <p className="text-lightbrown">
-                          {book.volumeInfo.pageCount} páginas
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2">
-                        <FaRegBuilding className="text-xl text-brown" />
-                        <p className="text-lightbrown">
-                          {book.volumeInfo.publisher}
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2">
-                        <BsCalendarDate className="text-xl text-brown" />
-                        <p className="text-lightbrown">
-                          Publicado em{" "}
-                          {book.volumeInfo.publishedDate?.slice(0, 4)}
-                        </p>
-                      </div>
-                    </div>
+                    <BookInfo
+                      pageCount={book.volumeInfo.pageCount}
+                      publisher={book.volumeInfo.publisher}
+                      publishedDate={book.volumeInfo.publishedDate}
+                    />
 
                     <p
-                      className="text-brown leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
+                      className=" text-sm  leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
                       dangerouslySetInnerHTML={{
                         __html: book.volumeInfo.description || "",
                       }}
                     />
                   </div>
+
                   {openModal &&
                     (userBook ? (
                       <BookFormModal
@@ -152,7 +138,7 @@ const BookDetails = () => {
             </>
           )}
         </div>
-      </section>
+      </Section>
     </>
   );
 };

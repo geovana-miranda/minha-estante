@@ -8,20 +8,25 @@ const UserProfileHeader = () => {
   const photo = currentUser!.profilePhoto;
 
   return (
-    <section className="w-4xl h-auto mx-auto  py-10 rounded-3xl shadow-xl border border-lightbrown">
-      <div className="w-2xl mx-auto flex flex-col">
-        <div className="w-2xl flex flex-col items-center justify-center gap-2">
+    <section className="w-4xl h-auto mx-auto rounded-3xl shadow-xl bg-white relative overflow-hidden">
+      <div className=" w-4xl h-36 mx-auto absolute inset-0">
+        <img
+          src="/books.jpg"
+          alt="imagem de capa do perfil do usuário"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="mt-24 mb-6 relative z-10 w-3xl mx-auto flex">
+        <div className="mr-4">
           <img
             src={photo}
-            alt="foto do usuário"
-            className="w-40 h-40 rounded-full border border-lightbrown"
+            alt="foto de perfil do usuário"
+            className="w-32 h-32 rounded-full border border-gray-400 shadow"
           />
-          <h2 className="text-4xl font-bold text-brown">{title}</h2>
         </div>
-        <div className="mt-5 flex justify-center">
-          <p className="text-xl text-center font-crimson italic text-lightbrown">
-            {quote}
-          </p>
+        <div className="flex flex-col justify-end items-start  gap-1">
+          <h2 className="text-2xl font-bold">{title}</h2>
+          <p className="text-sm italic">{quote}</p>
         </div>
       </div>
     </section>

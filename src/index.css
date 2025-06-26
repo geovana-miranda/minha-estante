@@ -1,25 +1,12 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@1,600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap");
-
-@theme {
-  --color-peach: #f2d39e;
-  --color-babyblue: #ebf1ed;
-  --color-babypink: #fee8d1;
-  --color-navy: blue;
-  --color-brown: #442609;
-  --color-lightbrown: #8c6444;
-  --font-montserrat: "Montserrat", sans-serif;
-  --font-crimson: "Crimson Text", serif;
-  --font-cormorant: "Cormorant Garamond", serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 body {
-  background-color: var(--color-peach);
-  font-family: var(--font-montserrat);
-  background-image: url("./assets/rice-paper.png");
-  background-size: repeat; 
-  background-position: center;
-  background-attachment: fixed;
+  font-family: "Inter";
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(148, 187, 233, 0.32) 100%
+  );
+  color: var(--color-gray-800)
 }
