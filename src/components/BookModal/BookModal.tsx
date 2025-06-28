@@ -4,6 +4,7 @@ import { useSaveBook } from "../../hooks/useSaveBook";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import FormModal from "./FormModal";
+import { useCallback, useEffect, useRef } from "react";
 
 interface IBookModalProps {
   handleToggleModal: () => void;
@@ -28,6 +29,26 @@ const BookModal = ({
   };
 
   const isEditMode = !!userBook;
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (modalRef.current) {
+      document.addEventListener("keydown", closeWithEsc);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", closeWithEsc);
+    };
+  });
+
+  const closeWithEsc = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleToggleModal();
+      }
+    },
+    [handleToggleModal]
+  );
 
   const { saveBook } = useSaveBook();
 
@@ -54,9 +75,19 @@ const BookModal = ({
 
   return (
     <>
-      <section className={styles.background}>
-        <dialog className={styles.modal} onClick={(e) => e.stopPropagation()}>
-          <h2 className="text-3xl  font-bold text-center">
+      <section
+        className={styles.background}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleToggleModal();
+        }}
+      >
+        <dialog
+          ref={modalRef}
+          className={styles.modal}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <h2 className="text-3xl font-bold text-center">
             {isEditMode ? "Editar livro" : "Adicionar novo livro"}
           </h2>
 

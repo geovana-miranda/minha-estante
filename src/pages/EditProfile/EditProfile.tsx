@@ -2,16 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import Header from "../../components/Header/Header";
 import { MdOutlineEdit } from "react-icons/md";
 import styles from "./EditProfile.module.css";
-import type { IUser } from "../../types/types";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useUsersContext } from "../../hooks/useUsersContext";
 import useUploadPhoto from "../../hooks/useUploadPhoto";
 import Input from "../../components/FormUser/Input";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import useEditUser from "../../hooks/useEditUser";
 
 const EditProfile = () => {
-  const { currentUser, setCurrentUser } = useAuthContext();
+  const { currentUser } = useAuthContext();
 
   const [name, setName] = useState<string>(currentUser!.name);
   const [email, setEmail] = useState<string>(currentUser!.email);
