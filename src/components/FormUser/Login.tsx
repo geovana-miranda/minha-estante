@@ -1,36 +1,19 @@
 import { useState } from "react";
-import Input from "../Input/Input";
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { useUsersContext } from "../../hooks/useUsersContext";
+import Input from "./Input";
 import SubmitButton from "../SubmitButton/SubmitButton";
+import FormUser from "./FormUser";
+import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
-  const { users } = useUsersContext();
-  const { setCurrentUser } = useAuthContext();
-
-  const navigate = useNavigate();
+  const { login, error } = useLogin();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
-
-    const existingUser = users.find((user) => user.email === email);
-
-    if (!existingUser) {
-      return setError("Email não cadastrado");
-    }
-
-    if (existingUser.password !== password) {
-      return setError("Senha incorreta");
-    }
-
-    setCurrentUser(existingUser);
-    navigate("/home");
+    const logged  = login(email, password);
+    if (!logged ) return;
   };
 
   return (
@@ -41,7 +24,7 @@ const Login = () => {
         </div>
       )}
 
-      <form className="flex flex-col mt-2 w-full" onSubmit={handleSubmit}>
+      <FormUser handleSubmit={handleSubmit}>
         <Input
           label="Email:"
           type="email"
@@ -57,7 +40,7 @@ const Login = () => {
           setValue={setPassword}
         />
         <SubmitButton value="Entrar" />
-      </form>
+      </FormUser>
     </>
   );
 };

@@ -6,7 +6,7 @@ import type { IUser } from "../../types/types";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useUsersContext } from "../../hooks/useUsersContext";
 import useUploadPhoto from "../../hooks/useUploadPhoto";
-import Input from "../../components/Input/Input";
+import Input from "../../components/FormUser/Input";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 
 const EditProfile = () => {
