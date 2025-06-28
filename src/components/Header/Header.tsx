@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineEdit } from "react-icons/md";
 import { IoExitOutline } from "react-icons/io5";
-import { IoMdSearch } from "react-icons/io";
 import { useState } from "react";
+import InputSearch from "./InputSearch";
 
 const Header = () => {
   const [query, setQuery] = useState<string>("");
@@ -20,26 +20,11 @@ const Header = () => {
         <img src="/logo.png" alt="logo da minha estante" className="w-32" />
       </Link>
 
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Digite o título do livro"
-          className="w-full italic mt-1 pl-4 pr-10 py-1 text-sm rounded-2xl bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          value={query}
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-            if (e.key === "Enter") handleSearch();
-          }}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setQuery(e.target.value.trimStart())
-          }
-        />
-        <span
-          className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 cursor-pointer hover:text-gray-800"
-          onClick={handleSearch}
-        >
-          <IoMdSearch className="text-xl" />
-        </span>
-      </div>
+      <InputSearch
+        query={query}
+        setQuery={setQuery}
+        handleSearch={handleSearch}
+      />
 
       <div className="flex items-center gap-5">
         <Link
@@ -55,7 +40,7 @@ const Header = () => {
           className="flex items-center gap-1 hover:text-blue-800 transition duration-200"
         >
           <span className="font-semibold">Sair</span>
-          <IoExitOutline className="text-2xl" title="Sair" />
+          <IoExitOutline className="text-2xl"/>
         </Link>
       </div>
     </header>

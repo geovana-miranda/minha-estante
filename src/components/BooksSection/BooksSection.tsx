@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import CardBook from "../CardBook/CardBook";
 import type { IBook } from "../../types/types";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import Section from "../Section/Section";
+import BooksList from "./BooksList";
 
 const BooksSection = () => {
   const { currentUser } = useAuthContext();
@@ -11,6 +11,12 @@ const BooksSection = () => {
 
   const [displayBooks, setDisplayBooks] = useState<typeDisplayBooks>("lido");
   const [filteredBooks, setFilteredBooks] = useState<IBook[] | null>(null);
+
+  const messages = {
+  queroler: 'Você ainda não adicionou nenhum livro à sua lista de "quero ler".',
+  lido: 'Você ainda não adicionou nenhum livro à sua lista de "lidos".',
+  favoritos: 'Você ainda não adicionou nenhum livro à sua lista de "favoritos".',
+};
 
   useEffect(() => {
     if (displayBooks === "lido" || displayBooks === "queroler") {
@@ -34,9 +40,7 @@ const BooksSection = () => {
     <Section>
       <div className="px-3">
         <div className="flex items-center gap-5 my-6 mx-auto">
-          <span className="text-lg font-bold">
-            Exibir:{" "}
-          </span>
+          <span className="text-lg font-bold">Exibir: </span>
           <select
             className="w-32 py-1 px-3 rounded-full  border border-gray-300"
             onChange={(e) => {
@@ -49,34 +53,18 @@ const BooksSection = () => {
           </select>
         </div>
         <div>
-          <ul className="flex items-center justify-start gap-4 flex-wrap">
+          <div>
             {filteredBooks && filteredBooks.length > 0 ? (
-              filteredBooks.map((b) => (
-                <li key={b.id}>
-                  <CardBook book={b} />
-                </li>
-              ))
+              <BooksList filteredBooks={filteredBooks} />
             ) : (
-              <div className="mx-auto   font-semibold">
-                {displayBooks === "queroler" ? (
-                  <p>
-                    Você ainda não adicionou nenhum livro à sua lista de "quero
-                    ler".
-                  </p>
-                ) : displayBooks === "lido" ? (
-                  <p>Você ainda não adicionou nenhum livro à sua lista de "lidos".</p>
-                ) : (
-                  <p>
-                    Você ainda não adicionou nenhum livro à sua lista de "favoritos".
-                  </p>
-                )}
+              <div className="mx-auto">
+                <p className="text-center">{messages[displayBooks]}</p>
               </div>
             )}
-          </ul>
+          </div>
         </div>
       </div>
     </Section>
-
   );
 };
 

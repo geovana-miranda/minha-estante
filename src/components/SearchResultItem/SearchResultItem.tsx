@@ -1,6 +1,6 @@
 import type { IBook, IGoogleBook, typeStatus } from "../../types/types";
 import { useEffect, useState } from "react";
-import BookFormModal from "../BookFormModal/BookFormModal";
+import BookFormModal from "../BookModal/BookModal";
 import { useNavigate } from "react-router-dom";
 import BookActionButton from "../BookActionButton/BookActionButton";
 import { useAuthContext } from "../../hooks/useAuthContext";

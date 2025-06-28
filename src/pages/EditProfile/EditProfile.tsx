@@ -8,10 +8,10 @@ import { useUsersContext } from "../../hooks/useUsersContext";
 import useUploadPhoto from "../../hooks/useUploadPhoto";
 import Input from "../../components/FormUser/Input";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
+import useEditUser from "../../hooks/useEditUser";
 
 const EditProfile = () => {
   const { currentUser, setCurrentUser } = useAuthContext();
-  const { users, setUsers } = useUsersContext();
 
   const [name, setName] = useState<string>(currentUser!.name);
   const [email, setEmail] = useState<string>(currentUser!.email);
@@ -25,12 +25,10 @@ const EditProfile = () => {
   const [profileQuote, setProfileQuote] = useState<string>(
     currentUser!.profileQuote
   );
-
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
   const inputImagemRef = useRef<HTMLInputElement>(null);
   const { photo, uploadPhotoProfile } = useUploadPhoto();
+
+  const { editUser, error, success } = useEditUser();
 
   useEffect(() => {
     if (photo) {
@@ -41,41 +39,14 @@ const EditProfile = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setError("");
-    setSuccess("");
-
-    if (!currentUser) return;
-    if (
-      name === currentUser!.name &&
-      email === currentUser!.email &&
-      profilePhoto === currentUser!.profilePhoto &&
-      profileTitle === currentUser!.profileTitle &&
-      profileQuote === currentUser!.profileQuote
-    )
-      return;
-
-    if (
-      users.find((user) => user.email === email && currentUser!.id !== user.id)
-    ) {
-      return setError("Email já cadastrado");
-    }
-
-    const editedUser: IUser = {
-      ...currentUser,
+    const editedUser = editUser({
       name,
       email,
       profilePhoto,
       profileTitle,
       profileQuote,
-    };
-
-    setCurrentUser(editedUser);
-
-    setUsers([
-      ...users.map((user) => (user.id === currentUser!.id ? editedUser : user)),
-    ]);
-
-    setSuccess("Perfil atualizado com sucesso");
+    });
+    if (!editedUser) return;
 
     window.scroll({ top: 0, behavior: "smooth" });
   };
@@ -85,9 +56,7 @@ const EditProfile = () => {
       <Header />
       <section className="w-md mx-auto my-3 bg-white p-6 rounded-2xl shadow border border-gray-300">
         <div className="w-sm mx-auto flex flex-col items-center justify-center px-10">
-          <h2 className="text-xl  font-bold text-center  mb-3">
-            Editar perfil
-          </h2>
+          <h2 className="text-xl font-bold text-center  mb-3">Editar perfil</h2>
 
           {success && (
             <div className="border-none py-2 px-5 mb-3 bg-[#bbffbe] rounded-3xl">
@@ -150,7 +119,6 @@ const EditProfile = () => {
                   onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                     setProfileQuote(e.target.value)
                   }
-                  
                   required
                 />
               </label>

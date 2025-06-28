@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaStar, FaHeart } from "react-icons/fa";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
-import BookFormModal from "../BookFormModal/BookFormModal";
+import BookFormModal from "../BookModal/BookModal";
 import type { IBook, IUser } from "../../types/types";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
