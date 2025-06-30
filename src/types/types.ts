@@ -41,3 +41,5 @@ export interface IAuthor {
   };
   extract_html: string;
 }
+
+export type typeDisplayBooks = "queroler" | "lido" | "favoritos";
