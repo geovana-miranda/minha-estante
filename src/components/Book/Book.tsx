@@ -4,6 +4,7 @@ import BookInfo from "../../components/BookInfo/BookInfo";
 import { useState } from "react";
 import type { IBook, IGoogleBook, typeStatus } from "../../types/types";
 import { useNavigate } from "react-router-dom";
+import { translateCategories } from "../../utils/categories";
 
 interface IBookProps {
   book: IGoogleBook;
@@ -14,6 +15,12 @@ interface IBookProps {
 const Book = ({ book, bookStatus, userBook }: IBookProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const navigate = useNavigate();
+  let category: string = "";
+
+  if (book.volumeInfo.categories) {
+    const categories = book.volumeInfo.categories[0].split("/").slice(1, 2);
+    category = translateCategories(categories[0].trim()).toString();
+  }
 
   const handleToggleModal = () => {
     setOpenModal(!openModal);
@@ -44,16 +51,18 @@ const Book = ({ book, bookStatus, userBook }: IBookProps) => {
       <div className="flex flex-col justify-between items-start gap-8">
         <div>
           <h2 className="text-2xl font-bold ">{book.volumeInfo.title}</h2>
-          <p className="italic text-gray-600 mb-2">
+          <p className="italic mb-2 text-gray-600">
             {book.volumeInfo.subtitle}
           </p>
+
           {book.volumeInfo.authors?.map((author, index) => (
-            <span key={index}
-              className="text-blue-600 cursor-pointer hover:underline"
+            <div
+              key={index}
+              className="my-2 text-blue-600 cursor-pointer hover:underline"
               onClick={() => displayAuthor(author)}
             >
               {author}
-            </span>
+            </div>
           ))}
         </div>
 
@@ -61,10 +70,11 @@ const Book = ({ book, bookStatus, userBook }: IBookProps) => {
           pageCount={book.volumeInfo.pageCount}
           publisher={book.volumeInfo.publisher}
           publishedDate={book.volumeInfo.publishedDate}
+          category={category}
         />
 
         <p
-          className=" text-sm  leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
+          className="text-sm leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
           dangerouslySetInnerHTML={{
             __html: book.volumeInfo.description || "",
           }}

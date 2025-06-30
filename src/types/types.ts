@@ -19,6 +19,7 @@ export interface IGoogleBook {
     publisher?: string;
     pageCount?: number;
     publishedDate?: string;
+    categories?: string[];
     imageLinks?: {
       thumbnail?: string;
     };
