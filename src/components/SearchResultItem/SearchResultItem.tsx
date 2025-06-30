@@ -11,14 +11,14 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const [bookStatus, setBookStatus] = useState<typeStatus | null>(null);
-  const userBook = currentUser?.books.find((b) => b.id === apiBook.id) ?? null;
+  const userBook = currentUser?.books.find((b) => b.id === apiBook.id) ?? undefined;
   const navigate = useNavigate();
 
   useEffect(() => {
     if (userBook) {
       setBookStatus(userBook.status as typeStatus);
     }
-  }, [currentUser]);
+  }, [currentUser, userBook]);
 
   const handleToggleModal = () => {
     setOpenModal(!openModal);

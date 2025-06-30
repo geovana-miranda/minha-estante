@@ -20,16 +20,10 @@ const BookDetails = () => {
   const userBook = currentUser?.books.find((b) => b.id === book?.id) as IBook;
 
   useEffect(() => {
-    const updatedStatus = currentUser?.books.find(
-      (b) => b.id === book?.id
-    ) as IBook;
-
-    if (updatedStatus) {
-      setBookStatus(updatedStatus.status as typeStatus);
-    } else {
-      setBookStatus(null);
+    if (userBook) {
+      setBookStatus(userBook.status as typeStatus);
     }
-  }, [currentUser, book]);
+  }, [currentUser, userBook]);
 
   useEffect(() => {
     if (!idBook) return;

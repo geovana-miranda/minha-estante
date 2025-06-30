@@ -47,8 +47,8 @@ const Book = ({ book, bookStatus, userBook }: IBookProps) => {
           <p className="italic text-gray-600 mb-2">
             {book.volumeInfo.subtitle}
           </p>
-          {book.volumeInfo.authors?.map((author) => (
-            <span
+          {book.volumeInfo.authors?.map((author, index) => (
+            <span key={index}
               className="text-blue-600 cursor-pointer hover:underline"
               onClick={() => displayAuthor(author)}
             >
