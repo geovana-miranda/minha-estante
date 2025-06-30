@@ -1,4 +1,4 @@
-import type { IBook, IGoogleBook, typeStatus } from "../../types/types";
+import type { IGoogleBook, typeStatus } from "../../types/types";
 import { useEffect, useState } from "react";
 import BookFormModal from "../BookModal/BookModal";
 import { useNavigate } from "react-router-dom";
@@ -9,32 +9,20 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
   const { currentUser } = useAuthContext();
 
   const [openModal, setOpenModal] = useState<boolean>(false);
+
   const [bookStatus, setBookStatus] = useState<typeStatus | null>(null);
-  const userBook = currentUser?.books.find((b) => b.id === apiBook.id) as IBook;
-
-  useEffect(() => {
-    const updatedStatus = currentUser?.books.find(
-      (b) => b.id === apiBook.id
-    ) as IBook;
-
-    if (updatedStatus) {
-      setBookStatus(updatedStatus.status as typeStatus);
-    } else {
-      setBookStatus(null);
-    }
-  }, [currentUser]);
-
+  const userBook = currentUser?.books.find((b) => b.id === apiBook.id) ?? null;
   const navigate = useNavigate();
-
-  const handleToggleModal = () => {
-    setOpenModal(!openModal);
-  };
 
   useEffect(() => {
     if (userBook) {
       setBookStatus(userBook.status as typeStatus);
     }
-  }, []);
+  }, [currentUser]);
+
+  const handleToggleModal = () => {
+    setOpenModal(!openModal);
+  };
 
   const displayBookDetails = () => {
     navigate(`/book/${apiBook.id}`);
@@ -52,19 +40,14 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
           alt={`Capa do livro ${apiBook.volumeInfo.title}`}
         />
       </div>
-      <div className="flex flex-col justify-between items-start">
+      <div className="w-full flex flex-col justify-between items-start">
         <div>
-          <h3 className="font-lg font-bold">
-            {apiBook.volumeInfo.title}
-          </h3>
+          <h3 className="font-lg font-bold">{apiBook.volumeInfo.title}</h3>
           <p className="italic text-gray-600 mb-1">
             {apiBook.volumeInfo.subtitle}
           </p>
-          {apiBook.volumeInfo.authors?.map((author) => (
-            <span
-              key={apiBook.volumeInfo.authors?.indexOf(author)}
-              className="text-sm text-gray-600 mb-2"
-            >
+          {apiBook.volumeInfo.authors?.map((author, index) => (
+            <span key={index} className="text-sm text-gray-600 mb-2">
               {author}{" "}
             </span>
           ))}
@@ -81,18 +64,13 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
         </div>
       </div>
 
-      {openModal &&
-        (userBook ? (
-          <BookFormModal
-            handleToggleModal={handleToggleModal}
-            userBook={userBook}
-          />
-        ) : (
-          <BookFormModal
-            handleToggleModal={handleToggleModal}
-            apiBook={apiBook}
-          />
-        ))}
+      {openModal && (
+        <BookFormModal
+          handleToggleModal={handleToggleModal}
+          userBook={userBook ? userBook : undefined}
+          apiBook={apiBook ? apiBook : undefined}
+        />
+      )}
     </div>
   );
 };
