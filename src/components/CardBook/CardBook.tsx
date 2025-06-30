@@ -1,18 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaStar, FaHeart } from "react-icons/fa";
-import { useUpdateUser } from "../../hooks/useUpdateUser";
 import BookFormModal from "../BookModal/BookModal";
-import type { IBook, IUser } from "../../types/types";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import type { IBook } from "../../types/types";
+import useFavoriteBook from "../../hooks/useFavoriteBook";
 
 const CardBook = ({ book }: { book: IBook }) => {
-  const { currentUser } = useAuthContext();
-  const { updateUser } = useUpdateUser();
+  const { favorited, favoriteBook } = useFavoriteBook(book);
 
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [favoritedBook, setFavoritedBook] = useState<boolean>(
-    book.favorite || false
-  );
 
   const handleToggleModal = () => {
     setOpenModal(!openModal);
@@ -22,35 +17,8 @@ const CardBook = ({ book }: { book: IBook }) => {
     if (book.rating) {
       return star <= book.rating ? "text-amber-400" : "text-gray-400";
     }
-
     return "text-gray-400";
   };
-
-  const favoriteBook = (
-    e: React.MouseEvent<SVGElement, globalThis.MouseEvent>
-  ) => {
-    e.stopPropagation();
-    setFavoritedBook(!favoritedBook);
-  };
-
-  const updateBook = () => {
-    if (!currentUser) return;
-
-    const updatedBook = { ...book, favorite: favoritedBook };
-
-    const updatedUser: IUser = {
-      ...currentUser,
-      books: [
-        ...currentUser.books.map((b) => (b.id === book.id ? updatedBook : b)),
-      ],
-    };
-
-    updateUser(updatedUser);
-  };
-
-  useEffect(() => {
-    updateBook();
-  }, [favoritedBook]);
 
   return (
     <div
@@ -62,7 +30,7 @@ const CardBook = ({ book }: { book: IBook }) => {
           <div className="absolute top-0 right-2 text-gray-300 cursor-pointer">
             <FaHeart
               className={`text-3xl ${
-                favoritedBook ? "text-red-600" : "text-gray-400"
+                favorited ? "text-red-600" : "text-gray-400"
               }`}
               onClick={(e) => favoriteBook(e)}
             />
