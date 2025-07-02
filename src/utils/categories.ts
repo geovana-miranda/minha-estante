@@ -51,7 +51,8 @@ export const categoriesInPortuguese: Record<string, string> = {
   "Juvenile Fiction": "Ficção Juvenil",
   "Juvenile Nonfiction": "Não Ficção Juvenil",
   "Young Adult Fiction": "Ficção Jovem Adulta",
-  "Psychotherapy": "Psicoterapia"
+  "Psychotherapy": "Psicoterapia",
+  "Action & Adventure": "Ação e Aventura"
 };
 
 export const translateCategories = (category: string): string =>
