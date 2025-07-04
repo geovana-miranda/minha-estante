@@ -14,7 +14,7 @@ const InputSearch = ({query, setQuery, handleSearch}: IInputSearchProps) => {
       <input
         type="text"
         placeholder="Digite o título do livro"
-        className="w-full italic mt-1 pl-4 pr-10 py-1 text-sm rounded-2xl bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="w-full italic mt-1 pl-1 md:pl-4 pr-10 py-1 text-xs md:text-sm rounded-2xl bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
         value={query}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
           if (e.key === "Enter") handleSearch();
@@ -27,7 +27,7 @@ const InputSearch = ({query, setQuery, handleSearch}: IInputSearchProps) => {
         className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 cursor-pointer hover:text-gray-800"
         onClick={handleSearch}
       >
-        <IoMdSearch className="text-xl" />
+        <IoMdSearch className="md:text-xl" />
       </button>
     </div>
   );
