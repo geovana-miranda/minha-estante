@@ -67,12 +67,12 @@ const AuthorDetails = () => {
     <>
       <Header />
       <Section>
-        <div className="w-3xl py-6 mx-auto flex flex-col items-center justify-between">
+        <div className="w-76 md:w-xl lg:w-3xl py-6 mx-auto flex flex-col items-center justify-between">
           {loading ? (
             <Loading />
           ) : author ? (
-            <div className="w-full flex gap-7 mx-auto">
-              <div className="w-36 shrink-0 flex flex-col items-center gap-3">
+            <div className="w-full flex gap-2 md:gap-7 mx-auto">
+              <div className="w-16 md:w-36 shrink-0 flex flex-col items-center gap-3">
                 <img
                   className="w-full h-auto object-cover"
                   src={author.thumbnail ? author.thumbnail.source : imgsemfoto}
@@ -81,13 +81,13 @@ const AuthorDetails = () => {
               </div>
               <div className="flex flex-col justify-between items-start gap-5">
                 <div>
-                  <h2 className="text-2xl font-bold ">
+                  <h2 className="md:text-2xl font-bold ">
                     {author.title}
                   </h2>
                 </div>
 
                 <p
-                  className=" text-sm leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
+                  className="text-xs md:text-sm leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
                   dangerouslySetInnerHTML={{
                     __html: author.extract_html || "",
                   }}
@@ -95,19 +95,19 @@ const AuthorDetails = () => {
 
                 {booksByAuthor && (
                   <>
-                    <h2 className=" text-lg font-bold">
+                    <h2 className="text-sm md:text-lg font-bold">
                       Livros publicados por {author.title}:
                     </h2>
                     <ul className="flex items-center justify-start gap-3 flex-wrap">
                       {booksByAuthor.map((book) => (
                         <li key={book.id}>
                           <div
-                            className="relative w-24 h-32 flex flex-col items-center justify-center bg-white border-gray-300 border rounded-xl shadow-lg cursor-pointer"
+                            className="relative w-16 h-24 md:w-24 md:h-32 flex flex-col items-center justify-center bg-white border-gray-300 border rounded-xl shadow-lg cursor-pointer"
                             onClick={() => displayBookDetails(book.id)}
                           >
-                            <div className="w-20 h-28 shrink-0">
+                            <div className="w-12 h-20 md:w-20 md:h-28 shrink-0">
                               <img
-                                className="w-20 h-28 object-cover"
+                                className="w-full h-full object-cover"
                                 src={book.volumeInfo.imageLinks?.thumbnail}
                                 alt={`Capa do livro ${book.volumeInfo.title}`}
                               />

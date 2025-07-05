@@ -74,7 +74,7 @@ const Book = ({ book, bookStatus, userBook }: IBookProps) => {
         />
 
         <p
-          className=" text-sm md:text-sm leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
+          className="text-xs md:text-sm leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
           dangerouslySetInnerHTML={{
             __html: book.volumeInfo.description || "",
           }}
