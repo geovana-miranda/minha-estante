@@ -7,7 +7,7 @@ interface IFilterBooksSelectProps {
 
 const FilterBooksSelect = ({ setDisplayBooks }: IFilterBooksSelectProps) => {
   return (
-    <div className="flex items-center gap-3 md:gap-5 my-6 mx-auto">
+    <div className="flex px-6 md:px-0 items-center gap-3 md:gap-5 my-6 mx-auto">
       <span className="md:text-lg font-bold">Exibir: </span>
       <select
         className="w-32 md:py-1 px-3 rounded-full border border-gray-300"
