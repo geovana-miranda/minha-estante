@@ -50,30 +50,30 @@ const FormModal = ({
 
   return (
     <>
-      <div className="flex justify-center gap-8">
+      <div className="flex justify-center gap-4 md:gap-8">
         <div className="shrink-0">
           <img
-            className="w-36 h-auto shadow-md cursor-pointer"
+            className="w-20 md:w-36 h-auto shadow-md cursor-pointer"
             src={book.volumeInfo.imageLinks?.thumbnail}
             alt="capa do livro"
             onClick={displayBookDetails}
           />
         </div>
-        <div className="w-full  flex flex-col gap-2">
+        <div className="w-full flex flex-col gap-2">
           <div>
-            <p className="text-lg font-bold">{book.volumeInfo.title} </p>
-            <p className="text-sm text-gray-600 italic">
+            <p className="md:text-lg font-bold">{book.volumeInfo.title} </p>
+            <p className="text-xs md:text-sm text-gray-600 italic">
               {book.volumeInfo.authors}
             </p>
           </div>
-          <div>
+          <div className="flex flex-col md:flex-row md:items-center">
             <label className="mr-2 font-bold">Status:</label>
             <select
               defaultValue={status}
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              className="w-32 mt-1 py-2 px-4 rounded-full bg-peach border border-gray-600"
+              className="text-xs md:text-base w-28 md:w-32 mt-1 py-2 px-4 rounded-full bg-peach border border-gray-600"
               onChange={(e) => {
                 if (e.target.value === "lido") {
                   setStatus("lido");
@@ -96,7 +96,7 @@ const FormModal = ({
           )}
           {isEditMode && (
             <button
-              className="text-start text-sm text-[#9e0101] underline cursor-pointer"
+              className="text-start text-xs md:text-base text-[#9e0101] underline cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
                 handleDeleteBook();

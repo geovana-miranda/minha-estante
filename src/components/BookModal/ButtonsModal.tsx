@@ -14,7 +14,7 @@ const ButtonsModal = ({
           e.stopPropagation();
           handleToggleModal();
         }}
-        className="w-full py-2 border border-gray-600 text-gray-700  rounded-3xl font-bold cursor-pointer hover:bg-gray-200 hover:text-gray-700 transition-colors"
+        className="w-full py-2 border border-gray-600 text-sm md:text-base text-gray-700 rounded-3xl font-bold cursor-pointer hover:bg-gray-200 hover:text-gray-700 transition-colors"
       >
         Cancelar
       </button>
@@ -23,7 +23,7 @@ const ButtonsModal = ({
           e.stopPropagation();
           handleSubmit();
         }}
-        className="w-full py-2 border rounded-3xl font-bold cursor-pointer bg-blue-800 hover:bg-blue-600 text-white"
+        className="w-full py-2 border rounded-3xl text-sm md:text-base font-bold cursor-pointer bg-blue-800 hover:bg-blue-600 text-white"
       >
         Salvar
       </button>

@@ -34,12 +34,12 @@ const FormAddNewBook = ({
   return (
     <>
       <div className="flex items-center gap-2">
-        <label className="text-brown font-bold">Avaliar:</label>{" "}
+        <label className="font-bold">Avaliar:</label>{" "}
         <div className="flex">
           {[1, 2, 3, 4, 5].map((star) => (
             <FaStar
               key={star}
-              className={`cursor-pointer text-4xl transition-colors ${getStarColor(
+              className={`cursor-pointer text-xl md:text-4xl transition-colors ${getStarColor(
                 star
               )}`}
               onMouseEnter={() => setHoveredStar(star)}
@@ -54,9 +54,9 @@ const FormAddNewBook = ({
         </div>
       </div>
       <div>
-        <p className="text-brown font-bold">Resenha:</p>
+        <p className="font-bold">Resenha:</p>
         <textarea
-          className="w-full h-20 border border-gray-400 rounded-md p-2 text-sm resize-none"
+          className="w-full h-20 border border-gray-400 rounded-md p-2 text-xs md:text-sm resize-none"
           maxLength={240}
           value={review}
           placeholder="Escreva sua resenha aqui..."

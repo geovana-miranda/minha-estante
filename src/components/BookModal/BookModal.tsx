@@ -87,7 +87,7 @@ const BookModal = ({
           className={styles.modal}
           onClick={(e) => e.stopPropagation()}
         >
-          <h2 className="text-3xl font-bold text-center">
+          <h2 className="text-xl md:text-3xl font-bold text-center">
             {isEditMode ? "Editar livro" : "Adicionar novo livro"}
           </h2>
 

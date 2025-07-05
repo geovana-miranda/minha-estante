@@ -43,7 +43,7 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
       <div className="w-full flex flex-col justify-between items-start">
         <div>
           <h3 className="md:text-lg font-bold">{apiBook.volumeInfo.title}</h3>
-          <p className="text-xs md:text-md italic text-gray-600 mb-1">
+          <p className="text-xs md:text-base italic text-gray-600 mb-1">
             {apiBook.volumeInfo.subtitle}
           </p>
           {apiBook.volumeInfo.authors?.map((author, index) => (

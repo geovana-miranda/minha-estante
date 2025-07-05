@@ -37,7 +37,7 @@ const BooksSection = () => {
 
   return (
     <Section>
-      <div className="md:px-3">
+      <div className="px-10 md:px-3">
         <FilterBooksSelect setDisplayBooks={setDisplayBooks}/>
         <div>
           <div>
