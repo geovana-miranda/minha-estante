@@ -33,30 +33,30 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
       className="w-full flex gap-5 mb-3 rounded-2xl shadow-sm p-4 cursor-pointer border border-gray-200"
       onClick={displayBookDetails}
     >
-      <div className="w-24 h-36 shrink-0">
+      <div className="w-16 h-24 md:w-24 md:h-36 shrink-0">
         <img
-          className="w-24 h-36 object-cover"
+          className="w-full h-full object-cover"
           src={apiBook.volumeInfo.imageLinks?.thumbnail}
           alt={`Capa do livro ${apiBook.volumeInfo.title}`}
         />
       </div>
       <div className="w-full flex flex-col justify-between items-start">
         <div>
-          <h3 className="font-lg font-bold">{apiBook.volumeInfo.title}</h3>
-          <p className="italic text-gray-600 mb-1">
+          <h3 className="md:text-lg font-bold">{apiBook.volumeInfo.title}</h3>
+          <p className="text-xs md:text-md italic text-gray-600 mb-1">
             {apiBook.volumeInfo.subtitle}
           </p>
           {apiBook.volumeInfo.authors?.map((author, index) => (
-            <span key={index} className="text-sm text-gray-600 mb-2">
+            <span key={index} className="text-xs md:text-sm text-gray-600 mb-2">
               {author}{" "}
             </span>
           ))}
-          <p className="text-sm my-2 line-clamp-4">
+          <p className="text-xs md:text-sm my-2 line-clamp-8 md:line-clamp-4">
             {apiBook.volumeInfo.description}
           </p>
         </div>
 
-        <div className="self-end w-36">
+        <div className="self-end w-24 md:w-36">
           <BookActionButton
             bookStatus={bookStatus}
             handleToggleModal={handleToggleModal}

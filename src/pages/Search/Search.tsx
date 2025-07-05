@@ -30,12 +30,12 @@ const Search = () => {
     <>
       <Header />
       <Section>
-        <div className="w-2xl mx-auto flex flex-col items-center justify-between">
+        <div className="w-76 md:w-xl lg:w-2xl mx-auto flex flex-col items-center justify-between">
           {loading ? (
             <Loading />
           ) : (
             <>
-              <h2 className="font-bold mb-4 text-center">
+              <h2 className="text-sm md:text-lg font-bold mb-4 text-center">
                 Exibindo resultados da pesquisa por: {query}{" "}
               </h2>
               <div className="w-full">

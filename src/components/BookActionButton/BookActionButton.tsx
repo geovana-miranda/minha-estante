@@ -25,18 +25,18 @@ const BookActionButton = ({
         e.stopPropagation();
         handleToggleModal();
       }}
-      className={`flex items-center justify-center gap-1 border-none cursor-pointer w-full py-1 rounded-full text-sm text-white shadow hover:shadow-lg hover:-translate-y-0.5 transition" ${
+      className={`flex items-center justify-center gap-1 border-none cursor-pointer w-full py-1 rounded-full text-xs md:text-sm text-white shadow hover:shadow-lg hover:-translate-y-0.5 transition" ${
         bookStatus ? getStatusColor(bookStatus) : "bg-blue-800"
       }`}
     >
       {bookStatus ? (
         <>
-          <HiCheck className="text-sm" />
+          <HiCheck className="text-xs md:text-sm" />
           {bookStatus === "lido" ? "Lido" : "Quero ler"}
         </>
       ) : (
         <>
-          <LuPlus className="text-sm" />
+          <LuPlus className="text-xs md:text-sm" />
           Adicionar
         </>
       )}
