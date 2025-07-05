@@ -34,10 +34,10 @@ const Book = ({ book, bookStatus, userBook }: IBookProps) => {
   };
 
   return (
-    <div className="w-full flex gap-7 mx-auto">
-      <div className="w-36 shrink-0 flex flex-col items-center gap-3">
+    <div className="w-full flex gap-2 md:gap-7 mx-auto">
+      <div className="w-16 md:w-36 shrink-0 flex flex-col items-center gap-3">
         <img
-          className=" w-full h-auto object-cover"
+          className="w-full h-auto object-cover"
           src={book.volumeInfo.imageLinks?.thumbnail}
           alt={`Capa do livro ${book.volumeInfo.title}`}
         />
@@ -48,17 +48,17 @@ const Book = ({ book, bookStatus, userBook }: IBookProps) => {
         />
       </div>
 
-      <div className="flex flex-col justify-between items-start gap-8">
+      <div className="flex w-60 md:w-full flex-col justify-between items-start gap-8">
         <div>
-          <h2 className="text-2xl font-bold ">{book.volumeInfo.title}</h2>
-          <p className="italic mb-2 text-gray-600">
+          <h2 className="md:text-2xl font-bold ">{book.volumeInfo.title}</h2>
+          <p className="text-xs md:text-base italic mb-2 text-gray-600">
             {book.volumeInfo.subtitle}
           </p>
 
           {book.volumeInfo.authors?.map((author, index) => (
             <div
               key={index}
-              className="my-2 text-blue-600 cursor-pointer hover:underline"
+              className="text-xs md:text-base text-blue-600 cursor-pointer hover:underline"
               onClick={() => displayAuthor(author)}
             >
               {author}
@@ -74,7 +74,7 @@ const Book = ({ book, bookStatus, userBook }: IBookProps) => {
         />
 
         <p
-          className="text-sm leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
+          className=" text-sm md:text-sm leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
           dangerouslySetInnerHTML={{
             __html: book.volumeInfo.description || "",
           }}

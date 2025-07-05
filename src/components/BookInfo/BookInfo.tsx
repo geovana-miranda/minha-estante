@@ -16,24 +16,24 @@ const BookInfo = ({
   category,
 }: IBookInfo) => {
   return (
-    <div className="w-full flex justify-around gap-4 text-sm text-gray-700">
+    <div className="w-full flex justify-around gap-4 text-xs md:text-sm text-gray-700">
       <div className="flex flex-col justify-center items-center gap-2">
-        <FaBook className="text-xl" />
-        <p className="text-gray-600">{pageCount} páginas</p>
+        <FaBook className="text-sm md:text-xl" />
+        <p className="text-gray-600 md:text-center">{pageCount} páginas</p>
       </div>
-      <div className="flex flex-col justify-center items-center gap-2">
-        <FaRegBuilding className="text-xl" />
-        <p className="text-gray-600">{publisher}</p>
+      <div className="hidden md:flex flex-col justify-center items-center gap-2">
+        <FaRegBuilding className="text-sm md:text-xl" />
+        <p className="text-gray-600 md:text-center">{publisher}</p>
       </div>
-      <div className="flex flex-col justify-center items-center gap-2">
-        <BsCalendarDate className="text-xl" />
-        <p className="text-gray-600">
+      <div className="hidden md:flex flex-col justify-center items-center gap-2">
+        <BsCalendarDate className="text-sm md:text-xl" />
+        <p className="text-gray-600 md:text-center">
           Publicado em {publishedDate?.slice(0, 4)}
         </p>
       </div>
       <div className="flex flex-col justify-center items-center gap-2">
-        <PiTag className="text-xl" />
-        {category && <p className="text-gray-600">{category}</p>}
+        <PiTag className="text-sm md:text-xl" />
+        {category && <p className="text-gray-600 md:text-center">{category}</p>}
       </div>
     </div>
   );

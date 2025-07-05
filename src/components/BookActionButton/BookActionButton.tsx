@@ -31,12 +31,12 @@ const BookActionButton = ({
     >
       {bookStatus ? (
         <>
-          <HiCheck className="text-xs md:text-sm" />
+          <HiCheck className="hidden md:block md:text-sm" />
           {bookStatus === "lido" ? "Lido" : "Quero ler"}
         </>
       ) : (
         <>
-          <LuPlus className="text-xs md:text-sm" />
+          <LuPlus className="hidden md:block md:text-sm" />
           Adicionar
         </>
       )}

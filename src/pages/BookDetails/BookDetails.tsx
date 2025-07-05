@@ -46,7 +46,7 @@ const BookDetails = () => {
     <>
       <Header />
       <Section>
-        <div className="w-3xl py-6 mx-auto flex flex-col items-center justify-between">
+        <div className="w-76 md:w-xl lg:w-3xl py-6 mx-auto flex flex-col items-center justify-between">
           {loading && !book ? (
             <Loading />
           ) : (
