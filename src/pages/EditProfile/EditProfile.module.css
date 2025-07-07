@@ -9,8 +9,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 2.5em;
-  padding: 0.2em;
+  height: 30%;
   background: #303030cc;
   color: #fff;
   text-align: center;
@@ -27,5 +26,12 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 1em;
+  gap: 0.2rem;
+}
+
+@media screen and (min-width: 390px) {
+  .overlay {
+    height: 2.5em;
+    padding: 0.2em;
+  }
 }

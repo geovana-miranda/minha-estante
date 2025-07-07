@@ -11,8 +11,8 @@ interface IInputProps {
 
 const Input = ({ label, type, placeholder, maxLength, value, setValue }: IInputProps) => {
   return (
-    <label className="w-full flex flex-col mb-3">
-      <span className=" font-medium">{label}</span>
+    <label className="w-full flex flex-col mb-3 text-sm md:text-base">
+      <span className="font-medium">{label}</span>
       <input
         className="w-full mt-1 px-2 py-1 rounded-2xl text-gray-700 bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
         type={type}

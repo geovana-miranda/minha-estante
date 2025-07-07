@@ -52,9 +52,9 @@ const EditProfile = () => {
   return (
     <>
       <Header />
-      <section className="w-md mx-auto my-3 bg-white p-6 rounded-2xl shadow border border-gray-300">
-        <div className="w-sm mx-auto flex flex-col items-center justify-center px-10">
-          <h2 className="text-xl font-bold text-center  mb-3">Editar perfil</h2>
+      <section className="w-84 md:w-md mx-auto my-3 bg-white p-6 rounded-2xl shadow border border-gray-300">
+        <div className="w-full mx-auto flex flex-col items-center justify-center px-10">
+          <h2 className="md:text-xl font-bold text-center  mb-3">Editar perfil</h2>
 
           {success && (
             <div className="border-none py-2 px-5 mb-3 bg-[#bbffbe] rounded-3xl">
@@ -72,13 +72,13 @@ const EditProfile = () => {
             <img
               src={profilePhoto}
               alt="foto do usuário"
-              className="w-36 h-36 rounded-full"
+              className="w-24 md:w-36 md:h-36 rounded-full"
             />
 
             <div className={styles.overlay}>
               <button onClick={() => inputImagemRef.current!.click()}>
                 <MdOutlineEdit />
-                <span>Alterar</span>
+                <span className="text-xs md:text-base">Alterar</span>
               </button>
               <input
                 type="file"
@@ -107,7 +107,7 @@ const EditProfile = () => {
             />
 
             <div>
-              <label className="flex flex-col mb-3 ">
+              <label className="flex flex-col mb-3 text-sm md:text-base">
                 <span>Frase:</span>
                 <textarea
                   className="w-full h-30 mt-1 px-2 py-1 rounded-2xl text-gray-700 bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"

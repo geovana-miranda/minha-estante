@@ -26,12 +26,12 @@ const Header = () => {
         handleSearch={handleSearch}
       />
 
-      <div className="flex items-center gap-2 md:gap-5">
+      <div className="flex items-center gap-2 md:gap-3 lg:gap-5">
         <Link
           to="/editprofile"
           className="flex items-center gap-1 hover:text-blue-800 transition duration-200"
         >
-          <span className="hidden md:block font-semibold text-xs md:text-lg">Editar perfil</span>
+          <span className="hidden md:block font-semibold text-xs md:text-base">Editar perfil</span>
           <MdOutlineEdit className="md:text-xl" />
         </Link>
 
@@ -39,7 +39,7 @@ const Header = () => {
           to="/"
           className="flex items-center gap-1 hover:text-blue-800 transition duration-200"
         >
-          <span className="hidden md:block font-semibold text-xs md:text-lg">Sair</span>
+          <span className="hidden md:block font-semibold text-xs md:text-base">Sair</span>
           <IoExitOutline className="md:text-2xl"/>
         </Link>
       </div>
