@@ -8,6 +8,8 @@ const imgsemfoto = semfoto;
 const useCreateUser = () => {
   const { users, setUsers } = useUsersContext();
   const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
 
   const createUser = (
     name: string,
@@ -39,9 +41,10 @@ const useCreateUser = () => {
 
     setError("");
     setUsers([...users, newUser]);
+    setSuccess("Cadastro realizado com sucesso.")
     return true;
   };
-  return { createUser, error };
+  return { createUser, error, success };
 };
 
 export default useCreateUser;

@@ -5,7 +5,7 @@ import FormUser from "./FormUser";
 import useCreateUser from "../../hooks/useCreateUser";
 
 const Register = () => {
-  const { createUser, error } = useCreateUser();
+  const { createUser, error, success } = useCreateUser();
 
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -31,6 +31,12 @@ const Register = () => {
       {error && (
         <div className=" border-none py-2 px-5 bg-[#ffbbbb] rounded-3xl">
           <p className="text-sm text-center text-[#ff0000]">{error}</p>
+        </div>
+      )}
+
+      {success && (
+        <div className="border-none py-2 px-5 mb-3 bg-[#bbffbe] rounded-3xl">
+          <p className="text-sm text-center text-[#00bb00]">{success}</p>
         </div>
       )}
 
