@@ -8,11 +8,10 @@ import { translateCategories } from "../../utils/categories";
 
 interface IBookProps {
   book: IGoogleBook;
-  bookStatus: typeStatus | null;
   userBook?: IBook;
 }
 
-const Book = ({ book, bookStatus, userBook }: IBookProps) => {
+const Book = ({ book, userBook }: IBookProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const navigate = useNavigate();
   let category: string = "";
@@ -33,6 +32,8 @@ const Book = ({ book, bookStatus, userBook }: IBookProps) => {
     }
   };
 
+
+
   return (
     <div className="w-full flex gap-2 md:gap-7 mx-auto">
       <div className="w-16 md:w-36 shrink-0 flex flex-col items-center gap-3">
@@ -43,7 +44,7 @@ const Book = ({ book, bookStatus, userBook }: IBookProps) => {
         />
 
         <BookActionButton
-          bookStatus={bookStatus}
+          bookStatus={userBook ? userBook.status as typeStatus : null}
           handleToggleModal={handleToggleModal}
         />
       </div>

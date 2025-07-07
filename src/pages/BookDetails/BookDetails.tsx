@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { useEffect, useState } from "react";
 import { fetchBookByID } from "../../services/GoogleAPI";
-import type { IBook, IGoogleBook, typeStatus } from "../../types/types";
+import type { IBook, IGoogleBook } from "../../types/types";
 import Loading from "../../components/Loading/Loading";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import NotFound from "../../components/NotFound/NotFound";
@@ -16,14 +16,7 @@ const BookDetails = () => {
   const idBook: string | undefined = id;
   const [book, setBook] = useState<IGoogleBook | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [bookStatus, setBookStatus] = useState<typeStatus | null>(null);
-  const userBook = currentUser?.books.find((b) => b.id === book?.id) as IBook;
-
-  useEffect(() => {
-    if (userBook) {
-      setBookStatus(userBook.status as typeStatus);
-    }
-  }, [currentUser, userBook]);
+  const userBook = currentUser?.books.find((b) => b.id === idBook) as IBook;
 
   useEffect(() => {
     if (!idBook) return;
@@ -51,11 +44,7 @@ const BookDetails = () => {
             <Loading />
           ) : (
             <>
-              {book ? (
-                <Book book={book} bookStatus={bookStatus} userBook={userBook} />
-              ) : (
-                <NotFound />
-              )}
+              {book ? <Book book={book} userBook={userBook} /> : <NotFound />}
             </>
           )}
         </div>
