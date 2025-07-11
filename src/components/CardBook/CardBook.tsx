@@ -35,12 +35,21 @@ const CardBook = ({ book }: { book: IBook }) => {
               onClick={(e) => favoriteBook(e)}
             />
           </div>
+
           <div className="w-20 h-32 md:w-28 md:h-42 mt-3 shrink-0">
-            <img
-              className="w-full h-full object-cover"
-              src={book.volumeInfo.imageLinks?.thumbnail}
-              alt={`Capa do livro ${book.volumeInfo.title}`}
-            />
+            {!book.volumeInfo.imageLinks?.thumbnail ? (
+              <img
+                className="border h-40 border-gray-200 object-cover"
+                src="/semcapa.jpg"
+                alt={`Capa do livro ${book.volumeInfo.title}`}
+              />
+            ) : (
+              <img
+                className="w-full h-full object-cover"
+                src={book.volumeInfo.imageLinks?.thumbnail}
+                alt={`Capa do livro ${book.volumeInfo.title}`}
+              />
+            )}
           </div>
           <div className="w-20 md:w-28 flex md:my-1">
             {[1, 2, 3, 4, 5].map((star) => (
@@ -50,11 +59,19 @@ const CardBook = ({ book }: { book: IBook }) => {
         </>
       ) : (
         <div className="w-20 h-32 md:w-28 md:h-42 my-2 shrink-0 flex flex-col justify-center">
-          <img
-            className="w-full h-fullobject-cover"
-            src={book.volumeInfo.imageLinks?.thumbnail}
-            alt={`Capa do livro ${book.volumeInfo.title}`}
-          />
+          {!book.volumeInfo.imageLinks?.thumbnail ? (
+              <img
+                className="border h-40 border-gray-200  object-cover"
+                src="/semcapa.jpg"
+                alt={`Capa do livro ${book.volumeInfo.title}`}
+              />
+            ) : (
+              <img
+                className="w-full h-full object-cover"
+                src={book.volumeInfo.imageLinks?.thumbnail}
+                alt={`Capa do livro ${book.volumeInfo.title}`}
+              />
+            )}
         </div>
       )}
       {openModal && (

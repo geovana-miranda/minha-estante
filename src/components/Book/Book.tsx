@@ -32,16 +32,22 @@ const Book = ({ book, userBook }: IBookProps) => {
     }
   };
 
-
-
   return (
     <div className="w-full flex gap-2 md:gap-7 mx-auto">
       <div className="w-16 md:w-36 shrink-0 flex flex-col items-center gap-3">
-        <img
-          className="w-full h-auto object-cover"
-          src={book.volumeInfo.imageLinks?.thumbnail}
-          alt={`Capa do livro ${book.volumeInfo.title}`}
-        />
+        {!book.volumeInfo.imageLinks?.thumbnail ? (
+              <img
+                className="border w-36 h-40 border-gray-200  object-cover"
+                src="/semcapa.jpg"
+                alt={`Capa do livro ${book.volumeInfo.title}`}
+              />
+            ) : (
+              <img
+                className="w-full h-auto object-cover"
+                src={book.volumeInfo.imageLinks?.thumbnail}
+                alt={`Capa do livro ${book.volumeInfo.title}`}
+              />
+            )}
 
         <BookActionButton
           bookStatus={userBook ? userBook.status as typeStatus : null}

@@ -11,7 +11,8 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const [bookStatus, setBookStatus] = useState<typeStatus | null>(null);
-  const userBook = currentUser?.books.find((b) => b.id === apiBook.id) ?? undefined;
+  const userBook =
+    currentUser?.books.find((b) => b.id === apiBook.id) ?? undefined;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,11 +35,19 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
       onClick={displayBookDetails}
     >
       <div className="w-16 h-24 md:w-24 md:h-36 shrink-0">
-        <img
-          className="w-full h-full object-cover"
-          src={apiBook.volumeInfo.imageLinks?.thumbnail}
-          alt={`Capa do livro ${apiBook.volumeInfo.title}`}
-        />
+        {!apiBook.volumeInfo.imageLinks?.thumbnail ? (
+          <img
+            className="border h-32 border-gray-200  object-cover"
+            src="/semcapa.jpg"
+            alt={`Capa do livro ${apiBook.volumeInfo.title}`}
+          />
+        ) : (
+          <img
+            className="w-full h-full object-cover"
+            src={apiBook.volumeInfo.imageLinks?.thumbnail}
+            alt={`Capa do livro ${apiBook.volumeInfo.title}`}
+          />
+        )}
       </div>
       <div className="w-full flex flex-col justify-between items-start">
         <div>

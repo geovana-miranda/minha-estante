@@ -81,9 +81,7 @@ const AuthorDetails = () => {
               </div>
               <div className="flex flex-col justify-between items-start gap-5">
                 <div>
-                  <h2 className="md:text-2xl font-bold ">
-                    {author.title}
-                  </h2>
+                  <h2 className="md:text-2xl font-bold ">{author.title}</h2>
                 </div>
 
                 <p
@@ -106,11 +104,19 @@ const AuthorDetails = () => {
                             onClick={() => displayBookDetails(book.id)}
                           >
                             <div className="w-12 h-20 md:w-20 md:h-28 shrink-0">
-                              <img
-                                className="w-full h-full object-cover"
-                                src={book.volumeInfo.imageLinks?.thumbnail}
-                                alt={`Capa do livro ${book.volumeInfo.title}`}
-                              />
+                              {!book.volumeInfo.imageLinks?.thumbnail ? (
+                                <img
+                                  className="border h-full border-gray-200  object-cover"
+                                  src="/semcapa.jpg"
+                                  alt={`Capa do livro ${book.volumeInfo.title}`}
+                                />
+                              ) : (
+                                <img
+                                  className="w-full h-full object-cover"
+                                  src={book.volumeInfo.imageLinks?.thumbnail}
+                                  alt={`Capa do livro ${book.volumeInfo.title}`}
+                                />
+                              )}
                             </div>
                           </div>
                         </li>
