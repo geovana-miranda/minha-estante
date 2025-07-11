@@ -74,10 +74,12 @@ const Book = ({ book, userBook }: IBookProps) => {
           category={category}
         />
 
+        
+
         <p
           className="text-xs md:text-sm leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
           dangerouslySetInnerHTML={{
-            __html: book.volumeInfo.description || "",
+            __html: book.volumeInfo.description || "Esse volume não possui uma descrição.",
           }}
         />
       </div>

@@ -52,7 +52,11 @@ export const categoriesInPortuguese: Record<string, string> = {
   "Juvenile Nonfiction": "Não Ficção Juvenil",
   "Young Adult Fiction": "Ficção Jovem Adulta",
   "Psychotherapy": "Psicoterapia",
-  "Action & Adventure": "Ação e Aventura"
+  "Action & Adventure": "Ação e Aventura",
+  "Faith": "Fé",
+  "General": "Geral",
+  "Gnosticism": "Gnosticismo",
+  "Teaching": "Ensino"
 };
 
 export const translateCategories = (category: string): string =>

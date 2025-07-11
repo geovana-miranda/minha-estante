@@ -17,11 +17,11 @@ const UserProfileHeader = () => {
         />
       </div>
       <div className="w-84 md:w-xl lg:w-3xl flex flex-col items-center md:items-end md:flex-row mt-12 md:mt-18 lg:mt-24 mb-6 relative z-10  mx-auto">
-        <div className="mr-4">
+        <div className="w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 mr-4">
           <img
             src={photo}
             alt="foto de perfil do usuário"
-            className="w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full border border-gray-400 shadow"
+            className="w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 object-cover rounded-full border border-gray-400 shadow"
           />
         </div>
         <div className="flex flex-col items-center lg:justify-end md:items-start gap-1">
