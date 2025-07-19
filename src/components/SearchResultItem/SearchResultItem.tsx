@@ -35,19 +35,11 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
       onClick={displayBookDetails}
     >
       <div className="w-16 h-24 md:w-24 md:h-36 shrink-0">
-        {!apiBook.volumeInfo.imageLinks?.thumbnail ? (
-          <img
-            className="border h-32 border-gray-200  object-cover"
-            src="/semcapa.jpg"
-            alt={`Capa do livro ${apiBook.volumeInfo.title}`}
-          />
-        ) : (
-          <img
-            className="w-full h-full object-cover"
-            src={apiBook.volumeInfo.imageLinks?.thumbnail}
-            alt={`Capa do livro ${apiBook.volumeInfo.title}`}
-          />
-        )}
+        <img
+          className="h-32 object-cover"
+          src={apiBook.volumeInfo.imageLinks?.thumbnail || "/semcapa.jpg"}
+          alt={`Capa do livro ${apiBook.volumeInfo.title}`}
+        />
       </div>
       <div className="w-full flex flex-col justify-between items-start">
         <div>

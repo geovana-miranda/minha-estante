@@ -35,22 +35,14 @@ const Book = ({ book, userBook }: IBookProps) => {
   return (
     <div className="w-full flex gap-2 md:gap-7 mx-auto">
       <div className="w-16 md:w-36 shrink-0 flex flex-col items-center gap-3">
-        {!book.volumeInfo.imageLinks?.thumbnail ? (
-              <img
-                className="border w-36 h-40 border-gray-200  object-cover"
-                src="/semcapa.jpg"
-                alt={`Capa do livro ${book.volumeInfo.title}`}
-              />
-            ) : (
-              <img
-                className="w-full h-auto object-cover"
-                src={book.volumeInfo.imageLinks?.thumbnail}
-                alt={`Capa do livro ${book.volumeInfo.title}`}
-              />
-            )}
+        <img
+          className="w-36 h-40 object-cover"
+          src={book.volumeInfo.imageLinks?.thumbnail || "/semcapa.jpg"}
+          alt={`Capa do livro ${book.volumeInfo.title}`}
+        />
 
         <BookActionButton
-          bookStatus={userBook ? userBook.status as typeStatus : null}
+          bookStatus={userBook ? (userBook.status as typeStatus) : null}
           handleToggleModal={handleToggleModal}
         />
       </div>
@@ -80,12 +72,12 @@ const Book = ({ book, userBook }: IBookProps) => {
           category={category}
         />
 
-        
-
         <p
           className="text-xs md:text-sm leading-relaxed space-y-2 [&_b]:font-semibold [&_i]:italic [&_br]:block"
           dangerouslySetInnerHTML={{
-            __html: book.volumeInfo.description || "Esse volume não possui uma descrição.",
+            __html:
+              book.volumeInfo.description ||
+              "Esse volume não possui uma descrição.",
           }}
         />
       </div>
