@@ -8,22 +8,15 @@ const imgsemfoto = semfoto;
 const useCreateUser = () => {
   const { users, setUsers } = useUsersContext();
   const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
-
+  const [success, setSuccess] = useState("");
 
   const createUser = (
     name: string,
     email: string,
     password: string,
-    confirmPassword: string
   ) => {
     if (users.find((user) => email === user.email)) {
       setError("Email já cadastrado");
-      return false;
-    }
-
-    if (password !== confirmPassword) {
-      setError("As senhas precisam ser iguais");
       return false;
     }
 
@@ -41,7 +34,7 @@ const useCreateUser = () => {
 
     setError("");
     setUsers([...users, newUser]);
-    setSuccess("Cadastro realizado com sucesso.")
+    setSuccess("Cadastro realizado com sucesso.");
     return true;
   };
   return { createUser, error, success };
