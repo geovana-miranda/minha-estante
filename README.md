@@ -18,6 +18,7 @@ MinhaEstante é um aplicativo web voltado para leitores, onde os usuários podem
 - **Tailwind:** Estilização da interface com classes utilitárias.
 - **UUID**: Para geração de IDs únicos para os usuários.
 - **Context API**: Para controle de autenticação e gerenciamento de usuário.
+- **React Hook Form**: Para gerenciamento de formulários e validação.
 - **Google Books API:** Utilizada para buscar livros.
 - **Wikipedia REST API:** Para obter informações biográficas dos autores.
 - **React Icons**: Para ícones personalizáveis e de fácil uso na interface.
@@ -35,13 +36,13 @@ MinhaEstante é um aplicativo web voltado para leitores, onde os usuários podem
 1. Clone este repositório para sua máquina:
 
     ```bash
-    git clone https://github.com/geovana-miranda/flashlearn.git
+    https://github.com/geovana-miranda/minha-estante.git
     ```
 
 2. Acesse a pasta do projeto:
 
     ```bash
-    cd flashlearn
+    cd minha-estante
     ```
 
 3. Instale as dependências:
@@ -57,3 +58,9 @@ MinhaEstante é um aplicativo web voltado para leitores, onde os usuários podem
     ```
 
     O aplicativo estará disponível em [http://localhost:3000](http://localhost:3000).
+
+
+## Funcionalidades Futuras
+
+- Implementação de backend utilizando **MongoDB**.
+- Adicionar paginação ao resultado da pesquisa por livros.
