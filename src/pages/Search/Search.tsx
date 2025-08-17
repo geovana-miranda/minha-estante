@@ -37,22 +37,23 @@ const Search = () => {
               <h2 className="text-sm md:text-lg font-bold mb-4 text-center">
                 Exibindo resultados da pesquisa por: {query}{" "}
               </h2>
-              <div className="w-full">
-                <ul>
-                  {foundBooks.length > 0 ? (
-                    foundBooks.map((book) => (
+
+              {foundBooks.length > 0 ? (
+                <div className="w-full">
+                  <ul>
+                    {foundBooks.map((book) => (
                       <li key={book.id}>
                         <SearchResultItem apiBook={book} />
                       </li>
-                    ))
-                  ) : (
-                    <p className="text-xs md:text-sm text-center">
-                      Desculpe. Nós não encontramos o livro que você está
-                      procurando.
-                    </p>
-                  )}
-                </ul>
-              </div>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p className="text-xs md:text-sm text-center">
+                  Desculpe. Nós não encontramos o livro que você está
+                  procurando.
+                </p>
+              )}
             </>
           )}
         </div>
