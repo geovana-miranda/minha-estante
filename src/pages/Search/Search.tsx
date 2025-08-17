@@ -17,7 +17,6 @@ const Search = () => {
   useEffect(() => {
     async function getBooks() {
       if (!query) return;
-
       const data = await fetchBooks(query);
       setFoundBooks(data);
       setLoading(false);
@@ -40,11 +39,18 @@ const Search = () => {
               </h2>
               <div className="w-full">
                 <ul>
-                  {foundBooks.map((book) => (
-                    <li key={book.id}>
-                      <SearchResultItem apiBook={book} />
-                    </li>
-                  ))}
+                  {foundBooks.length > 0 ? (
+                    foundBooks.map((book) => (
+                      <li key={book.id}>
+                        <SearchResultItem apiBook={book} />
+                      </li>
+                    ))
+                  ) : (
+                    <p className="text-xs md:text-sm text-center">
+                      Desculpe. Nós não encontramos o livro que você está
+                      procurando.
+                    </p>
+                  )}
                 </ul>
               </div>
             </>

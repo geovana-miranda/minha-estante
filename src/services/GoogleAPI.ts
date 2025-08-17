@@ -4,13 +4,12 @@ export async function fetchBooks(query: string) {
   );
 
   if (!res.ok) {
-    if (res.status === 404) {
-      throw new Error("NotFound");
-    }
     throw new Error(`Erro: ${res.status}`);
   }
 
   const data = await res.json();
+
+  if (!data.items) return [];
   return data.items;
 }
 
@@ -18,9 +17,6 @@ export async function fetchBookByID(id: string) {
   const res = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`);
 
   if (!res.ok) {
-    if (res.status === 404) {
-      throw new Error("NotFound");
-    }
     throw new Error(`Erro: ${res.status}`);
   }
 
@@ -34,9 +30,6 @@ export async function fetchBooksByAuthor(author: string) {
   );
 
   if (!res.ok) {
-    if (res.status === 404) {
-      throw new Error("NotFound");
-    }
     throw new Error(`Erro: ${res.status}`);
   }
 
