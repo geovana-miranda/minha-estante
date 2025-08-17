@@ -1,6 +1,6 @@
-export async function fetchBooks(query: string) {
+export async function fetchBooks(query: string, index: number) {
   const res = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=intitle:${query}&key=AIzaSyCrpquZTODiJvdC_Jre-UeO-homfFS3FnU`
+    `https://www.googleapis.com/books/v1/volumes?q=intitle:${query}&startIndex=${index}`
   );
 
   if (!res.ok) {

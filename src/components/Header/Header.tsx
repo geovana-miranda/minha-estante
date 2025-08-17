@@ -11,7 +11,7 @@ const Header = () => {
 
   const handleSearch = () => {
     if (!query) return;
-    navigate(`/search?query=${encodeURIComponent(query)}`);
+    navigate(`/search?query=${encodeURIComponent(query)}&page=1`);
   };
 
   return (
