@@ -36,7 +36,7 @@ const Book = ({ book, userBook }: IBookProps) => {
     <div className="w-full flex gap-2 md:gap-7 mx-auto">
       <div className="w-16 md:w-36 shrink-0 flex flex-col items-center gap-3">
         <img
-          className="w-36 h-40 object-cover"
+          className="w-36 h-auto object-cover"
           src={book.volumeInfo.imageLinks?.thumbnail || "/semcapa.jpg"}
           alt={`Capa do livro ${book.volumeInfo.title}`}
         />

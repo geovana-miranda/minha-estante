@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-84 md:w-2xl lg:w-4xl mx-auto py-2 my-3 px-4 md:px-8 flex items-center justify-between gap-3 shadow bg-white rounded-4xl">
+    <header className="w-84 md:w-2xl lg:w-4xl mx-auto py-2 my-3 px-4 md:px-8 flex items-center justify-between gap-3 shadow bg-white rounded-4xl border border-gray-300">
       <Link to="/home">
         <img src="/logo.png" alt="logo da minha estante" className="w-22 md:w-32" />
       </Link>

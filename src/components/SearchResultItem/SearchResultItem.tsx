@@ -31,7 +31,7 @@ const SearchResultItem = ({ apiBook }: { apiBook: IGoogleBook }) => {
 
   return (
     <div
-      className="w-full flex gap-5 mb-3 rounded-2xl shadow-sm p-4 cursor-pointer border border-gray-200"
+      className="w-full flex gap-5 mb-3 rounded-2xl shadow-sm p-4 cursor-pointer border border-gray-300"
       onClick={displayBookDetails}
     >
       <div className="w-16 h-24 md:w-24 md:h-36 shrink-0">
