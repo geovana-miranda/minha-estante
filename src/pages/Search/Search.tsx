@@ -39,6 +39,8 @@ const Search = () => {
   }, [query, firstIndex]);
 
   const nextPage = () => {
+    if (foundBooks.length < 10) return;
+    if (firstIndex >= 190) return;
     navigate(`/search?query=${query}&page=${page + 1}`);
   };
 
@@ -83,7 +85,11 @@ const Search = () => {
                       Anterior
                     </button>
                     <button
-                      className="flex items-center gap-2 py-1 px-4 border border-gray-600 text-xs md:text-base text-gray-700 rounded-3xl cursor-pointer hover:bg-gray-300 hover:text-gray-700 transition-colors"
+                      className={`flex items-center gap-2 py-1 px-4 border text-xs md:text-base rounded-3xl ${
+                        firstIndex === 190 || foundBooks.length < 10
+                          ? "cursor-auto bg-gray-200 border-gray-400 text-gray-400"
+                          : "border-gray-600 cursor-pointer text-gray-700 hover:bg-gray-300 hover:text-gray-700 transition-colors"
+                      }`}
                       onClick={nextPage}
                     >
                       Próximo
